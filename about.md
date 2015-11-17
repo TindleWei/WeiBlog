@@ -2,10 +2,17 @@
 title: About
 ---
 
-Hello.
+Hi guys,
 
-The main purpose of this theme is to be as simple as it could be, so you can focus on writing your stuffs. This is your About page. You may describe about yourself here; who you are, what are you currently doing, share some of your projects, your social links and how people can contact you, etc.
+I am Tindle Wei, a developer of Android and iOS.
 
-**Just write thing that matters..**
+Github:[tindleWei.gi]()
 
-Enjoy!
+CSDNBlog:[http://blog.csdn.net/mennoa](http://blog.csdn.net/mennoa)
+
+PersonalSite:[http://menkey.herokuapp.com/about](http://menkey.herokuapp.com/about)
+
+StackOverflow:[http://stackoverflow.com/users/4404683/tindlewei](http://stackoverflow.com/users/4404683/tindlewei)
+
+
+Best Regards!
