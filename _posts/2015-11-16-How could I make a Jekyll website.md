@@ -1,5 +1,7 @@
 # How could I make a Jekyll website
 
+![Minion](http://octodex.github.com/images/minion.png)
+
 [http://jekyllrb.com/docs/quickstart/][1]
 
 [https://help.github.com/articles/using-jekyll-with-pages/][2]
