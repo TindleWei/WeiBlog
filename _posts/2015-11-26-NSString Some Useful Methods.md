@@ -1,3 +1,4 @@
+2015-11-26-NSString Some Useful Methods
 
 1. [string substringToIndex:N]
  get substring from 0 to N-1;
@@ -12,18 +13,18 @@
  check substring contains ‘A’;
 
  5. Get Range Of String
- ```
-`NSString*string =@“abcdefgh”;
+ \`\`\`
+\`NSString\*string =@“abcdefgh”;
 NSRange range = [string rangeOfString:@"fg”]();
 NSLog(@"rang:%@",NSStringFromRange(range));//{5,2}
 string = [string substringWithRange:range]();
-```
-`
+\`\`\`
+\`
 6. Separate String
-```
-`NSString*string =@“123A456”;
-NSArray *array = [string componentsSeparatedByString:@"A"]();
+\`\`\`
+\`NSString\*string =@“123A456”;
+NSArray \*array = [string componentsSeparatedByString:@"A"]();
 NSLog(@"array:%@",array); 
-```
-`
+\`\`\`
+\`
 
