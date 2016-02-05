@@ -1,60 +1,28 @@
-# Site Info
-title:              "Wei Blog"
-description:        "This is Tindle Wei Tindle's blog."
-google_verify:      epFgX0s_0RM3CdjwFcsewfXzPov2g8s9ZBOLyaIUH-o # Put your Google Verification here
-google_analytics:   UA-XXXXXXX-X # Put your Google Analytics code
+# Site settings
+title: Wei's Blog
+email: tindle.wei@gmail.com
+description: Wei Zepeng's Blog.
+# > # this means to ignore newlines until "baseurl:"
+#   Write an awesome description for your new site here. You can edit this
+#   line in _config.yml. It will appear in your document head meta (for
+#   Google search results) and in your feed.xml site description.
 
-# Author Info
-author_name:        "Tindle Wei"
-author_email:       tindlewei@gmail.com
-author_gravatar:    d9333028cd11a79972775b2289e935d49eaf0cea # Gravatar md5 hash
-twitter_username:   TindleWei
+# baseurl: "" # the subpath of your site, e.g. /blog/
+# url: "http://yourdomain.com" # the base hostname & protocol for your site
+# twitter_username: jekyllrb
+github_username:  TindleWei
+permalink: /:year/:month/:day/:title/
 
-# Site Settings
-baseurl:            "" # Base URL must end WITHOUT a slash, default: ""
-permalink:          /notes/:title # Post permalink
-timezone:           Asia/Beijing # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+# Build settings
+markdown: kramdown
 
-# Site Build
-highlighter:        pygments
+paginate: 10
+paginate_path: "page:num"
+
+gems: [jekyll-paginate]
+
+# highlight
 # 本地用rouge, github上用pygments
 # highlighter: pygments
 # highlighter: rouge
 # highlighter: false
-
-#markdown:           redcarpet
-#redcarpet:
-#    extensions:     ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data", "highlight", "footnotes"]
-markdown:           kramdown
-kramdown:
-    input:          GFM
-sass:
-    style:          :compressed
-
-# Other Params
-include:            [ "robots.txt" ]
-exclude:            [ "LICENSE", "README.md", "CNAME", "vendor", "Gemfile" ]
-gems:
-  - jekyll-sitemap
-
-compress_html:
-    clippings:      all
-    ingore:
-        envs:       [ "test" ]
-
-defaults:
-  -
-    scope:
-      path:         ""
-    values:
-      layout:       "null"
-  -
-    scope:
-      type:         "pages"
-    values:
-      layout:       "page"
-  -
-    scope:
-      type:         "posts"
-    values:
-      layout:       "post"

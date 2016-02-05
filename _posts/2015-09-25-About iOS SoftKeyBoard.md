@@ -1,3 +1,12 @@
+---
+layout: post
+title:  "SoftKeyBoard"
+date:   2015-09-25 14:06:05
+categories: iOS
+excerpt: iOS SoftKeyBoard
+---
+
+
 iOS UITextView UITextField About SoftKeyBoard
 
 一、键盘风格   

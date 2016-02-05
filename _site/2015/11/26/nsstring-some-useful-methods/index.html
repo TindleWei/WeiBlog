@@ -1,0 +1,36 @@
+<p>2015-11-26-NSString Some Useful Methods</p>
+
+<ol>
+  <li>
+    <p>[string substringToIndex:N]
+ get substring from 0 to N-1;</p>
+  </li>
+  <li>
+    <p>[string substringFromIndex:N]
+ get substring form N to length-1;</p>
+  </li>
+  <li>
+    <p>[string substringWithRange:NSMakeRange(N,M)]
+ get substring from N to N+M-1;</p>
+  </li>
+  <li>
+    <p>([string rangeOfString:@“A”].location == NSNotFound)
+ check substring contains ‘A’;</p>
+  </li>
+  <li>Get Range Of String
+ ```
+`NSString*string =@“abcdefgh”;
+NSRange range = <a href="">string rangeOfString:@”fg”</a>;
+NSLog(@”rang:%@”,NSStringFromRange(range));//{5,2}
+string = <a href="">string substringWithRange:range</a>;
+```
+`</li>
+  <li>Separate String
+```
+`NSString*string =@“123A456”;
+NSArray *array = <a href="">string componentsSeparatedByString:@”A”</a>;
+NSLog(@”array:%@”,array); 
+```
+`</li>
+</ol>
+
