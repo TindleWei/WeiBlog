@@ -1,3 +1,11 @@
+---
+layout: post
+title:  What I Use Git to Build Blog
+date:   2015-09-06 14:06:05
+categories: Jekyll
+excerpt: Web App 相关技术，移动端的 web 应用
+---
+
 # What I Use Git to Build Blog
 
 First git repository is empty.

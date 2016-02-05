@@ -1,7 +1,11 @@
 ---
-title: Lorem Ipsum
-updated: 2015-09-06 15:56
+layout: post
+title:  Lorem Ipsum
+date:   2015-09-06 14:06:05
+categories: Jekyll
+excerpt: Web App 相关技术，移动端的 web 应用
 ---
+
 
 ### The standard Lorem Ipsum passage, used since the 1500s
 

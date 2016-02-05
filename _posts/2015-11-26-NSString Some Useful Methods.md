@@ -1,3 +1,11 @@
+---
+layout: post
+title: NSString Some Useful Methods
+date:   2015-11-26
+categories: iOS
+excerpt: Web App 相关技术，移动端的 web 应用
+---
+
 2015-11-26-NSString Some Useful Methods
 
 1. [string substringToIndex:N]

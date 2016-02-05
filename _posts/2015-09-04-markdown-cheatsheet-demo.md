@@ -1,6 +1,9 @@
 ---
-title: Markdown Cheatsheet Demo
-updated: 2015-09-04 22:43
+layout: post
+title:  Markdown Cheatsheet Demo
+date:   2015-09-06 14:06:05
+categories: Jekyll
+excerpt: Web App 相关技术，移动端的 web 应用
 ---
 
 > This is Markdown Cheatsheet Demo for **The Plain**, this Jekyll theme. Please check the raw content of this file for the markdown usage.
