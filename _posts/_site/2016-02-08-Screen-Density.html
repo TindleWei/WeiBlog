@@ -1,0 +1,49 @@
+<h1 id="section">宽高计算</h1>
+
+<p>在Activity中，可以这样获得宽高密：</p>
+
+<p><code class="highlighter-rouge">
+	float mDensity = getBaseContext().getResources().getDisplayMetrics().density;
+	float mScreenHeight = getBaseContext().getResources().getDisplayMetrics().heightPixels;
+    float mScreenWidth = getBaseContext().getResources().getDisplayMetrics().widthPixels;
+</code></p>
+
+<p>例如，我的手机Nexus6手机的分辨率是 1440*2560，
+打印出的数据是：
+desity:3.5
+height:2392.0
+width:1440.0</p>
+
+<p>接下来，查看statusBar和navigationBar的高度：</p>
+
+<p>```
+    //获取statusBar高度
+    public int getStatusBarHeight(Context context){
+        int result = 0;
+        int resourceId = context.getResources().getIdentifier(“status_bar_height”, “dimen”, “android”);
+        if(resourceId&gt;0){
+            result = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>//获取底部navigationBar高度
+public int getNavigationBarHeight(Context context) {
+    int result = 0;
+    int resourceId = context.getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+    if(resourceId&gt;0){
+        result = context.getResources().getDimensionPixelSize(resourceId);
+    }
+    return result;
+} ```
+</code></pre>
+</div>
+
+<p>打印出的数据：
+statusbar height:84
+navigationbar height:168</p>
+
+<p>接下来计算：
+168/3.5=48
+2560-2392=168, 所以NavigationBar包括了StatusBar.</p>
+
