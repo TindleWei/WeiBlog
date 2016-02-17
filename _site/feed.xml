@@ -5,9 +5,76 @@
     <description>Wei Zepeng&#39;s Blog.</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 08 Feb 2016 16:02:20 +0800</pubDate>
-    <lastBuildDate>Mon, 08 Feb 2016 16:02:20 +0800</lastBuildDate>
+    <pubDate>Wed, 17 Feb 2016 10:01:39 +0800</pubDate>
+    <lastBuildDate>Wed, 17 Feb 2016 10:01:39 +0800</lastBuildDate>
     <generator>Jekyll v3.0.0</generator>
+    
+      <item>
+        <title>Screen Density</title>
+        <description>&lt;h1 id=&quot;section&quot;&gt;宽高计算&lt;/h1&gt;
+
+&lt;p&gt;在Activity中，可以这样获得宽高密：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+	float mDensity = getBaseContext().getResources().getDisplayMetrics().density;
+	float mScreenHeight = getBaseContext().getResources().getDisplayMetrics().heightPixels;
+    float mScreenWidth = getBaseContext().getResources().getDisplayMetrics().widthPixels;
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;例如，我的手机Nexus6手机的分辨率是 1440*2560，
+打印出的数据是：
+desity:3.5
+height:2392.0
+width:1440.0&lt;/p&gt;
+
+&lt;p&gt;接下来，查看statusBar和navigationBar的高度：&lt;/p&gt;
+
+&lt;p&gt;```
+    //获取statusBar高度
+    public int getStatusBarHeight(Context context){
+        int result = 0;
+        int resourceId = context.getResources().getIdentifier(“status_bar_height”, “dimen”, “android”);
+        if(resourceId&amp;gt;0){
+            result = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//获取底部navigationBar高度
+public int getNavigationBarHeight(Context context) {
+    int result = 0;
+    int resourceId = context.getResources().getIdentifier(&quot;navigation_bar_height&quot;, &quot;dimen&quot;, &quot;android&quot;);
+    if(resourceId&amp;gt;0){
+        result = context.getResources().getDimensionPixelSize(resourceId);
+    }
+    return result;
+} ```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;打印出的数据：
+statusbar height:84
+navigationbar height:168&lt;/p&gt;
+
+&lt;p&gt;接下来计算：
+168/3.5=48
+2560-2392=168, 所以NavigationBar包括了StatusBar.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;dp2px&quot;&gt;dp2px&lt;/h2&gt;
+
+&lt;p&gt;实际，返回的值是 (int)(dp * density + 0.5f);&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 08 Feb 2016 19:59:05 +0800</pubDate>
+        <link>/2016/02/08/screen-density/</link>
+        <guid isPermaLink="true">/2016/02/08/screen-density/</guid>
+        
+        
+        <category>Android</category>
+        
+      </item>
     
       <item>
         <title>NSString Some Useful Methods</title>

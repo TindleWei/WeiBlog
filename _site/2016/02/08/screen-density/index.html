@@ -5,10 +5,10 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Wei's Blog</title>
-	<meta name="description" content="Wei Zepeng's Blog.">
+	<title>Screen Density</title>
+	<meta name="description" content="Screen Density">
 	
-	<link rel="canonical" href="/">
+	<link rel="canonical" href="/2016/02/08/screen-density/">
 	<link rel="alternate" type="application/rss+xml" title="Wei's Blog" href="/feed.xml" />
 	
 	<!-- <link rel="stylesheet" href="/css/main.css"> -->
@@ -96,225 +96,95 @@
 
 
     <div id="main" class="container main">
-      <div id="index" class="row">
-  <div class="col-sm-9">
-    <div class="post-area">
-      <!-- small button -->
-     <!--  <p class="pull-right visible-xs">
-       <button>toggle</button>
-     </p> -->
-      <div class="post-list-body">
-        
-        <div class="all-posts" post-cate="All">
-          
-            <a class="post-list-item" href="/2016/02/08/screen-density/">
-              <h2>
-              Screen Density
-              </h2>
-              <span class="">Feb 8, 2016</span>
-            </a>
+      <div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header>
+        <h1>Screen Density</h1>
+        <p>Feb 8, 2016</p>
+      </header>
+      <hr>
+      <article>
+        <h1 id="section">宽高计算</h1>
+
+<p>在Activity中，可以这样获得宽高密：</p>
+
+<p><code class="highlighter-rouge">
+	float mDensity = getBaseContext().getResources().getDisplayMetrics().density;
+	float mScreenHeight = getBaseContext().getResources().getDisplayMetrics().heightPixels;
+    float mScreenWidth = getBaseContext().getResources().getDisplayMetrics().widthPixels;
+</code></p>
+
+<p>例如，我的手机Nexus6手机的分辨率是 1440*2560，
+打印出的数据是：
+desity:3.5
+height:2392.0
+width:1440.0</p>
+
+<p>接下来，查看statusBar和navigationBar的高度：</p>
+
+<p>```
+    //获取statusBar高度
+    public int getStatusBarHeight(Context context){
+        int result = 0;
+        int resourceId = context.getResources().getIdentifier(“status_bar_height”, “dimen”, “android”);
+        if(resourceId&gt;0){
+            result = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>//获取底部navigationBar高度
+public int getNavigationBarHeight(Context context) {
+    int result = 0;
+    int resourceId = context.getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+    if(resourceId&gt;0){
+        result = context.getResources().getDimensionPixelSize(resourceId);
+    }
+    return result;
+} ```
+</code></pre>
+</div>
+
+<p>打印出的数据：
+statusbar height:84
+navigationbar height:168</p>
+
+<p>接下来计算：
+168/3.5=48
+2560-2392=168, 所以NavigationBar包括了StatusBar.</p>
+
+<hr />
+
+<h2 id="dp2px">dp2px</h2>
+
+<p>实际，返回的值是 (int)(dp * density + 0.5f);</p>
 
 
-
-          
-            <a class="post-list-item" href="/2015/11/26/nsstring-some-useful-methods/">
-              <h2>
-              NSString Some Useful Methods
-              </h2>
-              <span class="">Nov 26, 2015</span>
-            </a>
-
-
-
-          
-            <a class="post-list-item" href="/2015/09/25/about-ios-softkeyboard/">
-              <h2>
-              SoftKeyBoard
-              </h2>
-              <span class="">Sep 25, 2015</span>
-            </a>
-
-
-
-          
-            <a class="post-list-item" href="/2015/09/06/what-i-use-git-to-build-blog/">
-              <h2>
-              What I Use Git to Build Blog
-              </h2>
-              <span class="">Sep 6, 2015</span>
-            </a>
-
-
-
-          
-            <a class="post-list-item" href="/2015/09/06/how-could-i-make-a-jekyll-website/">
-              <h2>
-              How could I make a Jekyll website
-              </h2>
-              <span class="">Sep 6, 2015</span>
-            </a>
-
-
-
-          
-            <a class="post-list-item" href="/2015/09/06/lorem-ipsum/">
-              <h2>
-              Lorem Ipsum
-              </h2>
-              <span class="">Sep 6, 2015</span>
-            </a>
-
-
-
-          
-            <a class="post-list-item" href="/2015/09/06/markdown-cheatsheet-demo/">
-              <h2>
-              Markdown Cheatsheet Demo
-              </h2>
-              <span class="">Sep 6, 2015</span>
-            </a>
-
-
-
-          
-          <!-- 分页 -->
-      <div class="paginator">
-              
-      </div>
+      </article>
+      <hr>
+      <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a></div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
       
-
-
-        </div>
-        <!-- <div class="posts-in-categories"> -->
-        
-          <div post-cate="Jekyll">
-            
-              
-                
-              
-            
-              
-                
-                  <a href="/2015/09/06/what-i-use-git-to-build-blog/" class="post-list-item">
-                    <h2>
-                    What I Use Git to Build Blog
-                    </h2>
-                    <span class="">Sep 6, 2015</span>
-                  </a>
-                
-              
-                
-                  <a href="/2015/09/06/how-could-i-make-a-jekyll-website/" class="post-list-item">
-                    <h2>
-                    How could I make a Jekyll website
-                    </h2>
-                    <span class="">Sep 6, 2015</span>
-                  </a>
-                
-              
-                
-                  <a href="/2015/09/06/lorem-ipsum/" class="post-list-item">
-                    <h2>
-                    Lorem Ipsum
-                    </h2>
-                    <span class="">Sep 6, 2015</span>
-                  </a>
-                
-              
-                
-                  <a href="/2015/09/06/markdown-cheatsheet-demo/" class="post-list-item">
-                    <h2>
-                    Markdown Cheatsheet Demo
-                    </h2>
-                    <span class="">Sep 6, 2015</span>
-                  </a>
-                
-              
-            
-          </div>
-        
-          <div post-cate="iOS">
-            
-              
-                
-              
-            
-              
-                
-                  <a href="/2015/11/26/nsstring-some-useful-methods/" class="post-list-item">
-                    <h2>
-                    NSString Some Useful Methods
-                    </h2>
-                    <span class="">Nov 26, 2015</span>
-                  </a>
-                
-              
-                
-                  <a href="/2015/09/25/about-ios-softkeyboard/" class="post-list-item">
-                    <h2>
-                    SoftKeyBoard
-                    </h2>
-                    <span class="">Sep 25, 2015</span>
-                  </a>
-                
-              
-            
-          </div>
-        
-          <div post-cate="Android">
-            
-              
-                
-              
-            
-              
-                
-                  <a href="/2016/02/08/screen-density/" class="post-list-item">
-                    <h2>
-                    Screen Density
-                    </h2>
-                    <span class="">Feb 8, 2016</span>
-                  </a>
-                
-              
-            
-          </div>
-        
-        
-        <!-- </div> -->
-      </div>
+      <div class="ds-thread" data-thread-key="/2016/02/08/Screen-Density" data-title="Screen Density" data-url="gaohaoyang.github.io/2016/02/08/screen-density/"></div>
       
-
-     
+      <!-- 多说评论框 end -->
     </div>
   </div>
-  <div class="col-sm-3">
-    <div class="shadow-corner-curl hidden-xs">
+
+  <div id="content" class="col-sm-3">
+    <!-- <div id="myAffix" class="shadow-bottom-center hidden-xs" data-spy="affix" data-offset-top="0" data-offset-bottom="-20"> -->
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
       <div class="categories-list-header">
-        Categories
+        Content
       </div>
-      
-      <a href="/index.html" class="categories-list-item" cate="All">
-        All<span class="my-badge"> 7</span>
-      </a>
-      
-        <a href="javascript:;" class="categories-list-item" cate="Jekyll">
-          Jekyll <span class="my-badge">4</span>
-        </a>
-      
-        <a href="javascript:;" class="categories-list-item" cate="iOS">
-          iOS <span class="my-badge">2</span>
-        </a>
-      
-        <a href="javascript:;" class="categories-list-item" cate="Android">
-          Android <span class="my-badge">1</span>
-        </a>
-      
+      <div class="content-text"></div>
     </div>
   </div>
 </div>
-
-
     </div>
 
     
