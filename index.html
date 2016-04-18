@@ -80,9 +80,9 @@ layout: default
         Categories
       </div>
       
-      <a href="{{'/index.html' | prepend: site.baseurl}}" class="categories-list-item" cate="All">
+      <!-- <a href="{{'/index.html' | prepend: site.baseurl}}" class="categories-list-item" cate="All">
         All<span class="my-badge"> {{site.posts | size}}</span>
-      </a>
+      </a> -->
       {% for category in site.categories order:ascending %}
         <a href="javascript:;" class="categories-list-item" cate="{{ category | first }}">
           {{ category | first }} <span class="my-badge">{{ category | last | size }}</span>
