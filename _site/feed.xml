@@ -5,9 +5,287 @@
     <description>Wei Zepeng&#39;s Blog.</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 17 Feb 2016 10:01:39 +0800</pubDate>
-    <lastBuildDate>Wed, 17 Feb 2016 10:01:39 +0800</lastBuildDate>
+    <pubDate>Thu, 17 Mar 2016 15:01:23 +0800</pubDate>
+    <lastBuildDate>Thu, 17 Mar 2016 15:01:23 +0800</lastBuildDate>
     <generator>Jekyll v3.0.0</generator>
+    
+      <item>
+        <title>Android graphics的camera和matrix</title>
+        <description>&lt;h2 id=&quot;android-graphicscameramatrix&quot;&gt;关于Android graphics的Camera和Matrix&lt;/h2&gt;
+
+&lt;h3 id=&quot;camera&quot;&gt;Camera&lt;/h3&gt;
+
+&lt;p&gt;这是camera类的主要方法：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public native void save();
+public native void restore();
+public native void translate(float x, float y, float z);
+public native void rotateX(float deg);
+public native void rotateY(float deg);
+public native void rotateZ(float deg);
+public native void rotate(float x, float y, float z);
+public native float getLocationX();
+public native float getLocationY();
+public native float getLocationZ();
+public native void setLocation(float x, float y, float z);
+public void getMatrix(Matrix matrix) {
+    nativeGetMatrix(matrix.native_instance);
+}
+public void applyToCanvas(Canvas canvas) {
+    nativeApplyToCanvas(canvas.mNativeCanvas);
+}
+public native float dotWithNormal(float dx, float dy, float dz);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;这里是Camera变换的坐标轴
+&lt;img src=&quot;/Users/tindle/Desktop/20150117092512161.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在rotate的时候，要站在该轴正方向的地方看，才能明白他的旋转。
+如 camera.rotateZ(-60)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/tindle/Desktop/20150117092514165.png&quot; alt=&quot;&quot; /&gt;!&lt;/p&gt;
+
+&lt;h3 id=&quot;matrix&quot;&gt;Matrix&lt;/h3&gt;
+
+&lt;p&gt;Matrix是一个3 x 3的2D空间矩阵&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/Users/tindle/Desktop/1349614431_7130.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;MPERSP_2指的是投影变换,其实际作用就是如果MPERSP_2=0.5，那么物体是原来的4倍大小；如果MPERSP_2=2，那么物体是原来的1/4大小。&lt;/p&gt;
+
+&lt;p&gt;Camera和Matrix的联合使用：一般情况下，如果我们需要进行3D变换，那么需要将Camera和Matrix联合使用，使用Camera进行x轴或y轴的旋转，使用Matrix进行平移或放大。&lt;/p&gt;
+</description>
+        <pubDate>Thu, 10 Mar 2016 00:00:00 +0800</pubDate>
+        <link>/2016/03/10/android-graphics%E7%9A%84camera%E5%92%8Cmatrix/</link>
+        <guid isPermaLink="true">/2016/03/10/android-graphics%E7%9A%84camera%E5%92%8Cmatrix/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>关于RxJava的使用</title>
+        <description>&lt;p&gt;RxJava 的观察者模式
+RxJava 有四个基本概念：Observable (可观察者，即被观察者)、 Observer (观察者)、 subscribe (订阅)、事件。Observable 和Observer 通过 subscribe() 方法实现订阅关系，从而 Observable 可以在需要的时候发出事件来通知 Observer。&lt;/p&gt;
+
+&lt;p&gt;与传统观察者模式不同， RxJava 的事件回调方法除了普通事件 onNext() （相当于 onClick() / onEvent()）之外，还定义了两个特殊的事件：onCompleted() 和 onError()。&lt;/p&gt;
+
+&lt;p&gt;1) 创建 Observer&lt;br /&gt;
+Observer 即观察者&lt;/p&gt;
+
+&lt;p&gt;Observer&lt;string&gt; observer = new Observer&lt;string&gt;() {
+    @Override
+    public void onNext(String s) {
+        Log.d(tag, &quot;Item: &quot; + s);
+    }&lt;/string&gt;&lt;/string&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@Override
+public void onCompleted() {
+    Log.d(tag, &quot;Completed!&quot;);
+}
+ 
+@Override
+public void onError(Throwable e) {
+    Log.d(tag, &quot;Error!&quot;);
+}};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Subscriber&lt;string&gt; subscriber = new Subscriber&lt;string&gt;() {
+    @Override
+    public void onNext(String s) {
+        Log.d(tag, &quot;Item: &quot; + s);
+    }&lt;/string&gt;&lt;/string&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@Override
+public void onCompleted() {
+    Log.d(tag, &quot;Completed!&quot;);
+}
+ 
+@Override
+public void onError(Throwable e) {
+    Log.d(tag, &quot;Error!&quot;);
+}};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;他们的基本使用方式是完全一样的&lt;/p&gt;
+
+&lt;p&gt;2) 创建 Observable&lt;br /&gt;
+Observable 即被观察者&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Observable observable = Observable.create(new Observable.OnSubscribe&amp;lt;String&amp;gt;() {
+@Override
+public void call(Subscriber&amp;lt;? super String&amp;gt; subscriber) {
+    subscriber.onNext(&quot;Hello&quot;);
+    subscriber.onNext(&quot;Hi&quot;);
+    subscriber.onNext(&quot;Aloha&quot;);
+    subscriber.onCompleted();
+}});
+
+Observable observable = Observable.just(&quot;Hello&quot;, &quot;Hi&quot;, &quot;Aloha&quot;);
+// 将会依次调用：
+// onNext(&quot;Hello&quot;);
+// onNext(&quot;Hi&quot;);
+// onNext(&quot;Aloha&quot;);
+// onCompleted();
+
+String[] words = {&quot;Hello&quot;, &quot;Hi&quot;, &quot;Aloha&quot;};
+Observable observable = Observable.from(words);
+// 将会依次调用：
+// onNext(&quot;Hello&quot;);
+// onNext(&quot;Hi&quot;);
+// onNext(&quot;Aloha&quot;);
+// onCompleted();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;上面 just(T…) 的例子和 from(T[]) 的例子，都和之前的 create(OnSubscribe) 的例子是等价的。&lt;/p&gt;
+
+&lt;p&gt;3) Subscribe (订阅)&lt;br /&gt;
+创建了 Observable 和 Observer 之后，再用 subscribe() 方法将它们联结起&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;observable.subscribe(observer);
+// 或者：
+observable.subscribe(subscriber);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;subscribe() 还支持不完整定义的回调，RxJava 会自动根据定义创建出Subscriber：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Action1&amp;lt;String&amp;gt; onNextAction = new Action1&amp;lt;String&amp;gt;() {
+// onNext()
+@Override
+public void call(String s) {
+    Log.d(tag, s);
+}
+};
+Action1&amp;lt;Throwable&amp;gt; onErrorAction = new Action1&amp;lt;Throwable&amp;gt;() {
+// onError()
+@Override
+public void call(Throwable throwable) {
+    // Error handling
+}
+};
+Action0 onCompletedAction = new Action0() {
+// onCompleted()
+@Override
+public void call() {
+    Log.d(tag, &quot;completed&quot;);
+}
+};
+ 
+// 自动创建 Subscriber ，并使用 onNextAction 来定义 onNext()
+observable.subscribe(onNextAction);
+// 自动创建 Subscriber ，并使用 onNextAction 和 onErrorAction 来定义 	onNext() 和 onError()
+observable.subscribe(onNextAction, onErrorAction);
+// 自动创建 Subscriber ，并使用 onNextAction、 onErrorAction 和 	onCompletedAction 来定义 onNext()、 onError() 和 onCompleted()
+observable.subscribe(onNextAction, onErrorAction, 	onCompletedAction);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;线程控制 —— Scheduler&lt;/p&gt;
+
+&lt;p&gt;subscribeOn(): 指定 subscribe() 所发生的线程，即 Observable.OnSubscribe 被激活时所处的线程。或者叫做事件产生的线程。
+observeOn(): 指定 Subscriber 所运行在的线程。或者叫做事件消费的线程。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Observable.just(1, 2, 3, 4)
+.subscribeOn(Schedulers.io()) // 指定 subscribe() 发生在 IO 线程
+.observeOn(AndroidSchedulers.mainThread()) // 指定 Subscriber 的回调发生在主线程
+.subscribe(new Action1&amp;lt;Integer&amp;gt;() {
+    @Override
+    public void call(Integer number) {
+        Log.d(tag, &quot;number:&quot; + number);
+    }
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;变换&lt;/h3&gt;
+
+&lt;p&gt;map(): 事件对象的直接变换，它是 RxJava 最常用的变换。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Observable.just(&quot;images/logo.png&quot;) // 输入类型 String
+.map(new Func1&amp;lt;String, Bitmap&amp;gt;() {
+    @Override
+    public Bitmap call(String filePath) { // 参数类型 String
+        return getBitmapFromPath(filePath); // 返回类型 Bitmap
+    }
+})
+.subscribe(new Action1&amp;lt;Bitmap&amp;gt;() {
+    @Override
+    public void call(Bitmap bitmap) { // 参数类型 Bitmap
+        showBitmap(bitmap);
+    }
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;map() 是一对一的转化，而我现在的要求是一对多的转化, 就需要用 flatMap()了.&lt;/p&gt;
+
+ 	Student[] students = …;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Subscriber&amp;lt;Course&amp;gt; subscriber = new Subscriber&amp;lt;Course&amp;gt;() {
+@Override
+public void onNext(Course course) {
+    Log.d(tag, course.getName());
+}
+...
+};
+Observable.from(students)
+.flatMap(new Func1&amp;lt;Student, Observable&amp;lt;Course&amp;gt;&amp;gt;() {
+    @Override
+    public Observable&amp;lt;Course&amp;gt; call(Student student) {
+        return Observable.from(student.getCourses());
+    }
+})
+.subscribe(subscriber);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;不同于 observeOn() ， subscribeOn() 的位置放在哪里都可以，但它是只能调用一次的。通过 observeOn() 的多次调用，程序实现了线程的多次切换.&lt;/p&gt;
+
+ 	Observable.just(1, 2, 3, 4) // IO 线程，由 subscribeOn() 指定
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.subscribeOn(Schedulers.io())
+.observeOn(Schedulers.newThread())
+.map(mapOperator) // 新线程，由 observeOn() 指定
+.observeOn(Schedulers.io())
+.map(mapOperator2) // IO 线程，由 observeOn() 指定
+.observeOn(AndroidSchedulers.mainThread) 
+.subscribe(subscriber);  // Android 主线程，由 observeOn() 指定
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;至此，结束。&lt;/p&gt;
+</description>
+        <pubDate>Sat, 05 Mar 2016 00:00:00 +0800</pubDate>
+        <link>/2016/03/05/%E5%85%B3%E4%BA%8Erxjava%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+        <guid isPermaLink="true">/2016/03/05/%E5%85%B3%E4%BA%8Erxjava%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+        
+        
+        <category>Android</category>
+        
+      </item>
+    
+      <item>
+        <title>关于StaticLayout和DynamicLayout</title>
+        <description>&lt;p&gt;StaticLayout 来自 http://developer.android.com/reference/android/text/StaticLayout.html&lt;/p&gt;
+
+&lt;p&gt;DynamicLayout 来自 http://developer.android.com/reference/android/text/DynamicLayout.html&lt;/p&gt;
+
+&lt;h2 id=&quot;cerditsroll&quot;&gt;CerditsRoll&lt;/h2&gt;
+
+&lt;p&gt;在该项目中，使用了一些&lt;/p&gt;
+</description>
+        <pubDate>Wed, 17 Feb 2016 00:00:00 +0800</pubDate>
+        <link>/2016/02/17/%E5%85%B3%E4%BA%8Estaticlayout%E5%92%8Cdynamiclayout/</link>
+        <guid isPermaLink="true">/2016/02/17/%E5%85%B3%E4%BA%8Estaticlayout%E5%92%8Cdynamiclayout/</guid>
+        
+        
+        <category>Android</category>
+        
+      </item>
     
       <item>
         <title>Screen Density</title>
