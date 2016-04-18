@@ -5,11 +5,25 @@ date:   2016-04-18
 categories: Plan
 ---
 
-关于BigShow.
+关于BigShow, 最重要的是：快！快！快！
 
-首先，谢谢36Kr的这篇文章.
+但是我最近确实做慢了。
 
-于是，可以借助这个GIF搜索引擎：http://giphy.com/
+应该反思。
+
+## 任务300
+
+1. 点击搜索后的第一次自动搜索提示
+2. 搜索界面的网格视图
+3. 搜索框的输入与确定
+4. 搜索框的下拉提示列表
+5. 选择图片后的图片展示
+
+
+
+## 前言
+
+首先是36Kr的一篇文章, 可以借助这个GIF搜索引擎：http://giphy.com/
 
 微软的Bing也是可以搜索gif图片，但我发现它的图片还是来自Giphy.
 
@@ -19,21 +33,25 @@ categories: Plan
 
 这里是 Giphy 的文档：https://github.com/Giphy/GiphyAPI
 
-关于Parameters,
-rating - limit results to those rated (y,g, pg, pg-13 or r).
-	G: General Audiences. All ages admitted.
-	PG: Parental Guidance Suggested. Some material may not be suitable for children.
-	PG-13: Parents Strongly Cautioned. Some material may be inappropriate for children under 13.
-	R: Restricted. Under 17 requires accompanying parent or adult guardian.
-	NC-17: No Children. No one 17 and under admitted.
-
 更多的文档：https://api.giphy.com/  http://giphy.com/labs
+
+## 内容分级
+
+关于Parameters,
+rating - limit results to those rated (y,g, pg, pg-13 or r).  
+  G: General Audiences. All ages admitted.  
+  PG: Parental Guidance Suggested. Some material may not be suitable for children.  
+  PG-13: Parents Strongly Cautioned. Some material may be inappropriate for children under 13.  
+  R: Restricted. Under 17 requires accompanying parent or adult guardian.  
+  NC-17: No Children. No one 17 and under admitted.  
+
+
 
 -------------------------------------------------------------------------------------------------
 选择不光可以是文字，它可以是任何东西。
 -------------------------------------------------------------------------------------------------
 
-数据
+## 数据
 
 Plot
 num(三叉树排序)

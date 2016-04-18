@@ -5,17 +5,31 @@
     <description>Wei Zepeng&#39;s Blog.</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 18 Apr 2016 11:52:10 +0800</pubDate>
-    <lastBuildDate>Mon, 18 Apr 2016 11:52:10 +0800</lastBuildDate>
+    <pubDate>Mon, 18 Apr 2016 14:23:34 +0800</pubDate>
+    <lastBuildDate>Mon, 18 Apr 2016 14:23:34 +0800</lastBuildDate>
     <generator>Jekyll v3.0.0</generator>
     
       <item>
         <title>My BigShow Plan</title>
-        <description>&lt;p&gt;关于BigShow.&lt;/p&gt;
+        <description>&lt;p&gt;关于BigShow, 最重要的是：快！快！快！&lt;/p&gt;
 
-&lt;p&gt;首先，谢谢36Kr的这篇文章.&lt;/p&gt;
+&lt;p&gt;但是我最近确实做慢了。&lt;/p&gt;
 
-&lt;p&gt;于是，可以借助这个GIF搜索引擎：http://giphy.com/&lt;/p&gt;
+&lt;p&gt;应该反思。&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;任务300&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;点击搜索后的第一次自动搜索提示&lt;/li&gt;
+  &lt;li&gt;搜索界面的网格视图&lt;/li&gt;
+  &lt;li&gt;搜索框的输入与确定&lt;/li&gt;
+  &lt;li&gt;搜索框的下拉提示列表&lt;/li&gt;
+  &lt;li&gt;选择图片后的图片展示&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;前言&lt;/h2&gt;
+
+&lt;p&gt;首先是36Kr的一篇文章, 可以借助这个GIF搜索引擎：http://giphy.com/&lt;/p&gt;
 
 &lt;p&gt;微软的Bing也是可以搜索gif图片，但我发现它的图片还是来自Giphy.&lt;/p&gt;
 
@@ -25,21 +39,23 @@
 
 &lt;p&gt;这里是 Giphy 的文档：https://github.com/Giphy/GiphyAPI&lt;/p&gt;
 
-&lt;p&gt;关于Parameters,
-rating - limit results to those rated (y,g, pg, pg-13 or r).
-	G: General Audiences. All ages admitted.
-	PG: Parental Guidance Suggested. Some material may not be suitable for children.
-	PG-13: Parents Strongly Cautioned. Some material may be inappropriate for children under 13.
-	R: Restricted. Under 17 requires accompanying parent or adult guardian.
-	NC-17: No Children. No one 17 and under admitted.&lt;/p&gt;
-
 &lt;p&gt;更多的文档：https://api.giphy.com/  http://giphy.com/labs&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;内容分级&lt;/h2&gt;
+
+&lt;p&gt;关于Parameters,
+rating - limit results to those rated (y,g, pg, pg-13 or r).&lt;br /&gt;
+  G: General Audiences. All ages admitted.&lt;br /&gt;
+  PG: Parental Guidance Suggested. Some material may not be suitable for children.&lt;br /&gt;
+  PG-13: Parents Strongly Cautioned. Some material may be inappropriate for children under 13.&lt;br /&gt;
+  R: Restricted. Under 17 requires accompanying parent or adult guardian.&lt;br /&gt;
+  NC-17: No Children. No one 17 and under admitted.&lt;/p&gt;
 
 &lt;hr /&gt;
 &lt;p&gt;选择不光可以是文字，它可以是任何东西。
 ————————————————————————————————-&lt;/p&gt;
 
-&lt;p&gt;数据&lt;/p&gt;
+&lt;h2 id=&quot;section-3&quot;&gt;数据&lt;/h2&gt;
 
 &lt;p&gt;Plot
 num(三叉树排序)
