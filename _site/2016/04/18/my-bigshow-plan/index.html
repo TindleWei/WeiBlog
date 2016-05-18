@@ -116,14 +116,28 @@
 <h2 id="section">任务300</h2>
 
 <ol>
+  <li>保存数据</li>
   <li>点击搜索后的第一次自动搜索提示</li>
   <li>搜索界面的网格视图</li>
   <li>搜索框的输入与确定</li>
   <li>搜索框的下拉提示列表</li>
   <li>选择图片后的图片展示</li>
+  <li>关于网格的第一条Item √</li>
+  <li>关于网格的第后面的Item √</li>
+  <li>关于网格的数据Model √</li>
+  <li>网格图中的划线 √</li>
+  <li>网格图中的右上角数字</li>
+  <li>网格图中的数字操作</li>
+  <li>网格图的点击跳转效果</li>
+  <li>网格图的第一次显示效果</li>
 </ol>
 
-<h2 id="section-1">前言</h2>
+<h2 id="section-1">翻卷特效</h2>
+
+<p>https://github.com/harism/android_page_curl
+https://github.com/suyonoion/PageCurl_BookView</p>
+
+<h2 id="section-2">前言</h2>
 
 <p>首先是36Kr的一篇文章, 可以借助这个GIF搜索引擎：http://giphy.com/</p>
 
@@ -137,7 +151,7 @@
 
 <p>更多的文档：https://api.giphy.com/  http://giphy.com/labs</p>
 
-<h2 id="section-2">内容分级</h2>
+<h2 id="section-3">内容分级</h2>
 
 <p>关于Parameters,
 rating - limit results to those rated (y,g, pg, pg-13 or r).<br />
@@ -151,15 +165,15 @@ rating - limit results to those rated (y,g, pg, pg-13 or r).<br />
 <p>选择不光可以是文字，它可以是任何东西。
 ————————————————————————————————-</p>
 
-<h2 id="section-3">数据</h2>
+<h2 id="section-4">数据</h2>
 
 <p>Plot
-num(三叉树排序)
-isEnd: 0 非End, 1 End
-dataFrom: (参考项)giphy, user
-dataImg: (jsonstring: data: type:)
-dataText: (jsonstring: data: type:)
-dataChoose: (jsonstring: data: type:)
+num(二叉树排序)<br />
+isEnd: 0 非End, 1 End<br />
+dataFrom: (参考项)giphy, user<br />
+dataImg: (jsonstring: data: type:)<br />
+dataText: (jsonstring: data: type:)<br />
+dataChoose: (jsonstring: data: type:)<br />
 fromStory</p>
 
 <p>Story
@@ -167,20 +181,20 @@ fromStory</p>
 
 <p>关于GiphyAPI</p>
 
-<p>Translate Endpoint:
-http://api.giphy.com/v1/gifs/translate?s=superman&amp;api_key=dc6zaTOxFJmzC
+<p>Translate Endpoint:<br />
+http://api.giphy.com/v1/gifs/translate?s=superman&amp;api_key=dc6zaTOxFJmzC<br />
 将名词转化为特定图片,每次随机一个</p>
 
-<p>Search Endpoint: 
-http://api.giphy.com/v1/gifs/search?q=funny+cat&amp;api_key=dc6zaTOxFJmzC
+<p>Search Endpoint: <br />
+http://api.giphy.com/v1/gifs/search?q=funny+cat&amp;api_key=dc6zaTOxFJmzC<br />
 通过搜索关键字获得数据列表,默认为25个</p>
 
-<p>Random Endpoint:
-http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&amp;tag=american+psycho
+<p>Random Endpoint:<br />
+http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&amp;tag=american+psycho<br />
 根据标签随机获得一个数据</p>
 
-<p>Trending Gifs:
-http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC
+<p>Trending Gifs:<br />
+http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC<br />
 随机数据流25个</p>
 
 <hr />

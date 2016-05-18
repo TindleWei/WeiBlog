@@ -13,12 +13,26 @@ categories: Plan
 
 ## 任务300
 
-1. 点击搜索后的第一次自动搜索提示
-2. 搜索界面的网格视图
-3. 搜索框的输入与确定
-4. 搜索框的下拉提示列表
-5. 选择图片后的图片展示
+24. 保存数据
+11. 点击搜索后的第一次自动搜索提示
+12. 搜索界面的网格视图
+13. 搜索框的输入与确定
+14. 搜索框的下拉提示列表
+15. 选择图片后的图片展示
+16. 关于网格的第一条Item √
+17. 关于网格的第后面的Item √
+18. 关于网格的数据Model √
+19. 网格图中的划线 √
+20. 网格图中的右上角数字
+21. 网格图中的数字操作
+22. 网格图的点击跳转效果
+23. 网格图的第一次显示效果
 
+
+## 翻卷特效
+
+https://github.com/harism/android_page_curl
+https://github.com/suyonoion/PageCurl_BookView
 
 
 ## 前言
@@ -54,34 +68,34 @@ rating - limit results to those rated (y,g, pg, pg-13 or r).
 ## 数据
 
 Plot
-num(三叉树排序)
-isEnd: 0 非End, 1 End
-dataFrom: (参考项)giphy, user
-dataImg: (jsonstring: data: type:)
-dataText: (jsonstring: data: type:)
-dataChoose: (jsonstring: data: type:)
-fromStory
+num(二叉树排序)  
+isEnd: 0 非End, 1 End  
+dataFrom: (参考项)giphy, user  
+dataImg: (jsonstring: data: type:)  
+dataText: (jsonstring: data: type:)  
+dataChoose: (jsonstring: data: type:)  
+fromStory  
 
 Story
 [nothing add now]
 
-关于GiphyAPI
+关于GiphyAPI  
 
-Translate Endpoint:
-http://api.giphy.com/v1/gifs/translate?s=superman&api_key=dc6zaTOxFJmzC
-将名词转化为特定图片,每次随机一个
+Translate Endpoint:  
+http://api.giphy.com/v1/gifs/translate?s=superman&api_key=dc6zaTOxFJmzC  
+将名词转化为特定图片,每次随机一个  
 
-Search Endpoint: 
-http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC
-通过搜索关键字获得数据列表,默认为25个
+Search Endpoint:   
+http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=dc6zaTOxFJmzC  
+通过搜索关键字获得数据列表,默认为25个  
 
-Random Endpoint:
-http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=american+psycho
-根据标签随机获得一个数据
+Random Endpoint:  
+http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=american+psycho  
+根据标签随机获得一个数据  
 
-Trending Gifs:
-http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC
-随机数据流25个
+Trending Gifs:  
+http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC  
+随机数据流25个  
 
 -------------------------------------------------------------------------------------------------
 
