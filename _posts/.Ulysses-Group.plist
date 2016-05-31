@@ -5,6 +5,7 @@
 	<key>childOrder</key>
 	<array>
 		<string>_site</string>
+		<string>plan</string>
 	</array>
 	<key>createMarkedFile</key>
 	<false/>
@@ -33,6 +34,15 @@
 		</array>
 		<array>
 			<string>2016-02-17-关于StaticLayout和DynamicLayout.md</string>
+		</array>
+		<array>
+			<string>2016-01-01-Volley 源码分析.md</string>
+		</array>
+		<array>
+			<string>2016-03-05-关于RxJava的使用.md</string>
+		</array>
+		<array>
+			<string>2016-03-10-Android graphics的Camera和Matrix.md</string>
 		</array>
 	</array>
 </dict>
