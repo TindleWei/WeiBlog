@@ -60,5 +60,62 @@ navigationbar height:168
 
 实际，返回的值是 (int)(dp * density + 0.5f);
 
+### RootView
+
+```
+    public void init(){
+        ViewGroup decor = (ViewGroup) mActivity.getWindow().getDecorView();
+        ViewGroup contentParent = (ViewGroup)mActivity.findViewById(android.R.id.content);
+        View rootView = contentParent.getChildAt(0);
+
+        if(loadview==null){
+            loadview = LayoutInflater.from(mActivity).inflate(R.layout.layout_loadindview,null);
+            FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            lp.gravity = Gravity.CENTER;
+            loadview.setLayoutParams(lp);
+            contentParent.addView(loadview);
+            loadview.setVisibility(View.GONE);
+        }
+    }
+```
+
+### 屏幕截图
+
+```
+    private void getBitmapScreenshot() {
+        //create save path to for file
+        String mPath = Environment.getExternalStorageDirectory().toString() + "/" + IMAGE_FILENAME;
+
+        //create bitmap screenshot
+        Bitmap bitmap;
+        //remove .getRootView() if you want everything but the actionbar.
+        View view = getWindow().getDecorView().findViewById(android.R.id.content).getRootView();
+        view.setDrawingCacheEnabled(true);
+        bitmap = Bitmap.createBitmap(view.getDrawingCache());
+        view.setDrawingCacheEnabled(false);
+
+        OutputStream fileOut = null;
+        File imageFile = new File(mPath);
+
+        try {
+            fileOut = new FileOutputStream(imageFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fileOut);
+            fileOut.flush();
+            fileOut.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Uri uri = Uri.fromFile(new File(mPath));
+        //done. next steps are optional. just displaying screenshot for you in app.
+        Picasso.with(this)
+               .load(uri)
+               .into(mScreenshotImageView);
+        mPathTextView.setText("Screenshot saved at: " + mPath);
+    }
+```
+
 
 
