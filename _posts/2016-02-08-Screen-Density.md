@@ -117,5 +117,51 @@ navigationbar height:168
     }
 ```
 
+### 获取View在Screend中的坐标(或者说在Window或者DecorView中)
+
+```
+int[] location = new int[2];
+View.getLocationOnScreen(location);
+//或者
+int[] location = new int[2];
+View.getLocationInWindow(location);
+
+```
+
+### 判断是否存在NavigationBar
+
+单纯计算高度是不行的，因为高度值都不为0.
+
+```
+public static boolean checkDeviceHasNavigationBar(Context context) {
+    boolean hasNavigationBar = false;
+    Resources rs = context.getResources();
+    int id = rs.getIdentifier("config_showNavigationBar", "bool", "android");
+    if (id > 0) {
+        hasNavigationBar = rs.getBoolean(id);
+    }
+    try {
+        Class systemPropertiesClass = Class.forName("android.os.SystemProperties");
+        Method m = systemPropertiesClass.getMethod("get", String.class);
+        String navBarOverride = (String) m.invoke(systemPropertiesClass, "qemu.hw.mainkeys");
+        if ("1".equals(navBarOverride)) {
+            hasNavigationBar = false;
+        } else if ("0".equals(navBarOverride)) {
+            hasNavigationBar = true;
+        }
+    } catch (Exception e) {
+
+    }
+    return hasNavigationBar;
+
+}
+```
+
+隐藏NavigationBar,在3.0以后可以这么做：
+
+```
+getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+```
+
 
 
