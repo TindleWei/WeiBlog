@@ -5,9 +5,201 @@
     <description>Wei Zepeng&#39;s Blog.</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 19 May 2016 05:04:23 +0800</pubDate>
-    <lastBuildDate>Thu, 19 May 2016 05:04:23 +0800</lastBuildDate>
+    <pubDate>Mon, 04 Jul 2016 19:06:53 +0800</pubDate>
+    <lastBuildDate>Mon, 04 Jul 2016 19:06:53 +0800</lastBuildDate>
     <generator>Jekyll v3.0.0</generator>
+    
+      <item>
+        <title>RxJava一些概念的理解</title>
+        <description>&lt;p&gt;RxJava一些概念的理解 
+(摘录自soaringEveryday的博客)&lt;/p&gt;
+
+&lt;p&gt;api/students/getAll (传入班级的id获得班级的学生数组，返回值是list)
+api/courses/getAll (传入Student的id获得这个学生所上的课程，返回值是List)&lt;/p&gt;
+
+&lt;p&gt;使用Volley是下面这样子：&lt;/p&gt;
+
+&lt;p&gt;```
+private void getAllStudents(String id) {
+        BaseRequest baseRequest = new BaseRequest();
+        baseRequest.setClassId(id);
+        String url = AppConfig.SERVER_URL + “api/students/getAll”;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    final GsonRequest request = new GsonRequest&amp;lt;&amp;gt;(url, baseRequest, Response.class, new Response.Listener&amp;lt;response&amp;gt;() {
+        @Override
+        public void onResponse(Response response) {
+            if (response.getStatus() &amp;gt; 0) {
+                List&amp;lt;student&amp;gt; studentList = response.getData();
+                for (Student student : studentList) {
+
+                }
+            } else {
+                //error
+            }
+        }
+    }, new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            //error
+        }
+    });
+    MyVolley.startRequest(request);
+}
+
+private void getAllCourses(String id) {
+    BaseRequest baseRequest = new BaseRequest();
+    baseRequest.setStudentId(id);
+    String url = AppConfig.SERVER_URL + &quot;api/courses/getAll&quot;;
+
+    final GsonRequest request = new GsonRequest&amp;lt;&amp;gt;(url, baseRequest, Response.class, new Response.Listener&amp;lt;response&amp;gt;() {
+        @Override
+        public void onResponse(Response response) {
+            if (response.getStatus() &amp;gt; 0) {
+                List&amp;lt;course&amp;gt; courseList = response.getData();
+                for (Course course : courseList) {
+                    //use
+                }
+            } else {
+                //error
+            }
+        }
+    }, new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            //error
+        }
+    });
+    MyVolley.startRequest(request);
+} ```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;使用RxJava是下面这样：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+ConnectionBase.getApiService2()
+                .getStudents(101)
+                .flatMap(new Func1&amp;lt;student, observable&amp;lt;course=&quot;&quot;&amp;gt;&amp;gt;() {
+                    @Override
+                    public Observable&amp;lt;course&amp;gt; call(Student student) {
+                        return ConnectionBase.getApiService2().getAllCourse(student.getId());
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1&amp;lt;course&amp;gt;() {
+                    @Override
+                    public void call(Course course) {
+                        //use the Course
+                    }
+                });
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;首先getStudent传入了班级id(101)返回了Observable，然后链式调用flatMap操作符对这个Observable进行变换处理，针对每一个发射出来的Student进行再次请求 ConnectionBase.getApiService2().getAllCourse从而返回Observable，最后对这个 ConnectionBase.getApiService2().getAllCourse进行订阅，即subscribe方法，再Action1这个闭包的回调中使用course。&lt;/p&gt;
+
+&lt;p&gt;flatMap的作用就是对传入的对象进行处理，返回下一级所要的对象的Observable包装。&lt;/p&gt;
+
+&lt;p&gt;FuncX和ActionX的区别。FuncX包装的是有返回值的方法，用于Observable的变换、组合等等；ActionX用于包装无返回值的方法，用于subscribe方法的闭包参数。Func1有两个入参，前者是原始的参数类型，后者是返回值类型；而Action1只有一个入参，就是传入的被消费的数据类型。&lt;/p&gt;
+
+&lt;p&gt;subscribeOn(Schedulers.io()).observeOn(AndroidScheduler.mainThread())是最常用的方式，后台读取数据，主线程更新界面。subScribeOn指在哪个线程发射数据，observeOn是指在哪里消费数据。由于最终的Course要刷新界面，必须要在主线程上调用更新view的方法，所以observeOn(AndroidScheduler.mainThread())是至关重要的。&lt;/p&gt;
+
+&lt;h1 id=&quot;map--flatmap&quot;&gt;map &amp;amp; flatMap&lt;/h1&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+ConnectionBase.getApiService2()
+                .getStudents(101)
+                .map(new Func1&amp;lt;student, Course&amp;gt;() {
+                    @Override
+                    public Course call(Student student) {
+                        return conventStudentToCourse();// has problem
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1&amp;lt;course&amp;gt;() {
+                    @Override
+                    public void call(Course course) {
+                        //use the Course
+                    }
+                });
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;可以看到map也是接受一个Func1闭包，但是这个闭包的第二个参数即返回值参数类型并不是一个被包装的Observable，而是实际的原始类型，由于call的返回值是Course，所以conventStudentToCourse这里就不能用Retrofit2的方式返回一个Observable了。&lt;/p&gt;
+
+&lt;p&gt;所以这里是有一个问题的，对于这种嵌套的网络请求，由于接到上端数据流到处理后将结果数据放入下端数据流是一个异步的过程，而conventStudentToCourse这种直接将Student转化为Course是没法做到异步的，因为没有回调方法。那么这种情况，最好还是用flatMap并通过retrofit的方式来获取Observable。要知道，Rxjava的一个精髓就是“异步”.&lt;/p&gt;
+
+&lt;p&gt;那么到底map和flatMap有什么区别，或者说什么时候使用map什么时候使用flatMap呢？
+flatMap() 和 map() 有一个相同点：它也是把传入的参数转化之后返回另一个对象。但需要注意，和 map() 不同的是， flatMap() 中返回的是个 Observable 对象，并且这个 Observable 对象并不是被直接发送到了 Subscriber 的回调方法中。&lt;/p&gt;
+
+&lt;p&gt;首先，如果你需要将一个类型的对象经过处理（非异步）直接转化成下一个类型，推荐用map，否则的话就用flatMap。
+其次，如果你需要在处理中加入容错的机制（特别是你自己封装基于RxJava的网络请求框架），推荐用flatMap。&lt;/p&gt;
+
+&lt;p&gt;flapMap写法的好处&lt;/p&gt;
+
+&lt;p&gt;比如将一个File[] jsonFile中每个File转换成String，用map的话代码为：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+Observable.from(jsonFile).map(new Func1&amp;lt;file, string=&quot;&quot;&amp;gt;() {
+    @Override public String call(File file) {
+        try {
+            return new Gson().toJson(new FileReader(file), Object.class);
+        } catch (FileNotFoundException e) {
+            // So Exception. What to do ?
+        }
+        return null; // Not good :(
+    }
+});
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;可以看到这里在出现错误的时候直接抛出异常，这样的处理其实并不好，特别如果你自己封装框架，这个异常不大好去抓取。&lt;/p&gt;
+
+&lt;p&gt;如果用flatMap，由于flatMap的闭包返回值是一个Observable，所以我们可以在这个闭包的call中通过Observable.create的方式来创建Observable，而要知道create方法是可以控制数据流下端的Subscriber的，即可以调用onNext/onCompete/onError方法。如果出现异常，我们直接调用subscribe.onError即可，封装框架也很好感知。代码大致如下：&lt;/p&gt;
+
+&lt;p&gt;```
+Observable.from(jsonFile).flatMap(new Func1&amp;lt;file, observable&amp;lt;string=””»() {
+    @Override public Observable&lt;string&gt; call(final File file) {
+        return Observable.create(new Observable.OnSubscribe&lt;string&gt;() {
+            @Override public void call(Subscriber&amp;lt;? super String&amp;gt; subscriber) {
+                try {
+                    String json = new Gson().toJson(new FileReader(file), Object.class);&lt;/string&gt;&lt;/string&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;                subscriber.onNext(json);
+                subscriber.onCompleted();
+            } catch (FileNotFoundException e) {
+                subscriber.onError(e);
+            }
+        }
+    });
+} }); ```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;map操作符通常也用于处理结构化的服务端响应数据，比如下列返回的JSON数据就是一段典型的响应数据&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;message&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;操作成功&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;status&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;data&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;noVisitCount&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;planCount&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;visitedCount&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;在map的闭包中，我们可以先判断status进行统一的出错或者正确（返回data的内容）处理，一般来说，data的内容都是处理成一个泛型&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 15 Jun 2016 00:00:00 +0800</pubDate>
+        <link>/2016/06/15/rxjava%E4%B8%80%E4%BA%9B%E6%A6%82%E5%BF%B5%E7%9A%84%E7%90%86%E8%A7%A3/</link>
+        <guid isPermaLink="true">/2016/06/15/rxjava%E4%B8%80%E4%BA%9B%E6%A6%82%E5%BF%B5%E7%9A%84%E7%90%86%E8%A7%A3/</guid>
+        
+        
+        <category>Android</category>
+        
+      </item>
     
       <item>
         <title>My BigShow Plan</title>
@@ -128,7 +320,7 @@ http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC&lt;br /&gt;
       </item>
     
       <item>
-        <title>Android graphics的camera和matrix</title>
+        <title>关于Android graphics的Camera和Matrix</title>
         <description>&lt;h2 id=&quot;android-graphicscameramatrix&quot;&gt;关于Android graphics的Camera和Matrix&lt;/h2&gt;
 
 &lt;h3 id=&quot;camera&quot;&gt;Camera&lt;/h3&gt;
@@ -157,7 +349,7 @@ public native float dotWithNormal(float dx, float dy, float dz);
 &lt;/div&gt;
 
 &lt;p&gt;这里是Camera变换的坐标轴
-&lt;img src=&quot;/Users/tindle/Desktop/20150117092512161.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/img/20150117092512161.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;在rotate的时候，要站在该轴正方向的地方看，才能明白他的旋转。
 如 camera.rotateZ(-60)&lt;/p&gt;
@@ -178,6 +370,8 @@ public native float dotWithNormal(float dx, float dy, float dz);
         <link>/2016/03/10/android-graphics%E7%9A%84camera%E5%92%8Cmatrix/</link>
         <guid isPermaLink="true">/2016/03/10/android-graphics%E7%9A%84camera%E5%92%8Cmatrix/</guid>
         
+        
+        <category>Android</category>
         
       </item>
     
@@ -461,6 +655,113 @@ navigationbar height:168&lt;/p&gt;
 &lt;h2 id=&quot;dp2px&quot;&gt;dp2px&lt;/h2&gt;
 
 &lt;p&gt;实际，返回的值是 (int)(dp * density + 0.5f);&lt;/p&gt;
+
+&lt;h3 id=&quot;rootview&quot;&gt;RootView&lt;/h3&gt;
+
+&lt;p&gt;```
+    public void init(){
+        ViewGroup decor = (ViewGroup) mActivity.getWindow().getDecorView();
+        ViewGroup contentParent = (ViewGroup)mActivity.findViewById(android.R.id.content);
+        View rootView = contentParent.getChildAt(0);&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    if(loadview==null){
+        loadview = LayoutInflater.from(mActivity).inflate(R.layout.layout_loadindview,null);
+        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lp.gravity = Gravity.CENTER;
+        loadview.setLayoutParams(lp);
+        contentParent.addView(loadview);
+        loadview.setVisibility(View.GONE);
+    }
+} ```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;屏幕截图&lt;/h3&gt;
+
+&lt;p&gt;```
+    private void getBitmapScreenshot() {
+        //create save path to for file
+        String mPath = Environment.getExternalStorageDirectory().toString() + “/” + IMAGE_FILENAME;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    //create bitmap screenshot
+    Bitmap bitmap;
+    //remove .getRootView() if you want everything but the actionbar.
+    View view = getWindow().getDecorView().findViewById(android.R.id.content).getRootView();
+    view.setDrawingCacheEnabled(true);
+    bitmap = Bitmap.createBitmap(view.getDrawingCache());
+    view.setDrawingCacheEnabled(false);
+
+    OutputStream fileOut = null;
+    File imageFile = new File(mPath);
+
+    try {
+        fileOut = new FileOutputStream(imageFile);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fileOut);
+        fileOut.flush();
+        fileOut.close();
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+    Uri uri = Uri.fromFile(new File(mPath));
+    //done. next steps are optional. just displaying screenshot for you in app.
+    Picasso.with(this)
+           .load(uri)
+           .into(mScreenshotImageView);
+    mPathTextView.setText(&quot;Screenshot saved at: &quot; + mPath);
+} ```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;viewscreendwindowdecorview&quot;&gt;获取View在Screend中的坐标(或者说在Window或者DecorView中)&lt;/h3&gt;
+
+&lt;p&gt;```
+int[] location = new int[2];
+View.getLocationOnScreen(location);
+//或者
+int[] location = new int[2];
+View.getLocationInWindow(location);&lt;/p&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;h3 id=&quot;navigationbar&quot;&gt;判断是否存在NavigationBar&lt;/h3&gt;
+
+&lt;p&gt;单纯计算高度是不行的，因为高度值都不为0.&lt;/p&gt;
+
+&lt;p&gt;```
+public static boolean checkDeviceHasNavigationBar(Context context) {
+    boolean hasNavigationBar = false;
+    Resources rs = context.getResources();
+    int id = rs.getIdentifier(“config_showNavigationBar”, “bool”, “android”);
+    if (id &amp;gt; 0) {
+        hasNavigationBar = rs.getBoolean(id);
+    }
+    try {
+        Class systemPropertiesClass = Class.forName(“android.os.SystemProperties”);
+        Method m = systemPropertiesClass.getMethod(“get”, String.class);
+        String navBarOverride = (String) m.invoke(systemPropertiesClass, “qemu.hw.mainkeys”);
+        if (“1”.equals(navBarOverride)) {
+            hasNavigationBar = false;
+        } else if (“0”.equals(navBarOverride)) {
+            hasNavigationBar = true;
+        }
+    } catch (Exception e) {&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;}
+return hasNavigationBar;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;}
+```&lt;/p&gt;
+
+&lt;p&gt;隐藏NavigationBar,在3.0以后可以这么做：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+&lt;/code&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Mon, 08 Feb 2016 19:59:05 +0800</pubDate>
@@ -912,28 +1213,6 @@ Also installed grunt &lt;a href=&quot;http://gruntjs.com/&quot;&gt;GRUNT&lt;/a&g
         <pubDate>Sun, 06 Sep 2015 22:06:05 +0800</pubDate>
         <link>/2015/09/06/what-i-use-git-to-build-blog/</link>
         <guid isPermaLink="true">/2015/09/06/what-i-use-git-to-build-blog/</guid>
-        
-        
-        <category>Jekyll</category>
-        
-      </item>
-    
-      <item>
-        <title>How could I make a Jekyll website</title>
-        <description>&lt;h1 id=&quot;how-could-i-make-a-jekyll-website&quot;&gt;How could I make a Jekyll website&lt;/h1&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://octodex.github.com/images/minion.png&quot; alt=&quot;Minion&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://jekyllrb.com/docs/quickstart/&quot;&gt;http://jekyllrb.com/docs/quickstart/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://help.github.com/articles/using-jekyll-with-pages/&quot;&gt;https://help.github.com/articles/using-jekyll-with-pages/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.pchou.info/web-build/2014/07/04/build-github-blog-page-08.html&quot;&gt;http://www.pchou.info/web-build/2014/07/04/build-github-blog-page-08.html&lt;/a&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Sun, 06 Sep 2015 22:06:05 +0800</pubDate>
-        <link>/2015/09/06/how-could-i-make-a-jekyll-website/</link>
-        <guid isPermaLink="true">/2015/09/06/how-could-i-make-a-jekyll-website/</guid>
         
         
         <category>Jekyll</category>

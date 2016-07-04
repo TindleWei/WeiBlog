@@ -1,3 +1,11 @@
+---
+layout: post
+title:  关于Android graphics的Camera和Matrix 
+date:   2016-03-10 
+categories: Android
+excerpt: 
+---
+
 ## 关于Android graphics的Camera和Matrix
 
 ### Camera
@@ -24,7 +32,7 @@
 	public native float dotWithNormal(float dx, float dy, float dz);
 
 这里是Camera变换的坐标轴
-![](/Users/tindle/Desktop/20150117092512161.png)
+![](/img/20150117092512161.png)
 
 在rotate的时候，要站在该轴正方向的地方看，才能明白他的旋转。
 如 camera.rotateZ(-60)
