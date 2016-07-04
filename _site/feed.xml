@@ -5,8 +5,8 @@
     <description>Wei Zepeng&#39;s Blog.</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 04 Jul 2016 19:06:53 +0800</pubDate>
-    <lastBuildDate>Mon, 04 Jul 2016 19:06:53 +0800</lastBuildDate>
+    <pubDate>Mon, 04 Jul 2016 19:25:43 +0800</pubDate>
+    <lastBuildDate>Mon, 04 Jul 2016 19:25:43 +0800</lastBuildDate>
     <generator>Jekyll v3.0.0</generator>
     
       <item>
@@ -349,12 +349,12 @@ public native float dotWithNormal(float dx, float dy, float dz);
 &lt;/div&gt;
 
 &lt;p&gt;这里是Camera变换的坐标轴
-&lt;img src=&quot;/img/20150117092512161.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/img/20120929085945172.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;在rotate的时候，要站在该轴正方向的地方看，才能明白他的旋转。
 如 camera.rotateZ(-60)&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/Users/tindle/Desktop/20150117092514165.png&quot; alt=&quot;&quot; /&gt;!&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../img/20120929085945172.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;matrix&quot;&gt;Matrix&lt;/h3&gt;
 
