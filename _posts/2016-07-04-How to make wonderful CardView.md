@@ -1,11 +1,10 @@
-
-	---
-	layout: post
-	title:  Android Color 
-	date:   2016-07-06 
-	categories: Android
-	excerpt: 
-	---
+---
+layout: post
+title:  Android Color 
+date:   2016-07-06 
+categories: Android
+excerpt: 
+---
 
 # How To Make Wonderful CardView
 
