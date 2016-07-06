@@ -1,0 +1,117 @@
+<!DOCTYPE html> <!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--> <!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8"><![endif]--> <!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9"><![endif]--> <!--[if gt IE 8]><!--> <html class="no-js"><!--<![endif]--> <head> <meta charset="UTF-8"> <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"> <meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"> <title>关于RxJava的使用 &#8211; Black Adam</title> <meta name="description" content="Adam is my name, Black is my color."> <meta name="keywords" content=""> <!-- Twitter Cards --> <meta name="twitter:card" content="summary"> <meta name="twitter:image" content="/img/avatar_tindle_wei.jpg"> <meta name="twitter:title" content="关于RxJava的使用"> <meta name="twitter:description" content="RxJava 的观察者模式"> <meta name="twitter:site" content="@username"> <meta name="twitter:creator" content="@username"> <!-- Open Graph --> <meta property="og:locale" content=""> <meta property="og:type" content="article"> <meta property="og:title" content="关于RxJava的使用"> <meta property="og:description" content="RxJava 的观察者模式"> <meta property="og:url" content="/%E5%85%B3%E4%BA%8ERxJava%E7%9A%84%E4%BD%BF%E7%94%A8/"> <meta property="og:site_name" content="Black Adam"> <meta property="og:image" content="/img/avatar_tindle_wei.jpg"> <link rel="canonical" href="/%E5%85%B3%E4%BA%8ERxJava%E7%9A%84%E4%BD%BF%E7%94%A8/"> <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Black Adam Feed"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- CSS --> <link rel="stylesheet" href="/assets/css/main.css"> <!-- JS --> <script src="/assets/js/modernizr-3.3.1.custom.min.js"></script> <!-- Favicons --> <link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon-precomposed.png"> <link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicons/apple-icon-72x72.png"> <link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicons/apple-icon-114x114.png"> <link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicons/apple-icon-144x144.png"> <link rel="shortcut icon" type="image/png" href="/favicon.png" /> <link rel="shortcut icon" href="/favicon.ico" /> <!-- Background Image --> <style type="text/css">body {background-image:url(/img/home_wall_paper.jpg); }</style> <!-- Post Feature Image --> </head> <body> <nav id="dl-menu" class="dl-menuwrapper" role="navigation"> <button class="dl-trigger">Open Menu</button> <ul class="dl-menu"> <li><a href="/">Home</a></li> <li> <a href="#">About</a> <ul class="dl-submenu"> <li> <img src="/img/avatar_tindle_wei.jpg" alt="Black Adam photo" class="author-photo"> <h4>Black Adam</h4> <p>Adam is my name, Black is my color.</p> </li> <li><a href="/about/"><span class="btn btn-inverse">Learn More</span></a></li> <li> <a href="http://twitter.com/username" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-twitter-square"></i> Twitter</a> </li> <li> <a href="http://facebook.com/username" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-facebook-square"></i> Facebook</a> </li> <li> <a href="http://instagram.com/username" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-instagram"></i> Instagram</a> </li> <li> <a href="http://github.com/TindleWei" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-github"></i> Github</a> </li> <li> <a href="http://steamcommunity.com/id/SkyShuter" target="_blank" rel="noopener noreferrer"><i class="fa fa-fw fa-steam-square"></i> Steam</a> </li> </ul><!-- /.dl-submenu --> </li> <li> <a href="#">Posts</a> <ul class="dl-submenu"> <li><a href="/posts/">All Posts</a></li> <li><a href="/tags/">All Tags</a></li> </ul> </li> <li><a href="/projects/" >Projects</a></li> </ul><!-- /.dl-menu --> </nav><!-- /.dl-menuwrapper --> <!-- Header --> <header class="header" role="banner"> <div class="wrapper animated fadeIn"> <div class="content"> <div class="post-title "> <h1>关于RxJava的使用</h1> <h4>05 Mar 2016</h4> <a class="btn zoombtn" href="/posts/"> <i class="fa fa-chevron-left"></i> </a> </div> <p>RxJava 的观察者模式 RxJava 有四个基本概念：Observable (可观察者，即被观察者)、 Observer (观察者)、 subscribe (订阅)、事件。Observable 和Observer 通过 subscribe() 方法实现订阅关系，从而 Observable 可以在需要的时候发出事件来通知 Observer。</p> <p>与传统观察者模式不同， RxJava 的事件回调方法除了普通事件 onNext() （相当于 onClick() / onEvent()）之外，还定义了两个特殊的事件：onCompleted() 和 onError()。</p> <p>1) 创建 Observer<br /> Observer 即观察者</p> <p>Observer<string> observer = new Observer<string>() { <a href="https://github.com/Override" class="user-mention">@Override</a> public void onNext(String s) { Log.d(tag, "Item: " + s); }</string></string></p><pre><code>&lt;a href='https://github.com/Override' class='user-mention'&gt;@Override&lt;/a&gt;
+public void onCompleted() {
+    Log.d(tag, "Completed!");
+}
+ 
+&lt;a href='https://github.com/Override' class='user-mention'&gt;@Override&lt;/a&gt;
+public void onError(Throwable e) {
+    Log.d(tag, "Error!");
+}};
+</code></pre><p>Subscriber<string> subscriber = new Subscriber<string>() { <a href="https://github.com/Override" class="user-mention">@Override</a> public void onNext(String s) { Log.d(tag, "Item: " + s); }</string></string></p><pre><code>&lt;a href='https://github.com/Override' class='user-mention'&gt;@Override&lt;/a&gt;
+public void onCompleted() {
+    Log.d(tag, "Completed!");
+}
+ 
+&lt;a href='https://github.com/Override' class='user-mention'&gt;@Override&lt;/a&gt;
+public void onError(Throwable e) {
+    Log.d(tag, "Error!");
+}};
+</code></pre><p>他们的基本使用方式是完全一样的</p> <p>2) 创建 Observable<br /> Observable 即被观察者</p><pre><code>Observable observable = Observable.create(new Observable.OnSubscribe&lt;String&gt;() {
+&lt;a href='https://github.com/Override' class='user-mention'&gt;@Override&lt;/a&gt;
+public void call(Subscriber&lt;? super String&gt; subscriber) {
+    subscriber.onNext("Hello");
+    subscriber.onNext("Hi");
+    subscriber.onNext("Aloha");
+    subscriber.onCompleted();
+}});
+
+Observable observable = Observable.just("Hello", "Hi", "Aloha");
+// 将会依次调用：
+// onNext("Hello");
+// onNext("Hi");
+// onNext("Aloha");
+// onCompleted();
+
+String[] words = {"Hello", "Hi", "Aloha"};
+Observable observable = Observable.from(words);
+// 将会依次调用：
+// onNext("Hello");
+// onNext("Hi");
+// onNext("Aloha");
+// onCompleted();
+</code></pre><p>上面 just(T…) 的例子和 from(T[]) 的例子，都和之前的 create(OnSubscribe) 的例子是等价的。</p> <p>3) Subscribe (订阅)<br /> 创建了 Observable 和 Observer 之后，再用 subscribe() 方法将它们联结起</p><pre><code>observable.subscribe(observer);
+// 或者：
+observable.subscribe(subscriber);
+</code></pre><p>subscribe() 还支持不完整定义的回调，RxJava 会自动根据定义创建出Subscriber：</p><pre><code>Action1&lt;String&gt; onNextAction = new Action1&lt;String&gt;() {
+// onNext()
+&lt;a href='https://github.com/Override' class='user-mention'&gt;@Override&lt;/a&gt;
+public void call(String s) {
+    Log.d(tag, s);
+}
+};
+Action1&lt;Throwable&gt; onErrorAction = new Action1&lt;Throwable&gt;() {
+// onError()
+&lt;a href='https://github.com/Override' class='user-mention'&gt;@Override&lt;/a&gt;
+public void call(Throwable throwable) {
+    // Error handling
+}
+};
+Action0 onCompletedAction = new Action0() {
+// onCompleted()
+&lt;a href='https://github.com/Override' class='user-mention'&gt;@Override&lt;/a&gt;
+public void call() {
+    Log.d(tag, "completed");
+}
+};
+ 
+// 自动创建 Subscriber ，并使用 onNextAction 来定义 onNext()
+observable.subscribe(onNextAction);
+// 自动创建 Subscriber ，并使用 onNextAction 和 onErrorAction 来定义 	onNext() 和 onError()
+observable.subscribe(onNextAction, onErrorAction);
+// 自动创建 Subscriber ，并使用 onNextAction、 onErrorAction 和 	onCompletedAction 来定义 onNext()、 onError() 和 onCompleted()
+observable.subscribe(onNextAction, onErrorAction, 	onCompletedAction);
+</code></pre><p>线程控制 —— Scheduler</p> <p>subscribeOn(): 指定 subscribe() 所发生的线程，即 Observable.OnSubscribe 被激活时所处的线程。或者叫做事件产生的线程。 observeOn(): 指定 Subscriber 所运行在的线程。或者叫做事件消费的线程。</p><pre><code>Observable.just(1, 2, 3, 4)
+.subscribeOn(Schedulers.io()) // 指定 subscribe() 发生在 IO 线程
+.observeOn(AndroidSchedulers.mainThread()) // 指定 Subscriber 的回调发生在主线程
+.subscribe(new Action1&lt;Integer&gt;() {
+    &lt;a href='https://github.com/Override' class='user-mention'&gt;@Override&lt;/a&gt;
+    public void call(Integer number) {
+        Log.d(tag, "number:" + number);
+    }
+});
+</code></pre><h3 id="section">变换</h3> <p>map(): 事件对象的直接变换，它是 RxJava 最常用的变换。</p><pre><code>Observable.just("images/logo.png") // 输入类型 String
+.map(new Func1&lt;String, Bitmap&gt;() {
+    &lt;a href='https://github.com/Override' class='user-mention'&gt;@Override&lt;/a&gt;
+    public Bitmap call(String filePath) { // 参数类型 String
+        return getBitmapFromPath(filePath); // 返回类型 Bitmap
+    }
+})
+.subscribe(new Action1&lt;Bitmap&gt;() {
+    &lt;a href='https://github.com/Override' class='user-mention'&gt;@Override&lt;/a&gt;
+    public void call(Bitmap bitmap) { // 参数类型 Bitmap
+        showBitmap(bitmap);
+    }
+});
+</code></pre><p>map() 是一对一的转化，而我现在的要求是一对多的转化, 就需要用 flatMap()了.</p> Student[] students = …;<pre><code>Subscriber&lt;Course&gt; subscriber = new Subscriber&lt;Course&gt;() {
+&lt;a href='https://github.com/Override' class='user-mention'&gt;@Override&lt;/a&gt;
+public void onNext(Course course) {
+    Log.d(tag, course.getName());
+}
+...
+};
+Observable.from(students)
+.flatMap(new Func1&lt;Student, Observable&lt;Course&gt;&gt;() {
+    &lt;a href='https://github.com/Override' class='user-mention'&gt;@Override&lt;/a&gt;
+    public Observable&lt;Course&gt; call(Student student) {
+        return Observable.from(student.getCourses());
+    }
+})
+.subscribe(subscriber);
+</code></pre><p>不同于 observeOn() ， subscribeOn() 的位置放在哪里都可以，但它是只能调用一次的。通过 observeOn() 的多次调用，程序实现了线程的多次切换.</p> Observable.just(1, 2, 3, 4) // IO 线程，由 subscribeOn() 指定<pre><code>.subscribeOn(Schedulers.io())
+.observeOn(Schedulers.newThread())
+.map(mapOperator) // 新线程，由 observeOn() 指定
+.observeOn(Schedulers.io())
+.map(mapOperator2) // IO 线程，由 observeOn() 指定
+.observeOn(AndroidSchedulers.mainThread) 
+.subscribe(subscriber);  // Android 主线程，由 observeOn() 指定
+</code></pre><hr /> <p>至此，结束。</p> <div class="entry-meta"> <br> <hr> <span class="entry-tags"></span> <span class="social-share"> <a href="https://www.facebook.com/sharer/sharer.php?u=/%E5%85%B3%E4%BA%8ERxJava%E7%9A%84%E4%BD%BF%E7%94%A8/" title="Share on Facebook" class="tag"> <span class="term"><i class="fa fa-facebook-square"></i> Like</span> </a> <a href="https://twitter.com/intent/tweet?text=/%E5%85%B3%E4%BA%8ERxJava%E7%9A%84%E4%BD%BF%E7%94%A8/" title="Share on Twitter" class="tag"> <span class="term"><i class="fa fa-twitter-square"></i> Tweet</span> </a> <a href="https://plus.google.com/share?url=/%E5%85%B3%E4%BA%8ERxJava%E7%9A%84%E4%BD%BF%E7%94%A8/" title="Share on Google+" class="tag"> <span class="term"><i class="fa fa-google-plus-square"></i> +1</span> </a> </span> <div style="clear:both"></div> </div> </div> </div> </header> <!-- JS --> <script src="/assets/js/jquery-1.12.0.min.js"></script> <script src="/assets/js/jquery.dlmenu.min.js"></script> <script src="/assets/js/jquery.goup.min.js"></script> <script src="/assets/js/jquery.magnific-popup.min.js"></script> <script src="/assets/js/jquery.fitvid.min.js"></script> <script src="/assets/js/scripts.js"></script> <script type="text/javascript"> var disqus_shortname = 'taylantatli'; (function() { var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); })(); (function () { var s = document.createElement('script'); s.async = true; s.type = 'text/javascript'; s.src = '//' + disqus_shortname + '.disqus.com/count.js'; (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s); }()); </script> <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> <!-- MathJax --> <script async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> </body> </html>

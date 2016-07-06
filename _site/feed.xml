@@ -1,17 +1,742 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Wei&#39;s Blog</title>
-    <description>Wei Zepeng&#39;s Blog.</description>
-    <link>/</link>
-    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 04 Jul 2016 19:42:28 +0800</pubDate>
-    <lastBuildDate>Mon, 04 Jul 2016 19:42:28 +0800</lastBuildDate>
-    <generator>Jekyll v3.0.0</generator>
-    
-      <item>
-        <title>RxJava一些概念的理解</title>
-        <description>&lt;p&gt;RxJava一些概念的理解 
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+<generator uri="http://jekyllrb.com" version="2.4.0">Jekyll</generator>
+<link href="/feed.xml" rel="self" type="application/atom+xml" />
+<link href="/" rel="alternate" type="text/html" />
+<updated>2016-07-05T18:57:04+08:00</updated>
+<id>/</id>
+<subtitle>Adam is my name, Black is my color.</subtitle>
+<entry>
+<title>Android color</title>
+<link href="/Android%20Color/" rel="alternate" type="text/html" title="Android color" />
+<published>2016-07-04T00:00:00+08:00</published>
+<updated>2016-07-04T00:00:00+08:00</updated>
+<id>/Android Color</id>
+<content type="html" xml:base="/Android%20Color/">&lt;h2 id=&quot;section&quot;&gt;```&lt;/h2&gt;
+&lt;p&gt;layout: post
+title:  Android Color 
+date:   2016-06-15 
+categories: Android
+excerpt: 
+—
+```&lt;/p&gt;
+
+&lt;h1 id=&quot;gson-user-guide&quot;&gt;Gson User Guide&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;#TOC-Overview&quot;&gt;Overview&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#TOC-Goals-for-Gson&quot;&gt;Goals for Gson&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-Gson-Performance-and-Scalability&quot;&gt;Gson Performance and Scalability&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-Gson-Users&quot;&gt;Gson Users&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-Using-Gson&quot;&gt;Using Gson&lt;/a&gt;
+  	* &lt;a href=&quot;#TOC-Gson-With-Maven&quot;&gt;Using Gson with Maven&lt;/a&gt;
+  	* &lt;a href=&quot;#TOC-Primitives-Examples&quot;&gt;Primitives Examples&lt;/a&gt;
+  	* &lt;a href=&quot;#TOC-Object-Examples&quot;&gt;Object Examples&lt;/a&gt;
+  	* &lt;a href=&quot;#TOC-Finer-Points-with-Objects&quot;&gt;Finer Points with Objects&lt;/a&gt;
+  	* &lt;a href=&quot;#TOC-Nested-Classes-including-Inner-Classes-&quot;&gt;Nested Classes (including Inner Classes)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-Array-Examples&quot;&gt;Array Examples&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-Collections-Examples&quot;&gt;Collections Examples&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-Collections-Limitations&quot;&gt;Collections Limitations&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-Serializing-and-Deserializing-Generic-Types&quot;&gt;Serializing and Deserializing Generic Types&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-Serializing-and-Deserializing-Collection-with-Objects-of-Arbitrary-Types&quot;&gt;Serializing and Deserializing Collection with Objects of Arbitrary Types&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-Built-in-Serializers-and-Deserializers&quot;&gt;Built-in Serializers and Deserializers&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-Custom-Serialization-and-Deserialization&quot;&gt;Custom Serialization and Deserialization&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-Writing-a-Serializer&quot;&gt;Writing a Serializer&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-Writing-a-Deserializer&quot;&gt;Writing a Deserializer&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-Writing-an-Instance-Creator&quot;&gt;Writing an Instance Creator&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-InstanceCreator-for-a-Parameterized-Type&quot;&gt;InstanceCreator for a Parameterized Type&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-Compact-Vs.-Pretty-Printing-for-JSON-Output-Format&quot;&gt;Compact Vs. Pretty Printing for JSON Output Format&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-Null-Object-Support&quot;&gt;Null Object Support&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-Versioning-Support&quot;&gt;Versioning Support&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-Excluding-Fields-From-Serialization-and-Deserialization&quot;&gt;Excluding Fields From Serialization and Deserialization&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-Java-Modifier-Exclusion&quot;&gt;Java Modifier Exclusion&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-Gson-s-Expose&quot;&gt;Gson’s &lt;code&gt;&amp;lt;a href=&#39;https://github.com/Expose&#39; class=&#39;user-mention&#39;&amp;gt;@Expose&amp;lt;/a&amp;gt;&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-User-Defined-Exclusion-Strategies&quot;&gt;User Defined Exclusion Strategies&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-JSON-Field-Naming-Support&quot;&gt;JSON Field Naming Support&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-Sharing-State-Across-Custom-Serializers-and-Deserializers&quot;&gt;Sharing State Across Custom Serializers and Deserializers&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#TOC-Streaming&quot;&gt;Streaming&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#TOC-Issues-in-Designing-Gson&quot;&gt;Issues in Designing Gson&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#TOC-Future-Enhancements-to-Gson&quot;&gt;Future Enhancements to Gson&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;a-nametoc-overviewaoverview&quot;&gt;&lt;a name=&quot;TOC-Overview&quot;&gt;&lt;/a&gt;Overview&lt;/h2&gt;
+
+&lt;p&gt;Gson is a Java library that can be used to convert Java Objects into their JSON representation. It can also be used to convert a JSON string to an equivalent Java object.&lt;/p&gt;
+
+&lt;p&gt;Gson can work with arbitrary Java objects including pre-existing objects that you do not have source code of.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-nametoc-goals-for-gsonagoals-for-gson&quot;&gt;&lt;a name=&quot;TOC-Goals-for-Gson&quot;&gt;&lt;/a&gt;Goals for Gson&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Provide easy to use mechanisms like &lt;code&gt;toString()&lt;/code&gt; and constructor (factory method) to convert Java to JSON and vice-versa&lt;/li&gt;
+  &lt;li&gt;Allow pre-existing unmodifiable objects to be converted to and from JSON&lt;/li&gt;
+  &lt;li&gt;Allow custom representations for objects&lt;/li&gt;
+  &lt;li&gt;Support arbitrarily complex objects&lt;/li&gt;
+  &lt;li&gt;Generate compact and readable JSON output&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;a-nametoc-gson-performance-and-scalabilityagson-performance-and-scalability&quot;&gt;&lt;a name=&quot;TOC-Gson-Performance-and-Scalability&quot;&gt;&lt;/a&gt;Gson Performance and Scalability&lt;/h2&gt;
+
+&lt;p&gt;Here are some metrics that we obtained on a desktop (dual opteron, 8GB RAM, 64-bit Ubuntu) running lots of other things along-with the tests. You can rerun these tests by using the class &lt;a href=&quot;gson/src/test/java/com/google/gson/metrics/PerformanceTest.java&quot;&gt;&lt;code&gt;PerformanceTest&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Strings: Deserialized strings of over 25MB without any problems (see &lt;code&gt;disabled_testStringDeserializationPerformance&lt;/code&gt; method in &lt;code&gt;PerformanceTest&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;Large collections:
+    &lt;ul&gt;
+      &lt;li&gt;Serialized a collection of 1.4 million objects (see &lt;code&gt;disabled_testLargeCollectionSerialization&lt;/code&gt; method in &lt;code&gt;PerformanceTest&lt;/code&gt;)&lt;/li&gt;
+      &lt;li&gt;Deserialized a collection of 87,000 objects (see &lt;code&gt;disabled_testLargeCollectionDeserialization&lt;/code&gt; in &lt;code&gt;PerformanceTest&lt;/code&gt;)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Gson 1.4 raised the deserialization limit for byte arrays and collection to over 11MB from 80KB.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Note: Delete the &lt;code&gt;disabled_&lt;/code&gt; prefix to run these tests. We use this prefix to prevent running these tests every time we run JUnit tests.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-nametoc-gson-usersagson-users&quot;&gt;&lt;a name=&quot;TOC-Gson-Users&quot;&gt;&lt;/a&gt;Gson Users&lt;/h2&gt;
+
+&lt;p&gt;Gson was originally created for use inside Google where it is currently used in a number of projects. It is now used by a number of public projects and companies. See details &lt;a href=&quot;https://sites.google.com/site/gson/gson-users&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-nametoc-using-gsonausing-gson&quot;&gt;&lt;a name=&quot;TOC-Using-Gson&quot;&gt;&lt;/a&gt;Using Gson&lt;/h2&gt;
+
+&lt;p&gt;The primary class to use is &lt;a href=&quot;gson/src/main/java/com/google/gson/Gson.java&quot;&gt;&lt;code&gt;Gson&lt;/code&gt;&lt;/a&gt; which you can just create by calling &lt;code&gt;new Gson()&lt;/code&gt;. There is also a class &lt;a href=&quot;gson/src/main/java/com/google/gson/GsonBuilder.java&quot;&gt;&lt;code&gt;GsonBuilder&lt;/code&gt;&lt;/a&gt; available that can be used to create a Gson instance with various settings like version control and so on.&lt;/p&gt;
+
+&lt;p&gt;The Gson instance does not maintain any state while invoking Json operations. So, you are free to reuse the same object for multiple Json serialization and deserialization operations.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-nametoc-gson-with-mavenausing-gson-with-maven&quot;&gt;&lt;a name=&quot;TOC-Gson-With-Maven&quot;&gt;&lt;/a&gt;Using Gson with Maven&lt;/h2&gt;
+&lt;p&gt;To use Gson with Maven2/3, you can use the Gson version available in Maven Central by adding the following dependency:&lt;/p&gt;
+
+&lt;p&gt;```xml&lt;/p&gt;
+&lt;dependencies&gt;
+    &lt;!--  Gson: Java to Json conversion --&gt;
+    &lt;dependency&gt;
+      &lt;groupid&gt;com.google.code.gson&lt;/groupid&gt;
+      &lt;artifactid&gt;gson&lt;/artifactid&gt;
+      &lt;version&gt;2.7&lt;/version&gt;
+      &lt;scope&gt;compile&lt;/scope&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;That is it, now your maven project is Gson enabled.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-nametoc-primitives-examplesaprimitives-examples&quot;&gt;&lt;a name=&quot;TOC-Primitives-Examples&quot;&gt;&lt;/a&gt;Primitives Examples&lt;/h3&gt;
+
+&lt;p&gt;```java
+// Serialization
+Gson gson = new Gson();
+gson.toJson(1);            // ==&amp;gt; 1
+gson.toJson(“abcd”);       // ==&amp;gt; “abcd”
+gson.toJson(new Long(10)); // ==&amp;gt; 10
+int[] values = { 1 };
+gson.toJson(values);       // ==&amp;gt; [1]&lt;/p&gt;
+
+&lt;p&gt;// Deserialization
+int one = gson.fromJson(“1”, int.class);
+Integer one = gson.fromJson(“1”, Integer.class);
+Long one = gson.fromJson(“1”, Long.class);
+Boolean false = gson.fromJson(“false”, Boolean.class);
+String str = gson.fromJson(“&quot;abc&quot;”, String.class);
+String[] anotherStr = gson.fromJson(“[&quot;abc&quot;]”, String[].class);
+```&lt;/p&gt;
+
+&lt;h3 id=&quot;a-nametoc-object-examplesaobject-examples&quot;&gt;&lt;a name=&quot;TOC-Object-Examples&quot;&gt;&lt;/a&gt;Object Examples&lt;/h3&gt;
+
+&lt;p&gt;```java
+class BagOfPrimitives {
+  private int value1 = 1;
+  private String value2 = “abc”;
+  private transient int value3 = 3;
+  BagOfPrimitives() {
+    // no-args constructor
+  }
+}&lt;/p&gt;
+
+&lt;p&gt;// Serialization
+BagOfPrimitives obj = new BagOfPrimitives();
+Gson gson = new Gson();
+String json = gson.toJson(obj);&lt;/p&gt;
+
+&lt;p&gt;// ==&amp;gt; json is {“value1”:1,”value2”:”abc”}
+```&lt;/p&gt;
+
+&lt;p&gt;Note that you can not serialize objects with circular references since that will result in infinite recursion.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;java
+// Deserialization
+BagOfPrimitives obj2 = gson.fromJson(json, BagOfPrimitives.class);
+// ==&amp;gt; obj2 is just like obj
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;a-nametoc-finer-points-with-objectsafiner-points-with-objects&quot;&gt;&lt;a name=&quot;TOC-Finer-Points-with-Objects&quot;&gt;&lt;/a&gt;&lt;strong&gt;Finer Points with Objects&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;It is perfectly fine (and recommended) to use private fields&lt;/li&gt;
+  &lt;li&gt;There is no need to use any annotations to indicate a field is to be included for serialization and deserialization. All fields in the current class (and from all super classes) are included by default.&lt;/li&gt;
+  &lt;li&gt;If a field is marked transient, (by default) it is ignored and not included in the JSON serialization or deserialization.&lt;/li&gt;
+  &lt;li&gt;This implementation handles nulls correctly&lt;/li&gt;
+  &lt;li&gt;While serializing, a null field is skipped from the output&lt;/li&gt;
+  &lt;li&gt;While deserializing, a missing entry in JSON results in setting the corresponding field in the object to null&lt;/li&gt;
+  &lt;li&gt;If a field is &lt;em&gt;synthetic&lt;/em&gt;, it is ignored and not included in JSON serialization or deserialization&lt;/li&gt;
+  &lt;li&gt;Fields corresponding to the outer classes in inner classes, anonymous classes, and local classes are ignored and not included in serialization or deserialization&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;a-nametoc-nested-classes-including-inner-classes-anested-classes-including-inner-classes&quot;&gt;&lt;a name=&quot;TOC-Nested-Classes-including-Inner-Classes-&quot;&gt;&lt;/a&gt;Nested Classes (including Inner Classes)&lt;/h3&gt;
+
+&lt;p&gt;Gson can serialize static nested classes quite easily.&lt;/p&gt;
+
+&lt;p&gt;Gson can also deserialize static nested classes. However, Gson can &lt;strong&gt;not&lt;/strong&gt; automatically deserialize the &lt;strong&gt;pure inner classes since their no-args constructor also need a reference to the containing Object&lt;/strong&gt; which is not available at the time of deserialization. You can address this problem by either making the inner class static or by providing a custom InstanceCreator for it. Here is an example:&lt;/p&gt;
+
+&lt;p&gt;```java
+public class A { 
+  public String a;&lt;/p&gt;
+
+&lt;p&gt;class B {&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public String b; 
+
+public B() {
+  // No args constructor for B
+}   }  } ```
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: The above class B can not (by default) be serialized with Gson.&lt;/p&gt;
+
+&lt;p&gt;Gson can not deserialize &lt;code&gt;{&quot;b&quot;:&quot;abc&quot;}&lt;/code&gt; into an instance of B since the class B is an inner class. If it was defined as static class B then Gson would have been able to deserialize the string. Another solution is to write a custom instance creator for B.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;java
+public class InstanceCreatorForB implements InstanceCreator&amp;lt;A.B&amp;gt; {
+  private final A a;
+  public InstanceCreatorForB(A a)  {
+    this.a = a;
+  }
+  public A.B createInstance(Type type) {
+    return a.new B();
+  }
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;The above is possible, but not recommended.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-nametoc-array-examplesaarray-examples&quot;&gt;&lt;a name=&quot;TOC-Array-Examples&quot;&gt;&lt;/a&gt;Array Examples&lt;/h3&gt;
+
+&lt;p&gt;```java
+Gson gson = new Gson();
+int[] ints = {1, 2, 3, 4, 5};
+String[] strings = {“abc”, “def”, “ghi”};&lt;/p&gt;
+
+&lt;p&gt;// Serialization
+gson.toJson(ints);     // ==&amp;gt; [1,2,3,4,5]
+gson.toJson(strings);  // ==&amp;gt; [“abc”, “def”, “ghi”]&lt;/p&gt;
+
+&lt;p&gt;// Deserialization
+int[] ints2 = gson.fromJson(“[1,2,3,4,5]”, int[].class); 
+// ==&amp;gt; ints2 will be same as ints
+```&lt;/p&gt;
+
+&lt;p&gt;We also support multi-dimensional arrays, with arbitrarily complex element types.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-nametoc-collections-examplesacollections-examples&quot;&gt;&lt;a name=&quot;TOC-Collections-Examples&quot;&gt;&lt;/a&gt;Collections Examples&lt;/h3&gt;
+
+&lt;p&gt;```java
+Gson gson = new Gson();
+Collection&lt;integer&gt; ints = Lists.immutableList(1,2,3,4,5);&lt;/integer&gt;&lt;/p&gt;
+
+&lt;p&gt;// Serialization
+String json = gson.toJson(ints);  // ==&amp;gt; json is [1,2,3,4,5]&lt;/p&gt;
+
+&lt;p&gt;// Deserialization
+Type collectionType = new TypeToken&amp;lt;Collection&lt;integer&gt;&amp;gt;(){}.getType();
+Collection&lt;integer&gt; ints2 = gson.fromJson(json, collectionType);
+// ==&amp;gt; ints2 is same as ints
+```&lt;/integer&gt;&lt;/integer&gt;&lt;/p&gt;
+
+&lt;p&gt;Fairly hideous: note how we define the type of collection.
+Unfortunately, there is no way to get around this in Java.&lt;/p&gt;
+
+&lt;h4 id=&quot;a-nametoc-collections-limitationsacollections-limitations&quot;&gt;&lt;a name=&quot;TOC-Collections-Limitations&quot;&gt;&lt;/a&gt;Collections Limitations&lt;/h4&gt;
+
+&lt;p&gt;Gson can serialize collection of arbitrary objects but can not deserialize from it, because there is no way for the user to indicate the type of the resulting object. Instead, while deserializing, the Collection must be of a specific, generic type.
+This makes sense, and is rarely a problem when following good Java coding practices.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-nametoc-serializing-and-deserializing-generic-typesaserializing-and-deserializing-generic-types&quot;&gt;&lt;a name=&quot;TOC-Serializing-and-Deserializing-Generic-Types&quot;&gt;&lt;/a&gt;Serializing and Deserializing Generic Types&lt;/h3&gt;
+
+&lt;p&gt;When you call &lt;code&gt;toJson(obj)&lt;/code&gt;, Gson calls &lt;code&gt;obj.getClass()&lt;/code&gt; to get information on the fields to serialize. Similarly, you can typically pass &lt;code&gt;MyClass.class&lt;/code&gt; object in the &lt;code&gt;fromJson(json, MyClass.class)&lt;/code&gt; method. This works fine if the object is a non-generic type. However, if the object is of a generic type, then the Generic type information is lost because of Java Type Erasure. Here is an example illustrating the point:&lt;/p&gt;
+
+&lt;p&gt;```java
+class Foo&lt;t&gt; {
+  T value;
+}
+Gson gson = new Gson();
+Foo&lt;bar&gt; foo = new Foo&lt;bar&gt;();
+gson.toJson(foo); // May not serialize foo.value correctly&lt;/bar&gt;&lt;/bar&gt;&lt;/t&gt;&lt;/p&gt;
+
+&lt;p&gt;gson.fromJson(json, foo.getClass()); // Fails to deserialize foo.value as Bar
+```&lt;/p&gt;
+
+&lt;p&gt;The above code fails to interpret value as type Bar because Gson invokes &lt;code&gt;list.getClass()&lt;/code&gt; to get its class information, but this method returns a raw class, &lt;code&gt;Foo.class&lt;/code&gt;. This means that Gson has no way of knowing that this is an object of type &lt;code&gt;Foo&amp;lt;Bar&amp;gt;&lt;/code&gt;, and not just plain &lt;code&gt;Foo&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;You can solve this problem by specifying the correct parameterized type for your generic type. You can do this by using the &lt;a href=&quot;http://google.github.io/gson/apidocs/com/google/gson/reflect/TypeToken.html&quot;&gt;&lt;code&gt;TypeToken&lt;/code&gt;&lt;/a&gt; class.&lt;/p&gt;
+
+&lt;p&gt;```java
+Type fooType = new TypeToken&amp;lt;Foo&lt;bar&gt;&amp;gt;() {}.getType();
+gson.toJson(foo, fooType);&lt;/bar&gt;&lt;/p&gt;
+
+&lt;p&gt;gson.fromJson(json, fooType);
+```
+The idiom used to get &lt;code&gt;fooType&lt;/code&gt; actually defines an anonymous local inner class containing a method &lt;code&gt;getType()&lt;/code&gt; that returns the fully parameterized type.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-nametoc-serializing-and-deserializing-collection-with-objects-of-arbitrary-typesaserializing-and-deserializing-collection-with-objects-of-arbitrary-types&quot;&gt;&lt;a name=&quot;TOC-Serializing-and-Deserializing-Collection-with-Objects-of-Arbitrary-Types&quot;&gt;&lt;/a&gt;Serializing and Deserializing Collection with Objects of Arbitrary Types&lt;/h3&gt;
+
+&lt;p&gt;Sometimes you are dealing with JSON array that contains mixed types. For example:
+&lt;code&gt;[&#39;hello&#39;,5,{name:&#39;GREETINGS&#39;,source:&#39;guest&#39;}]&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;The equivalent &lt;code&gt;Collection&lt;/code&gt; containing this is:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;java
+Collection collection = new ArrayList();
+collection.add(&quot;hello&quot;);
+collection.add(5);
+collection.add(new Event(&quot;GREETINGS&quot;, &quot;guest&quot;));
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;where the &lt;code&gt;Event&lt;/code&gt; class is defined as:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;java
+class Event {
+  private String name;
+  private String source;
+  private Event(String name, String source) {
+    this.name = name;
+    this.source = source;
+  }
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;You can serialize the collection with Gson without doing anything specific: &lt;code&gt;toJson(collection)&lt;/code&gt; would write out the desired output.&lt;/p&gt;
+
+&lt;p&gt;However, deserialization with &lt;code&gt;fromJson(json, Collection.class)&lt;/code&gt; will not work since Gson has no way of knowing how to map the input to the types. Gson requires that you provide a genericised version of collection type in &lt;code&gt;fromJson()&lt;/code&gt;. So, you have three options:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Use Gson’s parser API (low-level streaming parser or the DOM parser JsonParser) to parse the array elements and then use &lt;code&gt;Gson.fromJson()&lt;/code&gt; on each of the array elements.This is the preferred approach. &lt;a href=&quot;extras/src/main/java/com/google/gson/extras/examples/rawcollections/RawCollectionsExample.java&quot;&gt;Here is an example&lt;/a&gt; that demonstrates how to do this.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Register a type adapter for &lt;code&gt;Collection.class&lt;/code&gt; that looks at each of the array members and maps them to appropriate objects. The disadvantage of this approach is that it will screw up deserialization of other collection types in Gson.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Register a type adapter for &lt;code&gt;MyCollectionMemberType&lt;/code&gt; and use &lt;code&gt;fromJson()&lt;/code&gt; with &lt;code&gt;Collection&amp;lt;MyCollectionMemberType&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This approach is practical only if the array appears as a top-level element or if you can change the field type holding the collection to be of type &lt;code&gt;Collection&amp;lt;MyCollectionMemberType&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-nametoc-built-in-serializers-and-deserializersabuilt-in-serializers-and-deserializers&quot;&gt;&lt;a name=&quot;TOC-Built-in-Serializers-and-Deserializers&quot;&gt;&lt;/a&gt;Built-in Serializers and Deserializers&lt;/h3&gt;
+
+&lt;p&gt;Gson has built-in serializers and deserializers for commonly used classes whose default representation may be inappropriate.
+Here is a list of such classes:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code&gt;java.net.URL&lt;/code&gt; to match it with strings like &lt;code&gt;&quot;https://github.com/google/gson/&quot;&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;java.net.URI&lt;/code&gt; to match it with strings like &lt;code&gt;&quot;/google/gson/&quot;&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You can also find source code for some commonly used classes such as JodaTime at &lt;a href=&quot;https://sites.google.com/site/gson/gson-type-adapters-for-common-classes-1&quot;&gt;this page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-nametoc-custom-serialization-and-deserializationacustom-serialization-and-deserialization&quot;&gt;&lt;a name=&quot;TOC-Custom-Serialization-and-Deserialization&quot;&gt;&lt;/a&gt;Custom Serialization and Deserialization&lt;/h3&gt;
+
+&lt;p&gt;Sometimes default representation is not what you want. This is often the case when dealing with library classes (DateTime, etc).
+Gson allows you to register your own custom serializers and deserializers. This is done by defining two parts:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Json Serializers: Need to define custom serialization for an object&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Json Deserializers: Needed to define custom deserialization for a type&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Instance Creators: Not needed if no-args constructor is available or a deserializer is registered&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;java
+GsonBuilder gson = new GsonBuilder();
+gson.registerTypeAdapter(MyType2.class, new MyTypeAdapter());
+gson.registerTypeAdapter(MyType.class, new MySerializer());
+gson.registerTypeAdapter(MyType.class, new MyDeserializer());
+gson.registerTypeAdapter(MyType.class, new MyInstanceCreator());
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;registerTypeAdapter&lt;/code&gt; call checks if the type adapter implements more than one of these interfaces and register it for all of them.&lt;/p&gt;
+
+&lt;h4 id=&quot;a-nametoc-writing-a-serializerawriting-a-serializer&quot;&gt;&lt;a name=&quot;TOC-Writing-a-Serializer&quot;&gt;&lt;/a&gt;Writing a Serializer&lt;/h4&gt;
+
+&lt;p&gt;Here is an example of how to write a custom serializer for JodaTime &lt;code&gt;DateTime&lt;/code&gt; class.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;java
+private class DateTimeSerializer implements JsonSerializer&amp;lt;DateTime&amp;gt; {
+  public JsonElement serialize(DateTime src, Type typeOfSrc, JsonSerializationContext context) {
+    return new JsonPrimitive(src.toString());
+  }
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Gson calls &lt;code&gt;serialize()&lt;/code&gt; when it runs into a &lt;code&gt;DateTime&lt;/code&gt; object during serialization.&lt;/p&gt;
+
+&lt;h4 id=&quot;a-nametoc-writing-a-deserializerawriting-a-deserializer&quot;&gt;&lt;a name=&quot;TOC-Writing-a-Deserializer&quot;&gt;&lt;/a&gt;Writing a Deserializer&lt;/h4&gt;
+
+&lt;p&gt;Here is an example of how to write a custom deserializer for JodaTime DateTime class.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;java
+private class DateTimeDeserializer implements JsonDeserializer&amp;lt;DateTime&amp;gt; {
+  public DateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+      throws JsonParseException {
+    return new DateTime(json.getAsJsonPrimitive().getAsString());
+  }
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Gson calls &lt;code&gt;deserialize&lt;/code&gt; when it needs to deserialize a JSON string fragment into a DateTime object&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Finer points with Serializers and Deserializers&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Often you want to register a single handler for all generic types corresponding to a raw type&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;For example, suppose you have an &lt;code&gt;Id&lt;/code&gt; class for id representation/translation (i.e. an internal vs. external representation).&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;Id&amp;lt;T&amp;gt;&lt;/code&gt; type that has same serialization for all generic types
+    &lt;ul&gt;
+      &lt;li&gt;Essentially write out the id value&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Deserialization is very similar but not exactly the same
+    &lt;ul&gt;
+      &lt;li&gt;Need to call &lt;code&gt;new Id(Class&amp;lt;T&amp;gt;, String)&lt;/code&gt; which returns an instance of &lt;code&gt;Id&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Gson supports registering a single handler for this. You can also register a specific handler for a specific generic type (say &lt;code&gt;Id&amp;lt;RequiresSpecialHandling&amp;gt;&lt;/code&gt; needed special handling).
+The &lt;code&gt;Type&lt;/code&gt; parameter for the &lt;code&gt;toJson()&lt;/code&gt; and &lt;code&gt;fromJson()&lt;/code&gt; contains the generic type information to help you write a single handler for all generic types corresponding to the same raw type.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-nametoc-writing-an-instance-creatorawriting-an-instance-creator&quot;&gt;&lt;a name=&quot;TOC-Writing-an-Instance-Creator&quot;&gt;&lt;/a&gt;Writing an Instance Creator&lt;/h3&gt;
+
+&lt;p&gt;While deserializing an Object, Gson needs to create a default instance of the class.
+Well-behaved classes that are meant for serialization and deserialization should have a no-argument constructor.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Doesn’t matter whether public or private&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Typically, Instance Creators are needed when you are dealing with a library class that does NOT define a no-argument constructor&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Instance Creator Example&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;java
+private class MoneyInstanceCreator implements InstanceCreator&amp;lt;Money&amp;gt; {
+  public Money createInstance(Type type) {
+    return new Money(&quot;1000000&quot;, CurrencyCode.USD);
+  }
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Type could be of a corresponding generic type&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Very useful to invoke constructors which need specific generic type information&lt;/li&gt;
+  &lt;li&gt;For example, if the &lt;code&gt;Id&lt;/code&gt; class stores the class for which the Id is being created&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;a-nametoc-instancecreator-for-a-parameterized-typeainstancecreator-for-a-parameterized-type&quot;&gt;&lt;a name=&quot;TOC-InstanceCreator-for-a-Parameterized-Type&quot;&gt;&lt;/a&gt;InstanceCreator for a Parameterized Type&lt;/h4&gt;
+
+&lt;p&gt;Sometimes the type that you are trying to instantiate is a parameterized type. Generally, this is not a problem since the actual instance is of raw type. Here is an example:&lt;/p&gt;
+
+&lt;p&gt;```java
+class MyList&lt;t&gt; extends ArrayList&lt;t&gt; {
+}&lt;/t&gt;&lt;/t&gt;&lt;/p&gt;
+
+&lt;p&gt;class MyListInstanceCreator implements InstanceCreator&amp;lt;MyList&lt;?&gt;&gt; {
+    &lt;a href=&#39;https://github.com/SuppressWarnings&#39; class=&#39;user-mention&#39;&gt;@SuppressWarnings&lt;/a&gt;(&quot;unchecked&quot;)
+  public MyList&lt;?&gt; createInstance(Type type) {
+    // No need to use a parameterized list since the actual instance will have the raw type anyway.
+    return new MyList();
+  }
+}
+```&lt;/p&gt;
+
+&lt;p&gt;However, sometimes you do need to create instance based on the actual parameterized type. In this case, you can use the type parameter being passed to the &lt;code&gt;createInstance&lt;/code&gt; method. Here is an example:&lt;/p&gt;
+
+&lt;p&gt;```java
+public class Id&lt;t&gt; {
+  private final Class&lt;t&gt; classOfId;
+  private final long value;
+  public Id(Class&lt;t&gt; classOfId, long value) {
+    this.classOfId = classOfId;
+    this.value = value;
+  }
+}&lt;/t&gt;&lt;/t&gt;&lt;/t&gt;&lt;/p&gt;
+
+&lt;p&gt;class IdInstanceCreator implements InstanceCreator&amp;lt;Id&lt;?&gt;&gt; {
+  public Id&lt;?&gt; createInstance(Type type) {
+    Type[] typeParameters = ((ParameterizedType)type).getActualTypeArguments();
+    Type idType = typeParameters[0]; // Id has only one parameterized type T
+    return Id.get((Class)idType, 0L);
+  }
+}
+```&lt;/p&gt;
+
+&lt;p&gt;In the above example, an instance of the Id class can not be created without actually passing in the actual type for the parameterized type. We solve this problem by using the passed method parameter, &lt;code&gt;type&lt;/code&gt;. The &lt;code&gt;type&lt;/code&gt; object in this case is the Java parameterized type representation of &lt;code&gt;Id&amp;lt;Foo&amp;gt;&lt;/code&gt; where the actual instance should be bound to &lt;code&gt;Id&amp;lt;Foo&amp;gt;&lt;/code&gt;. Since &lt;code&gt;Id&lt;/code&gt; class has just one parameterized type parameter, &lt;code&gt;T&lt;/code&gt;, we use the zeroth element of the type array returned by &lt;code&gt;getActualTypeArgument()&lt;/code&gt; which will hold &lt;code&gt;Foo.class&lt;/code&gt; in this case.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-nametoc-compact-vs-pretty-printing-for-json-output-formatacompact-vs-pretty-printing-for-json-output-format&quot;&gt;&lt;a name=&quot;TOC-Compact-Vs.-Pretty-Printing-for-JSON-Output-Format&quot;&gt;&lt;/a&gt;Compact Vs. Pretty Printing for JSON Output Format&lt;/h3&gt;
+
+&lt;p&gt;The default JSON output that is provided by Gson is a compact JSON format. This means that there will not be any whitespace in the output JSON structure. Therefore, there will be no whitespace between field names and its value, object fields, and objects within arrays in the JSON output. As well, “null” fields will be ignored in the output (NOTE: null values will still be included in collections/arrays of objects). See the &lt;a href=&quot;#TOC-Null-Object-Support&quot;&gt;Null Object Support&lt;/a&gt; section for information on configure Gson to output all null values.&lt;/p&gt;
+
+&lt;p&gt;If you would like to use the Pretty Print feature, you must configure your &lt;code&gt;Gson&lt;/code&gt; instance using the &lt;code&gt;GsonBuilder&lt;/code&gt;. The &lt;code&gt;JsonFormatter&lt;/code&gt; is not exposed through our public API, so the client is unable to configure the default print settings/margins for the JSON output. For now, we only provide a default &lt;code&gt;JsonPrintFormatter&lt;/code&gt; that has default line length of 80 character, 2 character indentation, and 4 character right margin.&lt;/p&gt;
+
+&lt;p&gt;The following is an example shows how to configure a &lt;code&gt;Gson&lt;/code&gt; instance to use the default &lt;code&gt;JsonPrintFormatter&lt;/code&gt; instead of the &lt;code&gt;JsonCompactFormatter&lt;/code&gt;:
+&lt;code&gt;
+Gson gson = new GsonBuilder().setPrettyPrinting().create();
+String jsonOutput = gson.toJson(someObject);
+&lt;/code&gt;
+### &lt;a name=&quot;TOC-Null-Object-Support&quot;&gt;&lt;/a&gt;Null Object Support&lt;/p&gt;
+
+&lt;p&gt;The default behaviour that is implemented in Gson is that &lt;code&gt;null&lt;/code&gt; object fields are ignored. This allows for a more compact output format; however, the client must define a default value for these fields as the JSON format is converted back into its Java form.&lt;/p&gt;
+
+&lt;p&gt;Here’s how you would configure a &lt;code&gt;Gson&lt;/code&gt; instance to output null:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;java
+Gson gson = new GsonBuilder().serializeNulls().create();
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;NOTE: when serializing &lt;code&gt;null&lt;/code&gt;s with Gson, it will add a &lt;code&gt;JsonNull&lt;/code&gt; element to the &lt;code&gt;JsonElement&lt;/code&gt; structure. Therefore, this object can be used in custom serialization/deserialization.&lt;/p&gt;
+
+&lt;p&gt;Here’s an example:&lt;/p&gt;
+
+&lt;p&gt;```java
+public class Foo {
+  private final String s;
+  private final int i;&lt;/p&gt;
+
+&lt;p&gt;public Foo() {
+    this(null, 5);
+  }&lt;/p&gt;
+
+&lt;p&gt;public Foo(String s, int i) {
+    this.s = s;
+    this.i = i;
+  }
+}&lt;/p&gt;
+
+&lt;p&gt;Gson gson = new GsonBuilder().serializeNulls().create();
+Foo foo = new Foo();
+String json = gson.toJson(foo);
+System.out.println(json);&lt;/p&gt;
+
+&lt;p&gt;json = gson.toJson(null);
+System.out.println(json);
+```&lt;/p&gt;
+
+&lt;p&gt;The output is:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+{&quot;s&quot;:null,&quot;i&quot;:5}
+null
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;a-nametoc-versioning-supportaversioning-support&quot;&gt;&lt;a name=&quot;TOC-Versioning-Support&quot;&gt;&lt;/a&gt;Versioning Support&lt;/h3&gt;
+
+&lt;p&gt;Multiple versions of the same object can be maintained by using &lt;a href=&quot;gson/src/main/java/com/google/gson/annotations/Since.java&quot;&gt;&lt;a href=&quot;https://github.com/Since&quot; class=&quot;user-mention&quot;&gt;@Since&lt;/a&gt;&lt;/a&gt; annotation. This annotation can be used on Classes, Fields and, in a future release, Methods. In order to leverage this feature, you must configure your &lt;code&gt;Gson&lt;/code&gt; instance to ignore any field/object that is greater than some version number. If no version is set on the &lt;code&gt;Gson&lt;/code&gt; instance then it will serialize and deserialize all fields and classes regardless of the version.&lt;/p&gt;
+
+&lt;p&gt;```java
+public class VersionedClass {
+  &lt;a href=&quot;https://github.com/Since&quot; class=&quot;user-mention&quot;&gt;@Since&lt;/a&gt;(1.1) private final String newerField;
+  &lt;a href=&quot;https://github.com/Since&quot; class=&quot;user-mention&quot;&gt;@Since&lt;/a&gt;(1.0) private final String newField;
+  private final String field;&lt;/p&gt;
+
+&lt;p&gt;public VersionedClass() {
+    this.newerField = “newer”;
+    this.newField = “new”;
+    this.field = “old”;
+  }
+}&lt;/p&gt;
+
+&lt;p&gt;VersionedClass versionedObject = new VersionedClass();
+Gson gson = new GsonBuilder().setVersion(1.0).create();
+String jsonOutput = gson.toJson(someObject);
+System.out.println(jsonOutput);
+System.out.println();&lt;/p&gt;
+
+&lt;p&gt;gson = new Gson();
+jsonOutput = gson.toJson(someObject);
+System.out.println(jsonOutput);
+```&lt;/p&gt;
+
+&lt;p&gt;The output is:&lt;/p&gt;
+
+&lt;p&gt;```
+{“newField”:”new”,”field”:”old”}&lt;/p&gt;
+
+&lt;p&gt;{“newerField”:”newer”,”newField”:”new”,”field”:”old”}
+```&lt;/p&gt;
+
+&lt;h3 id=&quot;a-nametoc-excluding-fields-from-serialization-and-deserializationaexcluding-fields-from-serialization-and-deserialization&quot;&gt;&lt;a name=&quot;TOC-Excluding-Fields-From-Serialization-and-Deserialization&quot;&gt;&lt;/a&gt;Excluding Fields From Serialization and Deserialization&lt;/h3&gt;
+
+&lt;p&gt;Gson supports numerous mechanisms for excluding top-level classes, fields and field types. Below are pluggable mechanisms that allow field and class exclusion. If none of the below mechanisms satisfy your needs then you can always use &lt;a href=&quot;#TOC-Custom-Serialization-and-Deserialization&quot;&gt;custom serializers and deserializers&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;a-nametoc-java-modifier-exclusionajava-modifier-exclusion&quot;&gt;&lt;a name=&quot;TOC-Java-Modifier-Exclusion&quot;&gt;&lt;/a&gt;Java Modifier Exclusion&lt;/h4&gt;
+
+&lt;p&gt;By default, if you mark a field as &lt;code&gt;transient&lt;/code&gt;, it will be excluded. As well, if a field is marked as &lt;code&gt;static&lt;/code&gt; then by default it will be excluded. If you want to include some transient fields then you can do the following:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;java
+import java.lang.reflect.Modifier;
+Gson gson = new GsonBuilder()
+    .excludeFieldsWithModifiers(Modifier.STATIC)
+    .create();
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;NOTE: you can give any number of the &lt;code&gt;Modifier&lt;/code&gt; constants to the &lt;code&gt;excludeFieldsWithModifiers&lt;/code&gt; method. For example:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;java
+Gson gson = new GsonBuilder()
+    .excludeFieldsWithModifiers(Modifier.STATIC, Modifier.TRANSIENT, Modifier.VOLATILE)
+    .create();
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;a-nametoc-gson-s-exposeagsons-a-hrefhttpsgithubcomexpose-classuser-mentionexposea&quot;&gt;&lt;a name=&quot;TOC-Gson-s-Expose&quot;&gt;&lt;/a&gt;Gson’s &lt;code&gt;&amp;lt;a href=&#39;https://github.com/Expose&#39; class=&#39;user-mention&#39;&amp;gt;@Expose&amp;lt;/a&amp;gt;&lt;/code&gt;&lt;/h4&gt;
+
+&lt;p&gt;This feature provides a way where you can mark certain fields of your objects to be excluded for consideration for serialization and deserialization to JSON. To use this annotation, you must create Gson by using &lt;code&gt;new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()&lt;/code&gt;. The Gson instance created will exclude all fields in a class that are not marked with &lt;code&gt;&amp;lt;a href=&#39;https://github.com/Expose&#39; class=&#39;user-mention&#39;&amp;gt;@Expose&amp;lt;/a&amp;gt;&lt;/code&gt; annotation.&lt;/p&gt;
+
+&lt;h4 id=&quot;a-nametoc-user-defined-exclusion-strategiesauser-defined-exclusion-strategies&quot;&gt;&lt;a name=&quot;TOC-User-Defined-Exclusion-Strategies&quot;&gt;&lt;/a&gt;User Defined Exclusion Strategies&lt;/h4&gt;
+
+&lt;p&gt;If the above mechanisms for excluding fields and class type do not work for you then you can always write your own exclusion strategy and plug it into Gson. See the &lt;a href=&quot;http://google.github.io/gson/apidocs/com/google/gson/ExclusionStrategy.html&quot;&gt;&lt;code&gt;ExclusionStrategy&lt;/code&gt;&lt;/a&gt; JavaDoc for more information.&lt;/p&gt;
+
+&lt;p&gt;The following example shows how to exclude fields marked with a specific &lt;code&gt;&amp;lt;a href=&#39;https://github.com/Foo&#39; class=&#39;user-mention&#39;&amp;gt;@Foo&amp;lt;/a&amp;gt;&lt;/code&gt; annotation and excludes top-level types (or declared field type) of class &lt;code&gt;String&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;```java
+&lt;a href=&quot;https://github.com/Retention&quot; class=&quot;user-mention&quot;&gt;@Retention&lt;/a&gt;(RetentionPolicy.RUNTIME)
+&lt;a href=&quot;https://github.com/Target&quot; class=&quot;user-mention&quot;&gt;@Target&lt;/a&gt;({ElementType.FIELD})
+public &lt;a href=&quot;https://github.com/interface&quot; class=&quot;user-mention&quot;&gt;@interface&lt;/a&gt; Foo {
+  // Field tag only annotation
+}&lt;/p&gt;
+
+&lt;p&gt;public class SampleObjectForTest {
+  &lt;a href=&quot;https://github.com/Foo&quot; class=&quot;user-mention&quot;&gt;@Foo&lt;/a&gt; private final int annotatedField;
+  private final String stringField;
+  private final long longField;
+  private final Class&amp;lt;?&amp;gt; clazzField;&lt;/p&gt;
+
+&lt;p&gt;public SampleObjectForTest() {
+    annotatedField = 5;
+    stringField = “someDefaultValue”;
+    longField = 1234;
+  }
+}&lt;/p&gt;
+
+&lt;p&gt;public class MyExclusionStrategy implements ExclusionStrategy {
+  private final Class&amp;lt;?&amp;gt; typeToSkip;&lt;/p&gt;
+
+&lt;p&gt;private MyExclusionStrategy(Class&amp;lt;?&amp;gt; typeToSkip) {
+    this.typeToSkip = typeToSkip;
+  }&lt;/p&gt;
+
+&lt;p&gt;public boolean shouldSkipClass(Class&amp;lt;?&amp;gt; clazz) {
+    return (clazz == typeToSkip);
+  }&lt;/p&gt;
+
+&lt;p&gt;public boolean shouldSkipField(FieldAttributes f) {
+    return f.getAnnotation(Foo.class) != null;
+  }
+}&lt;/p&gt;
+
+&lt;p&gt;public static void main(String[] args) {
+  Gson gson = new GsonBuilder()
+      .setExclusionStrategies(new MyExclusionStrategy(String.class))
+      .serializeNulls()
+      .create();
+  SampleObjectForTest src = new SampleObjectForTest();
+  String json = gson.toJson(src);
+  System.out.println(json);
+}
+```&lt;/p&gt;
+
+&lt;p&gt;The output is:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+{&quot;longField&quot;:1234}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;a-nametoc-json-field-naming-supportajson-field-naming-support&quot;&gt;&lt;a name=&quot;TOC-JSON-Field-Naming-Support&quot;&gt;&lt;/a&gt;JSON Field Naming Support&lt;/h3&gt;
+
+&lt;p&gt;Gson supports some pre-defined field naming policies to convert the standard Java field names (i.e., camel cased names starting with lower case — &lt;code&gt;sampleFieldNameInJava&lt;/code&gt;) to a Json field name (i.e., &lt;code&gt;sample_field_name_in_java&lt;/code&gt; or &lt;code&gt;SampleFieldNameInJava&lt;/code&gt;). See the &lt;a href=&quot;http://google.github.io/gson/apidocs/com/google/gson/FieldNamingPolicy.html&quot;&gt;FieldNamingPolicy&lt;/a&gt; class for information on the pre-defined naming policies.&lt;/p&gt;
+
+&lt;p&gt;It also has an annotation based strategy to allows clients to define custom names on a per field basis. Note, that the annotation based strategy has field name validation which will raise “Runtime” exceptions if an invalid field name is provided as the annotation value.&lt;/p&gt;
+
+&lt;p&gt;The following is an example of how to use both Gson naming policy features:&lt;/p&gt;
+
+&lt;p&gt;```java
+private class SomeObject {
+  &lt;a href=&quot;https://github.com/SerializedName&quot; class=&quot;user-mention&quot;&gt;@SerializedName&lt;/a&gt;(“custom_naming”) private final String someField;
+  private final String someOtherField;&lt;/p&gt;
+
+&lt;p&gt;public SomeObject(String a, String b) {
+    this.someField = a;
+    this.someOtherField = b;
+  }
+}&lt;/p&gt;
+
+&lt;p&gt;SomeObject someObject = new SomeObject(“first”, “second”);
+Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).create();
+String jsonRepresentation = gson.toJson(someObject);
+System.out.println(jsonRepresentation);
+```&lt;/p&gt;
+
+&lt;p&gt;The output is:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+{&quot;custom_naming&quot;:&quot;first&quot;,&quot;SomeOtherField&quot;:&quot;second&quot;}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;If you have a need for custom naming policy (&lt;a href=&quot;http://groups.google.com/group/google-gson/browse_thread/thread/cb441a2d717f6892&quot;&gt;see this discussion&lt;/a&gt;), you can use the &lt;a href=&quot;http://google.github.io/gson/apidocs/com/google/gson/annotations/SerializedName.html&quot;&gt;&lt;a href=&quot;https://github.com/SerializedName&quot; class=&quot;user-mention&quot;&gt;@SerializedName&lt;/a&gt;&lt;/a&gt; annotation.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-nametoc-sharing-state-across-custom-serializers-and-deserializersasharing-state-across-custom-serializers-and-deserializers&quot;&gt;&lt;a name=&quot;TOC-Sharing-State-Across-Custom-Serializers-and-Deserializers&quot;&gt;&lt;/a&gt;Sharing State Across Custom Serializers and Deserializers&lt;/h3&gt;
+
+&lt;p&gt;Sometimes you need to share state across custom serializers/deserializers (&lt;a href=&quot;http://groups.google.com/group/google-gson/browse_thread/thread/2850010691ea09fb&quot;&gt;see this discussion&lt;/a&gt;). You can use the following three strategies to accomplish this:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Store shared state in static fields&lt;/li&gt;
+  &lt;li&gt;Declare the serializer/deserializer as inner classes of a parent type, and use the instance fields of parent type to store shared state&lt;/li&gt;
+  &lt;li&gt;Use Java &lt;code&gt;ThreadLocal&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;1 and 2 are not thread-safe options, but 3 is.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-nametoc-streamingastreaming&quot;&gt;&lt;a name=&quot;TOC-Streaming&quot;&gt;&lt;/a&gt;Streaming&lt;/h3&gt;
+
+&lt;p&gt;In addition Gson’s object model and data binding, you can use Gson to read from and write to a &lt;a href=&quot;https://sites.google.com/site/gson/streaming&quot;&gt;stream&lt;/a&gt;. You can also combine streaming and object model access to get the best of both approaches.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-nametoc-issues-in-designing-gsonaissues-in-designing-gson&quot;&gt;&lt;a name=&quot;TOC-Issues-in-Designing-Gson&quot;&gt;&lt;/a&gt;Issues in Designing Gson&lt;/h2&gt;
+
+&lt;p&gt;See the &lt;a href=&quot;https://sites.google.com/site/gson/gson-design-document&quot; title=&quot;Gson design document&quot;&gt;Gson design document&lt;/a&gt; for a discussion of issues we faced while designing Gson. It also include a comparison of Gson with other Java libraries that can be used for Json conversion.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-nametoc-future-enhancements-to-gsonafuture-enhancements-to-gson&quot;&gt;&lt;a name=&quot;TOC-Future-Enhancements-to-Gson&quot;&gt;&lt;/a&gt;Future Enhancements to Gson&lt;/h2&gt;
+
+&lt;p&gt;For the latest list of proposed enhancements or if you’d like to suggest new ones, see the &lt;a href=&quot;https://github.com/google/gson/issues&quot;&gt;Issues section&lt;/a&gt; under the project website.&lt;/p&gt;
+
+&lt;h2 id=&quot;shader&quot;&gt;Shader&lt;/h2&gt;
+
+&lt;h2 id=&quot;colorfilter&quot;&gt;ColorFilter&lt;/h2&gt;
+
+&lt;h2 id=&quot;maskfilter&quot;&gt;MaskFilter&lt;/h2&gt;
+
+</content>
+<summary>```layout: posttitle:  Android Color date:   2016-06-15 categories: Androidexcerpt: —```</summary>
+</entry>
+<entry>
+<title>RxJava一些概念的理解</title>
+<link href="/RxJava%E4%B8%80%E4%BA%9B%E6%A6%82%E5%BF%B5%E7%9A%84%E7%90%86%E8%A7%A3/" rel="alternate" type="text/html" title="RxJava一些概念的理解" />
+<published>2016-06-15T00:00:00+08:00</published>
+<updated>2016-06-15T00:00:00+08:00</updated>
+<id>/RxJava一些概念的理解</id>
+<content type="html" xml:base="/RxJava%E4%B8%80%E4%BA%9B%E6%A6%82%E5%BF%B5%E7%9A%84%E7%90%86%E8%A7%A3/">&lt;p&gt;RxJava一些概念的理解 
 (摘录自soaringEveryday的博客)&lt;/p&gt;
 
 &lt;p&gt;api/students/getAll (传入班级的id获得班级的学生数组，返回值是list)
@@ -25,8 +750,8 @@ private void getAllStudents(String id) {
         baseRequest.setClassId(id);
         String url = AppConfig.SERVER_URL + “api/students/getAll”;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    final GsonRequest request = new GsonRequest&amp;lt;&amp;gt;(url, baseRequest, Response.class, new Response.Listener&amp;lt;response&amp;gt;() {
-        @Override
+&lt;pre&gt;&lt;code&gt;    final GsonRequest request = new GsonRequest&amp;lt;&amp;gt;(url, baseRequest, Response.class, new Response.Listener&amp;lt;response&amp;gt;() {
+        &amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
         public void onResponse(Response response) {
             if (response.getStatus() &amp;gt; 0) {
                 List&amp;lt;student&amp;gt; studentList = response.getData();
@@ -38,7 +763,7 @@ private void getAllStudents(String id) {
             }
         }
     }, new Response.ErrorListener() {
-        @Override
+        &amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
         public void onErrorResponse(VolleyError error) {
             //error
         }
@@ -52,7 +777,7 @@ private void getAllCourses(String id) {
     String url = AppConfig.SERVER_URL + &quot;api/courses/getAll&quot;;
 
     final GsonRequest request = new GsonRequest&amp;lt;&amp;gt;(url, baseRequest, Response.class, new Response.Listener&amp;lt;response&amp;gt;() {
-        @Override
+        &amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
         public void onResponse(Response response) {
             if (response.getStatus() &amp;gt; 0) {
                 List&amp;lt;course&amp;gt; courseList = response.getData();
@@ -64,7 +789,7 @@ private void getAllCourses(String id) {
             }
         }
     }, new Response.ErrorListener() {
-        @Override
+        &amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
         public void onErrorResponse(VolleyError error) {
             //error
         }
@@ -72,15 +797,14 @@ private void getAllCourses(String id) {
     MyVolley.startRequest(request);
 } ```
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;p&gt;使用RxJava是下面这样：&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+&lt;p&gt;&lt;code&gt;
 ConnectionBase.getApiService2()
                 .getStudents(101)
                 .flatMap(new Func1&amp;lt;student, observable&amp;lt;course=&quot;&quot;&amp;gt;&amp;gt;() {
-                    @Override
+                    &amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
                     public Observable&amp;lt;course&amp;gt; call(Student student) {
                         return ConnectionBase.getApiService2().getAllCourse(student.getId());
                     }
@@ -88,7 +812,7 @@ ConnectionBase.getApiService2()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1&amp;lt;course&amp;gt;() {
-                    @Override
+                    &amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
                     public void call(Course course) {
                         //use the Course
                     }
@@ -105,11 +829,11 @@ ConnectionBase.getApiService2()
 
 &lt;h1 id=&quot;map--flatmap&quot;&gt;map &amp;amp; flatMap&lt;/h1&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+&lt;p&gt;&lt;code&gt;
 ConnectionBase.getApiService2()
                 .getStudents(101)
                 .map(new Func1&amp;lt;student, Course&amp;gt;() {
-                    @Override
+                    &amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
                     public Course call(Student student) {
                         return conventStudentToCourse();// has problem
                     }
@@ -117,7 +841,7 @@ ConnectionBase.getApiService2()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1&amp;lt;course&amp;gt;() {
-                    @Override
+                    &amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
                     public void call(Course course) {
                         //use the Course
                     }
@@ -138,9 +862,9 @@ flatMap() 和 map() 有一个相同点：它也是把传入的参数转化之后
 
 &lt;p&gt;比如将一个File[] jsonFile中每个File转换成String，用map的话代码为：&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+&lt;p&gt;&lt;code&gt;
 Observable.from(jsonFile).map(new Func1&amp;lt;file, string=&quot;&quot;&amp;gt;() {
-    @Override public String call(File file) {
+    &amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt; public String call(File file) {
         try {
             return new Gson().toJson(new FileReader(file), Object.class);
         } catch (FileNotFoundException e) {
@@ -157,13 +881,13 @@ Observable.from(jsonFile).map(new Func1&amp;lt;file, string=&quot;&quot;&amp;gt;
 
 &lt;p&gt;```
 Observable.from(jsonFile).flatMap(new Func1&amp;lt;file, observable&amp;lt;string=””»() {
-    @Override public Observable&lt;string&gt; call(final File file) {
+    &lt;a href=&quot;https://github.com/Override&quot; class=&quot;user-mention&quot;&gt;@Override&lt;/a&gt; public Observable&lt;string&gt; call(final File file) {
         return Observable.create(new Observable.OnSubscribe&lt;string&gt;() {
-            @Override public void call(Subscriber&amp;lt;? super String&amp;gt; subscriber) {
+            &lt;a href=&quot;https://github.com/Override&quot; class=&quot;user-mention&quot;&gt;@Override&lt;/a&gt; public void call(Subscriber&amp;lt;? super String&amp;gt; subscriber) {
                 try {
                     String json = new Gson().toJson(new FileReader(file), Object.class);&lt;/string&gt;&lt;/string&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;                subscriber.onNext(json);
+&lt;pre&gt;&lt;code&gt;                subscriber.onNext(json);
                 subscriber.onCompleted();
             } catch (FileNotFoundException e) {
                 subscriber.onError(e);
@@ -172,162 +896,39 @@ Observable.from(jsonFile).flatMap(new Func1&amp;lt;file, observable&amp;lt;strin
     });
 } }); ```
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;p&gt;map操作符通常也用于处理结构化的服务端响应数据，比如下列返回的JSON数据就是一段典型的响应数据&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;message&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;操作成功&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;status&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;data&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;noVisitCount&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;planCount&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;visitedCount&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;
+{
+    &quot;message&quot;:&quot;操作成功&quot;,
+    &quot;status&quot;:1,
+    &quot;data&quot;:
+    {
+        &quot;noVisitCount&quot;:0,
+        &quot;planCount&quot;:0,
+        &quot;visitedCount&quot;:0
+    }
+}
+&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;在map的闭包中，我们可以先判断status进行统一的出错或者正确（返回data的内容）处理，一般来说，data的内容都是处理成一个泛型&lt;/p&gt;
 
-</description>
-        <pubDate>Wed, 15 Jun 2016 00:00:00 +0800</pubDate>
-        <link>/2016/06/15/rxjava%E4%B8%80%E4%BA%9B%E6%A6%82%E5%BF%B5%E7%9A%84%E7%90%86%E8%A7%A3/</link>
-        <guid isPermaLink="true">/2016/06/15/rxjava%E4%B8%80%E4%BA%9B%E6%A6%82%E5%BF%B5%E7%9A%84%E7%90%86%E8%A7%A3/</guid>
-        
-        
-        <category>Android</category>
-        
-      </item>
-    
-      <item>
-        <title>My BigShow Plan</title>
-        <description>&lt;p&gt;关于BigShow, 最重要的是：快！快！快！&lt;/p&gt;
-
-&lt;p&gt;但是我最近确实做慢了。&lt;/p&gt;
-
-&lt;p&gt;应该反思。&lt;/p&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;任务300&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;保存数据&lt;/li&gt;
-  &lt;li&gt;点击搜索后的第一次自动搜索提示&lt;/li&gt;
-  &lt;li&gt;搜索界面的网格视图&lt;/li&gt;
-  &lt;li&gt;搜索框的输入与确定&lt;/li&gt;
-  &lt;li&gt;搜索框的下拉提示列表&lt;/li&gt;
-  &lt;li&gt;选择图片后的图片展示&lt;/li&gt;
-  &lt;li&gt;关于网格的第一条Item √&lt;/li&gt;
-  &lt;li&gt;关于网格的第后面的Item √&lt;/li&gt;
-  &lt;li&gt;关于网格的数据Model √&lt;/li&gt;
-  &lt;li&gt;网格图中的划线 √&lt;/li&gt;
-  &lt;li&gt;网格图中的右上角数字&lt;/li&gt;
-  &lt;li&gt;网格图中的数字操作&lt;/li&gt;
-  &lt;li&gt;网格图的点击跳转效果&lt;/li&gt;
-  &lt;li&gt;网格图的第一次显示效果&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;翻卷特效&lt;/h2&gt;
-
-&lt;p&gt;https://github.com/harism/android_page_curl
-https://github.com/suyonoion/PageCurl_BookView&lt;/p&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;前言&lt;/h2&gt;
-
-&lt;p&gt;首先是36Kr的一篇文章, 可以借助这个GIF搜索引擎：http://giphy.com/&lt;/p&gt;
-
-&lt;p&gt;微软的Bing也是可以搜索gif图片，但我发现它的图片还是来自Giphy.&lt;/p&gt;
-
-&lt;p&gt;比如搜索南方公园 http://giphy.com/search/south-park&lt;/p&gt;
-
-&lt;p&gt;所以，BigShow的内容方面就有源源不断与时俱进的素材了。&lt;/p&gt;
-
-&lt;p&gt;这里是 Giphy 的文档：https://github.com/Giphy/GiphyAPI&lt;/p&gt;
-
-&lt;p&gt;更多的文档：https://api.giphy.com/  http://giphy.com/labs&lt;/p&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;内容分级&lt;/h2&gt;
-
-&lt;p&gt;关于Parameters,
-rating - limit results to those rated (y,g, pg, pg-13 or r).&lt;br /&gt;
-  G: General Audiences. All ages admitted.&lt;br /&gt;
-  PG: Parental Guidance Suggested. Some material may not be suitable for children.&lt;br /&gt;
-  PG-13: Parents Strongly Cautioned. Some material may be inappropriate for children under 13.&lt;br /&gt;
-  R: Restricted. Under 17 requires accompanying parent or adult guardian.&lt;br /&gt;
-  NC-17: No Children. No one 17 and under admitted.&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;选择不光可以是文字，它可以是任何东西。
-————————————————————————————————-&lt;/p&gt;
-
-&lt;h2 id=&quot;section-4&quot;&gt;数据&lt;/h2&gt;
-
-&lt;p&gt;Plot
-num(二叉树排序)&lt;br /&gt;
-isEnd: 0 非End, 1 End&lt;br /&gt;
-dataFrom: (参考项)giphy, user&lt;br /&gt;
-dataImg: (jsonstring: data: type:)&lt;br /&gt;
-dataText: (jsonstring: data: type:)&lt;br /&gt;
-dataChoose: (jsonstring: data: type:)&lt;br /&gt;
-fromStory&lt;/p&gt;
-
-&lt;p&gt;Story
-[nothing add now]&lt;/p&gt;
-
-&lt;p&gt;关于GiphyAPI&lt;/p&gt;
-
-&lt;p&gt;Translate Endpoint:&lt;br /&gt;
-http://api.giphy.com/v1/gifs/translate?s=superman&amp;amp;api_key=dc6zaTOxFJmzC&lt;br /&gt;
-将名词转化为特定图片,每次随机一个&lt;/p&gt;
-
-&lt;p&gt;Search Endpoint: &lt;br /&gt;
-http://api.giphy.com/v1/gifs/search?q=funny+cat&amp;amp;api_key=dc6zaTOxFJmzC&lt;br /&gt;
-通过搜索关键字获得数据列表,默认为25个&lt;/p&gt;
-
-&lt;p&gt;Random Endpoint:&lt;br /&gt;
-http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&amp;amp;tag=american+psycho&lt;br /&gt;
-根据标签随机获得一个数据&lt;/p&gt;
-
-&lt;p&gt;Trending Gifs:&lt;br /&gt;
-http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC&lt;br /&gt;
-随机数据流25个&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Gmail之父说过一句话：你需要将某几件事情做得精益求精，而不要追求面面俱到。&lt;/p&gt;
-
-&lt;p&gt;对于BigShow，有3个核心点：
-制作：上手环节、自动补全
-游戏中：选择、结局、生命值
-分类：栏目、排序、推荐&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;关于字体&lt;/p&gt;
-
-&lt;p&gt;我在 http://www.uisdc.com/23-handwritten-english-font 找到了http://www.fontsquirrel.com/fonts/architects-daughter,
-该ArchitectsDaughter.ttf字体遵从SIL Open Font License协议。
-知乎上其他的 https://www.zhihu.com/question/21759657。&lt;/p&gt;
-</description>
-        <pubDate>Mon, 18 Apr 2016 00:00:00 +0800</pubDate>
-        <link>/2016/04/18/my-bigshow-plan/</link>
-        <guid isPermaLink="true">/2016/04/18/my-bigshow-plan/</guid>
-        
-        
-        <category>Plan</category>
-        
-      </item>
-    
-      <item>
-        <title>关于Android graphics的Camera和Matrix</title>
-        <description>&lt;h2 id=&quot;android-graphicscameramatrix&quot;&gt;关于Android graphics的Camera和Matrix&lt;/h2&gt;
+</content>
+</entry>
+<entry>
+<title>关于Android graphics的Camera和Matrix</title>
+<link href="/Android%20graphics%E7%9A%84Camera%E5%92%8CMatrix/" rel="alternate" type="text/html" title="关于Android graphics的Camera和Matrix" />
+<published>2016-03-10T00:00:00+08:00</published>
+<updated>2016-03-10T00:00:00+08:00</updated>
+<id>/Android graphics的Camera和Matrix</id>
+<content type="html" xml:base="/Android%20graphics%E7%9A%84Camera%E5%92%8CMatrix/">&lt;h2 id=&quot;android-graphicscameramatrix&quot;&gt;关于Android graphics的Camera和Matrix&lt;/h2&gt;
 
 &lt;h3 id=&quot;camera&quot;&gt;Camera&lt;/h3&gt;
 
 &lt;p&gt;这是camera类的主要方法：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public native void save();
+&lt;pre&gt;&lt;code&gt;public native void save();
 public native void restore();
 public native void translate(float x, float y, float z);
 public native void rotateX(float deg);
@@ -346,10 +947,9 @@ public void applyToCanvas(Canvas canvas) {
 }
 public native float dotWithNormal(float dx, float dy, float dz);
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;p&gt;这里是Camera变换的坐标轴
-&lt;img src=&quot;/img/20120929085945172.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/img/image-src.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;在rotate的时候，要站在该轴正方向的地方看，才能明白他的旋转。
 如 camera.rotateZ(-60)&lt;/p&gt;
@@ -365,19 +965,15 @@ public native float dotWithNormal(float dx, float dy, float dz);
 &lt;p&gt;MPERSP_2指的是投影变换,其实际作用就是如果MPERSP_2=0.5，那么物体是原来的4倍大小；如果MPERSP_2=2，那么物体是原来的1/4大小。&lt;/p&gt;
 
 &lt;p&gt;Camera和Matrix的联合使用：一般情况下，如果我们需要进行3D变换，那么需要将Camera和Matrix联合使用，使用Camera进行x轴或y轴的旋转，使用Matrix进行平移或放大。&lt;/p&gt;
-</description>
-        <pubDate>Thu, 10 Mar 2016 00:00:00 +0800</pubDate>
-        <link>/2016/03/10/android-graphics%E7%9A%84camera%E5%92%8Cmatrix/</link>
-        <guid isPermaLink="true">/2016/03/10/android-graphics%E7%9A%84camera%E5%92%8Cmatrix/</guid>
-        
-        
-        <category>Android</category>
-        
-      </item>
-    
-      <item>
-        <title>关于RxJava的使用</title>
-        <description>&lt;p&gt;RxJava 的观察者模式
+</content>
+</entry>
+<entry>
+<title>关于RxJava的使用</title>
+<link href="/%E5%85%B3%E4%BA%8ERxJava%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="alternate" type="text/html" title="关于RxJava的使用" />
+<published>2016-03-05T00:00:00+08:00</published>
+<updated>2016-03-05T00:00:00+08:00</updated>
+<id>/关于RxJava的使用</id>
+<content type="html" xml:base="/%E5%85%B3%E4%BA%8ERxJava%E7%9A%84%E4%BD%BF%E7%94%A8/">&lt;p&gt;RxJava 的观察者模式
 RxJava 有四个基本概念：Observable (可观察者，即被观察者)、 Observer (观察者)、 subscribe (订阅)、事件。Observable 和Observer 通过 subscribe() 方法实现订阅关系，从而 Observable 可以在需要的时候发出事件来通知 Observer。&lt;/p&gt;
 
 &lt;p&gt;与传统观察者模式不同， RxJava 的事件回调方法除了普通事件 onNext() （相当于 onClick() / onEvent()）之外，还定义了两个特殊的事件：onCompleted() 和 onError()。&lt;/p&gt;
@@ -386,48 +982,46 @@ RxJava 有四个基本概念：Observable (可观察者，即被观察者)、 Ob
 Observer 即观察者&lt;/p&gt;
 
 &lt;p&gt;Observer&lt;string&gt; observer = new Observer&lt;string&gt;() {
-    @Override
+    &lt;a href=&quot;https://github.com/Override&quot; class=&quot;user-mention&quot;&gt;@Override&lt;/a&gt;
     public void onNext(String s) {
         Log.d(tag, &quot;Item: &quot; + s);
     }&lt;/string&gt;&lt;/string&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@Override
+&lt;pre&gt;&lt;code&gt;&amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
 public void onCompleted() {
     Log.d(tag, &quot;Completed!&quot;);
 }
  
-@Override
+&amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
 public void onError(Throwable e) {
     Log.d(tag, &quot;Error!&quot;);
 }};
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;p&gt;Subscriber&lt;string&gt; subscriber = new Subscriber&lt;string&gt;() {
-    @Override
+    &lt;a href=&quot;https://github.com/Override&quot; class=&quot;user-mention&quot;&gt;@Override&lt;/a&gt;
     public void onNext(String s) {
         Log.d(tag, &quot;Item: &quot; + s);
     }&lt;/string&gt;&lt;/string&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@Override
+&lt;pre&gt;&lt;code&gt;&amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
 public void onCompleted() {
     Log.d(tag, &quot;Completed!&quot;);
 }
  
-@Override
+&amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
 public void onError(Throwable e) {
     Log.d(tag, &quot;Error!&quot;);
 }};
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;p&gt;他们的基本使用方式是完全一样的&lt;/p&gt;
 
 &lt;p&gt;2) 创建 Observable&lt;br /&gt;
 Observable 即被观察者&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Observable observable = Observable.create(new Observable.OnSubscribe&amp;lt;String&amp;gt;() {
-@Override
+&lt;pre&gt;&lt;code&gt;Observable observable = Observable.create(new Observable.OnSubscribe&amp;lt;String&amp;gt;() {
+&amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
 public void call(Subscriber&amp;lt;? super String&amp;gt; subscriber) {
     subscriber.onNext(&quot;Hello&quot;);
     subscriber.onNext(&quot;Hi&quot;);
@@ -450,38 +1044,36 @@ Observable observable = Observable.from(words);
 // onNext(&quot;Aloha&quot;);
 // onCompleted();
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;p&gt;上面 just(T…) 的例子和 from(T[]) 的例子，都和之前的 create(OnSubscribe) 的例子是等价的。&lt;/p&gt;
 
 &lt;p&gt;3) Subscribe (订阅)&lt;br /&gt;
 创建了 Observable 和 Observer 之后，再用 subscribe() 方法将它们联结起&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;observable.subscribe(observer);
+&lt;pre&gt;&lt;code&gt;observable.subscribe(observer);
 // 或者：
 observable.subscribe(subscriber);
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;p&gt;subscribe() 还支持不完整定义的回调，RxJava 会自动根据定义创建出Subscriber：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Action1&amp;lt;String&amp;gt; onNextAction = new Action1&amp;lt;String&amp;gt;() {
+&lt;pre&gt;&lt;code&gt;Action1&amp;lt;String&amp;gt; onNextAction = new Action1&amp;lt;String&amp;gt;() {
 // onNext()
-@Override
+&amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
 public void call(String s) {
     Log.d(tag, s);
 }
 };
 Action1&amp;lt;Throwable&amp;gt; onErrorAction = new Action1&amp;lt;Throwable&amp;gt;() {
 // onError()
-@Override
+&amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
 public void call(Throwable throwable) {
     // Error handling
 }
 };
 Action0 onCompletedAction = new Action0() {
 // onCompleted()
-@Override
+&amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
 public void call() {
     Log.d(tag, &quot;completed&quot;);
 }
@@ -494,50 +1086,47 @@ observable.subscribe(onNextAction, onErrorAction);
 // 自动创建 Subscriber ，并使用 onNextAction、 onErrorAction 和 	onCompletedAction 来定义 onNext()、 onError() 和 onCompleted()
 observable.subscribe(onNextAction, onErrorAction, 	onCompletedAction);
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;p&gt;线程控制 —— Scheduler&lt;/p&gt;
 
 &lt;p&gt;subscribeOn(): 指定 subscribe() 所发生的线程，即 Observable.OnSubscribe 被激活时所处的线程。或者叫做事件产生的线程。
 observeOn(): 指定 Subscriber 所运行在的线程。或者叫做事件消费的线程。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Observable.just(1, 2, 3, 4)
+&lt;pre&gt;&lt;code&gt;Observable.just(1, 2, 3, 4)
 .subscribeOn(Schedulers.io()) // 指定 subscribe() 发生在 IO 线程
 .observeOn(AndroidSchedulers.mainThread()) // 指定 Subscriber 的回调发生在主线程
 .subscribe(new Action1&amp;lt;Integer&amp;gt;() {
-    @Override
+    &amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
     public void call(Integer number) {
         Log.d(tag, &quot;number:&quot; + number);
     }
 });
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;h3 id=&quot;section&quot;&gt;变换&lt;/h3&gt;
 
 &lt;p&gt;map(): 事件对象的直接变换，它是 RxJava 最常用的变换。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Observable.just(&quot;images/logo.png&quot;) // 输入类型 String
+&lt;pre&gt;&lt;code&gt;Observable.just(&quot;images/logo.png&quot;) // 输入类型 String
 .map(new Func1&amp;lt;String, Bitmap&amp;gt;() {
-    @Override
+    &amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
     public Bitmap call(String filePath) { // 参数类型 String
         return getBitmapFromPath(filePath); // 返回类型 Bitmap
     }
 })
 .subscribe(new Action1&amp;lt;Bitmap&amp;gt;() {
-    @Override
+    &amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
     public void call(Bitmap bitmap) { // 参数类型 Bitmap
         showBitmap(bitmap);
     }
 });
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;p&gt;map() 是一对一的转化，而我现在的要求是一对多的转化, 就需要用 flatMap()了.&lt;/p&gt;
 
  	Student[] students = …;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Subscriber&amp;lt;Course&amp;gt; subscriber = new Subscriber&amp;lt;Course&amp;gt;() {
-@Override
+&lt;pre&gt;&lt;code&gt;Subscriber&amp;lt;Course&amp;gt; subscriber = new Subscriber&amp;lt;Course&amp;gt;() {
+&amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
 public void onNext(Course course) {
     Log.d(tag, course.getName());
 }
@@ -545,19 +1134,18 @@ public void onNext(Course course) {
 };
 Observable.from(students)
 .flatMap(new Func1&amp;lt;Student, Observable&amp;lt;Course&amp;gt;&amp;gt;() {
-    @Override
+    &amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
     public Observable&amp;lt;Course&amp;gt; call(Student student) {
         return Observable.from(student.getCourses());
     }
 })
 .subscribe(subscriber);
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;p&gt;不同于 observeOn() ， subscribeOn() 的位置放在哪里都可以，但它是只能调用一次的。通过 observeOn() 的多次调用，程序实现了线程的多次切换.&lt;/p&gt;
 
  	Observable.just(1, 2, 3, 4) // IO 线程，由 subscribeOn() 指定
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.subscribeOn(Schedulers.io())
+&lt;pre&gt;&lt;code&gt;.subscribeOn(Schedulers.io())
 .observeOn(Schedulers.newThread())
 .map(mapOperator) // 新线程，由 observeOn() 指定
 .observeOn(Schedulers.io())
@@ -565,47 +1153,40 @@ Observable.from(students)
 .observeOn(AndroidSchedulers.mainThread) 
 .subscribe(subscriber);  // Android 主线程，由 observeOn() 指定
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;hr /&gt;
 
 &lt;p&gt;至此，结束。&lt;/p&gt;
-</description>
-        <pubDate>Sat, 05 Mar 2016 00:00:00 +0800</pubDate>
-        <link>/2016/03/05/%E5%85%B3%E4%BA%8Erxjava%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
-        <guid isPermaLink="true">/2016/03/05/%E5%85%B3%E4%BA%8Erxjava%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
-        
-        
-        <category>Android</category>
-        
-      </item>
-    
-      <item>
-        <title>关于StaticLayout和DynamicLayout</title>
-        <description>&lt;p&gt;StaticLayout 来自 http://developer.android.com/reference/android/text/StaticLayout.html&lt;/p&gt;
+</content>
+<summary>RxJava 的观察者模式</summary>
+</entry>
+<entry>
+<title>关于StaticLayout和DynamicLayout</title>
+<link href="/%E5%85%B3%E4%BA%8EStaticLayout%E5%92%8CDynamicLayout/" rel="alternate" type="text/html" title="关于StaticLayout和DynamicLayout" />
+<published>2016-02-17T00:00:00+08:00</published>
+<updated>2016-02-17T00:00:00+08:00</updated>
+<id>/关于StaticLayout和DynamicLayout</id>
+<content type="html" xml:base="/%E5%85%B3%E4%BA%8EStaticLayout%E5%92%8CDynamicLayout/">&lt;p&gt;StaticLayout 来自 http://developer.android.com/reference/android/text/StaticLayout.html&lt;/p&gt;
 
 &lt;p&gt;DynamicLayout 来自 http://developer.android.com/reference/android/text/DynamicLayout.html&lt;/p&gt;
 
 &lt;h2 id=&quot;cerditsroll&quot;&gt;CerditsRoll&lt;/h2&gt;
 
 &lt;p&gt;在该项目中，使用了一些&lt;/p&gt;
-</description>
-        <pubDate>Wed, 17 Feb 2016 00:00:00 +0800</pubDate>
-        <link>/2016/02/17/%E5%85%B3%E4%BA%8Estaticlayout%E5%92%8Cdynamiclayout/</link>
-        <guid isPermaLink="true">/2016/02/17/%E5%85%B3%E4%BA%8Estaticlayout%E5%92%8Cdynamiclayout/</guid>
-        
-        
-        <category>Android</category>
-        
-      </item>
-    
-      <item>
-        <title>Screen Density</title>
-        <description>&lt;h1 id=&quot;section&quot;&gt;宽高计算&lt;/h1&gt;
+</content>
+<summary>myself</summary>
+</entry>
+<entry>
+<title>Screen Density</title>
+<link href="/Screen-Density/" rel="alternate" type="text/html" title="Screen Density" />
+<published>2016-02-08T19:59:05+08:00</published>
+<updated>2016-02-08T19:59:05+08:00</updated>
+<id>/Screen-Density</id>
+<content type="html" xml:base="/Screen-Density/">&lt;h1 id=&quot;section&quot;&gt;宽高计算&lt;/h1&gt;
 
 &lt;p&gt;在Activity中，可以这样获得宽高密：&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+&lt;p&gt;&lt;code&gt;
 	float mDensity = getBaseContext().getResources().getDisplayMetrics().density;
 	float mScreenHeight = getBaseContext().getResources().getDisplayMetrics().heightPixels;
     float mScreenWidth = getBaseContext().getResources().getDisplayMetrics().widthPixels;
@@ -630,7 +1211,7 @@ width:1440.0&lt;/p&gt;
         return result;
     }&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//获取底部navigationBar高度
+&lt;pre&gt;&lt;code&gt;//获取底部navigationBar高度
 public int getNavigationBarHeight(Context context) {
     int result = 0;
     int resourceId = context.getResources().getIdentifier(&quot;navigation_bar_height&quot;, &quot;dimen&quot;, &quot;android&quot;);
@@ -640,7 +1221,6 @@ public int getNavigationBarHeight(Context context) {
     return result;
 } ```
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;p&gt;打印出的数据：
 statusbar height:84
@@ -664,7 +1244,7 @@ navigationbar height:168&lt;/p&gt;
         ViewGroup contentParent = (ViewGroup)mActivity.findViewById(android.R.id.content);
         View rootView = contentParent.getChildAt(0);&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    if(loadview==null){
+&lt;pre&gt;&lt;code&gt;    if(loadview==null){
         loadview = LayoutInflater.from(mActivity).inflate(R.layout.layout_loadindview,null);
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         lp.gravity = Gravity.CENTER;
@@ -674,7 +1254,6 @@ navigationbar height:168&lt;/p&gt;
     }
 } ```
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;h3 id=&quot;section-1&quot;&gt;屏幕截图&lt;/h3&gt;
 
@@ -683,7 +1262,7 @@ navigationbar height:168&lt;/p&gt;
         //create save path to for file
         String mPath = Environment.getExternalStorageDirectory().toString() + “/” + IMAGE_FILENAME;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    //create bitmap screenshot
+&lt;pre&gt;&lt;code&gt;    //create bitmap screenshot
     Bitmap bitmap;
     //remove .getRootView() if you want everything but the actionbar.
     View view = getWindow().getDecorView().findViewById(android.R.id.content).getRootView();
@@ -713,7 +1292,6 @@ navigationbar height:168&lt;/p&gt;
     mPathTextView.setText(&quot;Screenshot saved at: &quot; + mPath);
 } ```
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;h3 id=&quot;viewscreendwindowdecorview&quot;&gt;获取View在Screend中的坐标(或者说在Window或者DecorView中)&lt;/h3&gt;
 
@@ -749,33 +1327,29 @@ public static boolean checkDeviceHasNavigationBar(Context context) {
         }
     } catch (Exception e) {&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;}
+&lt;pre&gt;&lt;code&gt;}
 return hasNavigationBar;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;p&gt;}
 ```&lt;/p&gt;
 
 &lt;p&gt;隐藏NavigationBar,在3.0以后可以这么做：&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+&lt;p&gt;&lt;code&gt;
 getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 &lt;/code&gt;&lt;/p&gt;
 
-</description>
-        <pubDate>Mon, 08 Feb 2016 19:59:05 +0800</pubDate>
-        <link>/2016/02/08/screen-density/</link>
-        <guid isPermaLink="true">/2016/02/08/screen-density/</guid>
-        
-        
-        <category>Android</category>
-        
-      </item>
-    
-      <item>
-        <title>Volley 源码分析</title>
-        <description>&lt;h1 id=&quot;volley-&quot;&gt;Volley 源码分析&lt;/h1&gt;
+</content>
+<summary>Screen Density</summary>
+</entry>
+<entry>
+<title>Volley 源码分析</title>
+<link href="/Volley%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="alternate" type="text/html" title="Volley 源码分析" />
+<published>2016-01-01T00:00:00+08:00</published>
+<updated>2016-01-01T00:00:00+08:00</updated>
+<id>/Volley 源码分析</id>
+<content type="html" xml:base="/Volley%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">&lt;h1 id=&quot;volley-&quot;&gt;Volley 源码分析&lt;/h1&gt;
 
 &lt;h2 id=&quot;http&quot;&gt;Http缓存机制&lt;/h2&gt;
 
@@ -798,7 +1372,7 @@ getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGA
                 StatusLine statusLine = httpResponse.getStatusLine();
                 int statusCode = statusLine.getStatusCode();&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;            responseHeaders = convertHeaders(httpResponse.getAllHeaders());
+&lt;pre&gt;&lt;code&gt;            responseHeaders = convertHeaders(httpResponse.getAllHeaders());
             // Handle cache validation.
             if (statusCode == HttpStatus.SC_NOT_MODIFIED) {
             // 响应码：304 （未修改） 自从上次请求后，请求的网页未修改过。 服务器返回此响应时，不会返回网页内容。
@@ -827,7 +1401,6 @@ getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGA
             return new NetworkResponse(statusCode, responseContents, responseHeaders, false);
         } ```
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;p&gt;Volley使用的Http缓存机制 与 Http协议的”Etag&amp;amp;Last-Modified”缓存机制有关。Etag有两种用法 If-Match/If-None-Match，是用来判断服务器的对象和客户端的URL对象是否匹配。
 关于Etag在后面#补充中做简单介绍。下面是  BasicNetwork.java 的源码：&lt;/p&gt;
@@ -839,7 +1412,7 @@ private void addCacheHeaders(Map&amp;lt;String, String&amp;gt; headers, Cache.En
             return;
         }&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    if (entry.etag != null) {
+&lt;pre&gt;&lt;code&gt;    if (entry.etag != null) {
         headers.put(&quot;If-None-Match&quot;, entry.etag);
     }
 
@@ -849,7 +1422,6 @@ private void addCacheHeaders(Map&amp;lt;String, String&amp;gt; headers, Cache.En
     }
 }     ```
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -897,7 +1469,7 @@ private void addCacheHeaders(Map&amp;lt;String, String&amp;gt; headers, Cache.En
 
 &lt;p&gt;我们看到如下代码：&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+&lt;p&gt;&lt;code&gt;
             } catch (SocketTimeoutException e) {
                 attemptRetryOnException(&quot;socket&quot;, request, new TimeoutError());
             } catch (ConnectTimeoutException e) {
@@ -938,7 +1510,7 @@ private void addCacheHeaders(Map&amp;lt;String, String&amp;gt; headers, Cache.En
         RetryPolicy retryPolicy = request.getRetryPolicy();
         int oldTimeout = request.getTimeoutMs();&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    try {
+&lt;pre&gt;&lt;code&gt;    try {
         retryPolicy.retry(exception);
     } catch (VolleyError e) {
         request.addMarker(
@@ -948,7 +1520,6 @@ private void addCacheHeaders(Map&amp;lt;String, String&amp;gt; headers, Cache.En
     request.addMarker(String.format(&quot;%s-retry [timeout=%s]&quot;, logPrefix, oldTimeout));
 } ```
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;h2 id=&quot;section-1&quot;&gt;补充&lt;/h2&gt;
 
@@ -980,19 +1551,16 @@ private void addCacheHeaders(Map&amp;lt;String, String&amp;gt; headers, Cache.En
   &lt;li&gt;客户再次请求页面A，并将上次请求时服务器返回的Last-Modified/ETag一起传递给服务器。&lt;/li&gt;
   &lt;li&gt;服务器检查该Last-Modified或ETag，并判断出该页面自上次客户端请求之后还未被修改，直接返回响应304和一个空的响应体。&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-        <pubDate>Fri, 01 Jan 2016 00:00:00 +0800</pubDate>
-        <link>/2016/01/01/volley-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</link>
-        <guid isPermaLink="true">/2016/01/01/volley-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</guid>
-        
-        
-        <category>Android</category>
-        
-      </item>
-    
-      <item>
-        <title>NSString Some Useful Methods</title>
-        <description>&lt;p&gt;2015-11-26-NSString Some Useful Methods&lt;/p&gt;
+</content>
+<summary>Volley 源码分析</summary>
+</entry>
+<entry>
+<title>NSString Some Useful Methods</title>
+<link href="/NSString%20Some%20Useful%20Methods/" rel="alternate" type="text/html" title="NSString Some Useful Methods" />
+<published>2015-11-26T00:00:00+08:00</published>
+<updated>2015-11-26T00:00:00+08:00</updated>
+<id>/NSString Some Useful Methods</id>
+<content type="html" xml:base="/NSString%20Some%20Useful%20Methods/">&lt;p&gt;2015-11-26-NSString Some Useful Methods&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
@@ -1028,19 +1596,16 @@ NSLog(@”array:%@”,array);
 `&lt;/li&gt;
 &lt;/ol&gt;
 
-</description>
-        <pubDate>Thu, 26 Nov 2015 00:00:00 +0800</pubDate>
-        <link>/2015/11/26/nsstring-some-useful-methods/</link>
-        <guid isPermaLink="true">/2015/11/26/nsstring-some-useful-methods/</guid>
-        
-        
-        <category>iOS</category>
-        
-      </item>
-    
-      <item>
-        <title>SoftKeyBoard</title>
-        <description>&lt;p&gt;iOS UITextView UITextField About SoftKeyBoard&lt;/p&gt;
+</content>
+<summary>Web App 相关技术，移动端的 web 应用</summary>
+</entry>
+<entry>
+<title>SoftKeyBoard</title>
+<link href="/About%20iOS%20SoftKeyBoard/" rel="alternate" type="text/html" title="SoftKeyBoard" />
+<published>2015-09-25T22:06:05+08:00</published>
+<updated>2015-09-25T22:06:05+08:00</updated>
+<id>/About iOS SoftKeyBoard</id>
+<content type="html" xml:base="/About%20iOS%20SoftKeyBoard/">&lt;p&gt;iOS UITextView UITextField About SoftKeyBoard&lt;/p&gt;
 
 &lt;p&gt;一、键盘风格   
 UIKit框架支持8种风格键盘。
@@ -1155,69 +1720,189 @@ return NO;
 
 &lt;p&gt;UITextField进入编辑状态 获得焦点 becomeFirstResponder
  关闭键盘 resignFirstResponder&lt;/p&gt;
-</description>
-        <pubDate>Fri, 25 Sep 2015 22:06:05 +0800</pubDate>
-        <link>/2015/09/25/about-ios-softkeyboard/</link>
-        <guid isPermaLink="true">/2015/09/25/about-ios-softkeyboard/</guid>
-        
-        
-        <category>iOS</category>
-        
-      </item>
-    
-      <item>
-        <title>What I Use Git to Build Blog</title>
-        <description>&lt;h1 id=&quot;what-i-use-git-to-build-blog&quot;&gt;What I Use Git to Build Blog&lt;/h1&gt;
+</content>
+<summary>iOS SoftKeyBoard</summary>
+</entry>
+<entry>
+<title>Markdown Cheatsheet Demo</title>
+<link href="/markdown-cheatsheet-demo/" rel="alternate" type="text/html" title="Markdown Cheatsheet Demo" />
+<published>2015-09-06T22:06:05+08:00</published>
+<updated>2015-09-06T22:06:05+08:00</updated>
+<id>/markdown-cheatsheet-demo</id>
+<content type="html" xml:base="/markdown-cheatsheet-demo/">&lt;blockquote&gt;
+  &lt;p&gt;This is Markdown Cheatsheet Demo for &lt;strong&gt;The Plain&lt;/strong&gt;, this Jekyll theme. Please check the raw content of this file for the markdown usage.&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;First git repository is empty.&lt;/p&gt;
+&lt;h2 id=&quot;typography-elements-in-one&quot;&gt;Typography Elements in One&lt;/h2&gt;
 
-&lt;p&gt;So we should first add and commit to init the master branch.&lt;/p&gt;
+&lt;p&gt;Let’s start with a informative paragraph. &lt;strong&gt;This text is bolded.&lt;/strong&gt; But not this one! &lt;em&gt;How about italic text?&lt;/em&gt; Cool right? Ok, let’s &lt;strong&gt;&lt;em&gt;combine&lt;/em&gt;&lt;/strong&gt; them together. Yeah, that’s right! I have code to highlight, so &lt;code&gt;ThisIsMyCode()&lt;/code&gt;. What a nice! Good people will hyperlink away, so &lt;a href=&quot;#&quot;&gt;here we go&lt;/a&gt; or &lt;a href=&quot;http://www.example.com&quot;&gt;http://www.example.com&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;After above, you could make a new branch.&lt;/p&gt;
+&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
 
-&lt;p&gt;init a new branch&lt;/p&gt;
+&lt;h2 id=&quot;headings-h1-to-h6&quot;&gt;Headings H1 to H6&lt;/h2&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt; $ git branch testing&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&quot;h1-heading&quot;&gt;H1 Heading&lt;/h1&gt;
 
-&lt;p&gt;show all branch&lt;/p&gt;
+&lt;h2 id=&quot;h2-heading&quot;&gt;H2 Heading&lt;/h2&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt; $ git branch -a &lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&quot;h3-heading&quot;&gt;H3 Heading&lt;/h3&gt;
 
-&lt;p&gt;check what status it is now&lt;/p&gt;
+&lt;h4 id=&quot;h4-heading&quot;&gt;H4 Heading&lt;/h4&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt; $ git status &lt;/code&gt;&lt;/p&gt;
+&lt;h5 id=&quot;h5-heading&quot;&gt;H5 Heading&lt;/h5&gt;
 
-&lt;p&gt;This article is really detailed.
-&lt;a href=&quot;http://blog.jobbole.com/25808/&quot;&gt;http://blog.jobbole.com/25808/&lt;/a&gt;&lt;/p&gt;
+&lt;h6 id=&quot;h6-heading&quot;&gt;H6 Heading&lt;/h6&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt; $ git checkout —orphan gh-pages &lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt; $ git add . &lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&quot;footnote&quot;&gt;Footnote&lt;/h2&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt; $ git commit -m &quot;first post&quot; &lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Let’s say you have text that you want to refer with a footnote, you can do that too! This is an example for the footnote number one &lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. You can even add more footnotes, with link! &lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt; $ git remote add origin https://github.com/username/projectName.git &lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt; $ git push origin gh-pages &lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&quot;blockquote&quot;&gt;Blockquote&lt;/h2&gt;
 
-&lt;p&gt;—- Finally, I found it.
-&lt;a href=&quot;http://tindlewei.github.io/WeiBlog/&quot;&gt;http://tindlewei.github.io/WeiBlog/&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Start by doing what’s necessary; then do what’s possible; and suddenly you are doing the impossible. –Francis of Assisi&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;What Helped me. 
-&lt;a href=&quot;http://www.aymerick.com/2014/07/22/jekyll-github-pages-bower-bootstrap.html&quot;&gt;http://www.aymerick.com/2014/07/22/jekyll-github-pages-bower-bootstrap.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; This theme does NOT support nested blockquotes.&lt;/p&gt;
 
-&lt;p&gt;Oops, I installed bower &lt;a href=&quot;https://github.com/bower/bower&quot;&gt;https://github.com/bower/bower&lt;/a&gt;
-Also installed grunt &lt;a href=&quot;http://gruntjs.com/&quot;&gt;GRUNT&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
 
-</description>
-        <pubDate>Sun, 06 Sep 2015 22:06:05 +0800</pubDate>
-        <link>/2015/09/06/what-i-use-git-to-build-blog/</link>
-        <guid isPermaLink="true">/2015/09/06/what-i-use-git-to-build-blog/</guid>
-        
-        
-        <category>Jekyll</category>
-        
-      </item>
-    
-  </channel>
-</rss>
+&lt;h2 id=&quot;list-items&quot;&gt;List Items&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;First order list item&lt;/li&gt;
+  &lt;li&gt;Second item&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Unordered list can use asterisks&lt;/li&gt;
+  &lt;li&gt;Or minuses&lt;/li&gt;
+  &lt;li&gt;Or pluses&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;code-blocks&quot;&gt;Code Blocks&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;javascript
+var s = &quot;JavaScript syntax highlighting&quot;;
+alert(s);
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;python
+s = &quot;Python syntax highlighting&quot;
+print s
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+No language indicated, so no syntax highlighting.
+But let&#39;s throw in a &amp;lt;b&amp;gt;tag&amp;lt;/b&amp;gt;.
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;table&quot;&gt;Table&lt;/h2&gt;
+
+&lt;h3 id=&quot;table-1-with-alignment&quot;&gt;Table 1: With Alignment&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Tables&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Are&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;Cool&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;col 3 is&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;right-aligned&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;$1600&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;col 2 is&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;centered&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;$12&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;zebra stripes&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;are neat&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;$1&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;table-2-with-typography-elements&quot;&gt;Table 2: With Typography Elements&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Markdown&lt;/th&gt;
+      &lt;th&gt;Less&lt;/th&gt;
+      &lt;th&gt;Pretty&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;em&gt;Still&lt;/em&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;renders&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;nicely&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;horizontal-line&quot;&gt;Horizontal Line&lt;/h2&gt;
+
+&lt;p&gt;The HTML &lt;code&gt;&amp;lt;hr&amp;gt;&lt;/code&gt; element is for creating a “thematic break” between paragraph-level elements. In markdown, you can create a &lt;code&gt;&amp;lt;hr&amp;gt;&lt;/code&gt; with any of the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;___&lt;/code&gt;: three consecutive underscores&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;---&lt;/code&gt;: three consecutive dashes&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;***&lt;/code&gt;: three consecutive asterisks&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;renders to:&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;media&quot;&gt;Media&lt;/h2&gt;
+
+&lt;h3 id=&quot;youtube-embedded-iframe&quot;&gt;YouTube Embedded Iframe&lt;/h3&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/n1a7o44WxNo&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;h3 id=&quot;image&quot;&gt;Image&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://octodex.github.com/images/minion.png&quot; alt=&quot;Minion&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;Footnote number one yeah baby! &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;A footnote you can link to - &lt;a href=&quot;#&quot;&gt;click here!&lt;/a&gt; &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</content>
+<summary>Web App 相关技术，移动端的 web 应用</summary>
+</entry>
+</feed>

@@ -32,7 +32,7 @@ excerpt:
 	public native float dotWithNormal(float dx, float dy, float dz);
 
 这里是Camera变换的坐标轴
-![img](/img/20120929085945172.jpg)
+![img](/img/image-src.png)
 
 在rotate的时候，要站在该轴正方向的地方看，才能明白他的旋转。
 如 camera.rotateZ(-60)
