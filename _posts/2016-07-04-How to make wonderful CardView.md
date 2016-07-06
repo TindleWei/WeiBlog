@@ -11,7 +11,7 @@ excerpt:
 
 How to make view like this ?
 
-![img](../img/blog_16_6_17_1.jpg)
+<img src="../img/blog_16_6_17_1.jpg" width = "360" height = "640" alt="blog_16_6_17_1" align=center />
 
 Wonderful, isn't it?
 
