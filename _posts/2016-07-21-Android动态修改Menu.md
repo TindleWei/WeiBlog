@@ -1,6 +1,9 @@
-# Android 动态修改 Menu
-
-
+---
+ layout: post  
+ title:  Android动态修改Menu  
+ date:   2016-07-21   
+ categories: Android  
+---
 
 ## 打开一个包含Fragment的Activity: 
 ### -- 普通方式 --
