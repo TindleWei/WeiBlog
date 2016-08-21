@@ -3,9 +3,555 @@
 <generator uri="http://jekyllrb.com" version="2.4.0">Jekyll</generator>
 <link href="/feed.xml" rel="self" type="application/atom+xml" />
 <link href="/" rel="alternate" type="text/html" />
-<updated>2016-07-05T18:57:04+08:00</updated>
+<updated>2016-08-20T17:58:00+08:00</updated>
 <id>/</id>
 <subtitle>Adam is my name, Black is my color.</subtitle>
+<entry>
+<title>Flask使用记录</title>
+<link href="/Flask%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" rel="alternate" type="text/html" title="Flask使用记录" />
+<published>2016-08-09T00:00:00+08:00</published>
+<updated>2016-08-09T00:00:00+08:00</updated>
+<id>/Flask使用记录</id>
+<content type="html" xml:base="/Flask%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">&lt;h2 id=&quot;section&quot;&gt;配置时的一些命令&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ git clone https://github.com/miguelgrinberg/flasky.git
+$ cd flasky
+$ git checkout 1a
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ source venv/bin/activate
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;deactivate&lt;/code&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;code&gt; (venv) $ pip install flask&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;pip install -r requirements.txt&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;(venv) $ pip freeze &amp;gt;requirements.txt&lt;/code&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;code&gt;
+pip install -r requirements.txt
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; db.create_all()&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;python manage.py db upgrade&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+(venv) $ python manage.py shell
+&amp;gt;&amp;gt;&amp;gt; u = User(email=&#39;john@example.com&#39;, username=&#39;john&#39;, password=&#39;cat&#39;)
+&amp;gt;&amp;gt;&amp;gt; db.session.add(u)
+&amp;gt;&amp;gt;&amp;gt; db.session.commit()
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+(venv) $ python manage.py shell
+&amp;gt;&amp;gt;&amp;gt; db.drop_all()
+&amp;gt;&amp;gt;&amp;gt; db.create_all()
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+(venv) $ python manage.py shell
+      &amp;gt;&amp;gt;&amp;gt; Role.insert_roles()
+      &amp;gt;&amp;gt;&amp;gt; Role.query.all()
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;http://www.cnblogs.com/bitCoin/p/5485032.html&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;一些错误处理&lt;/h2&gt;
+
+&lt;h3 id=&quot;pip&quot;&gt;pip升级库&lt;/h3&gt;
+
+&lt;p&gt;在 $python manager.py db migrate的时候,
+报错版本号不够，可以这样升级库：&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;sudo pip install --upgrade alembic&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;db-migrate&quot;&gt;DB Migrate时出错:&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;File “/Users/tindle/Company2/board/board/models.py”, line 73, in ColumnHas
+  created_at = Column(DateTime, nullable=False, default=datetime.now)
+TypeError: &lt;strong&gt;init&lt;/strong&gt;() got an unexpected keyword argument ‘default’&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;解决：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;DateTime doesn’t have a default key as an input. The default key should be an input to the Column function. Try this:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;created_at = Column(DateTime, default=datetime.datetime.utcnow)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;or&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;from sqlalchemy.sql import func&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;created_at = Column(DateTime(timezone=True), default=func.now())&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;运行时报错：&lt;/h3&gt;
+
+&lt;p&gt;AttributeError: type object ‘datetime.datetime’ has no attribute ‘datetime’&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;from datetime import datetime&lt;/code&gt; 改为 &lt;code&gt;import datetime&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;部署到服务器&lt;/h2&gt;
+
+&lt;h3 id=&quot;virtualenvsupervisornginxgunicorn&quot;&gt;virtualenv+supervisor+nginx+gunicorn&lt;/h3&gt;
+
+&lt;p&gt;http://www.v2ex.com/t/267868&lt;/p&gt;
+
+&lt;p&gt;http://www.jikexueyuan.com/course/2060.html&lt;/p&gt;
+
+&lt;p&gt;http://www.simpleapples.com/2015/06/configure-nginx-supervisor-gunicorn-flask/&lt;/p&gt;
+
+&lt;p&gt;http://codingnow.cn/server/539.html&lt;/p&gt;
+
+&lt;p&gt;http://gunicorn.org/&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;python&quot;&gt;Python爬虫&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.zhihu.com/question/20899988&quot;&gt;https://www.zhihu.com/question/20899988&lt;/a&gt;&lt;/p&gt;
+</content>
+<summary>配置时的一些命令</summary>
+</entry>
+<entry>
+<title>Android动态修改Menu</title>
+<link href="/Android%E5%8A%A8%E6%80%81%E4%BF%AE%E6%94%B9Menu/" rel="alternate" type="text/html" title="Android动态修改Menu" />
+<published>2016-07-21T00:00:00+08:00</published>
+<updated>2016-07-21T00:00:00+08:00</updated>
+<id>/Android动态修改Menu</id>
+<content type="html" xml:base="/Android%E5%8A%A8%E6%80%81%E4%BF%AE%E6%94%B9Menu/">&lt;h2 id=&quot;fragmentactivity&quot;&gt;打开一个包含Fragment的Activity:&lt;/h2&gt;
+&lt;p&gt;### – 普通方式 –&lt;/p&gt;
+
+&lt;p&gt;这个普通的步骤就可以：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;添加 &lt;code&gt;setHasOptionsMenu(true);&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;onCreateOptionMenu&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;onOptionItemSeleted&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;重要Tip:&lt;/strong&gt;  &lt;br /&gt;
+需要在 onCreate 或 onCreateView中加入 &lt;code&gt;setHasOptionsMenu(true);&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;activityfragment&quot;&gt;在Activity中切换Fragment:&lt;/h2&gt;
+&lt;p&gt;### – 特殊方式 –&lt;/p&gt;
+
+&lt;p&gt;初始化时调用&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+	getActivity().supportInvalidateOptionsMenu();
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;切换需要调用&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+    &amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.clear();
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.menu_zeus_save, menu);
+        super.onPrepareOptionsMenu(menu);
+    }
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;在ViewPager切换监听调用&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+getActivity().invalidateOptionsMenu();
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;补充&lt;/h2&gt;
+
+&lt;p&gt;这里说一下 &lt;code&gt;onCreateOptionsMenu&lt;/code&gt; 和 &lt;code&gt;onPrepareOptionsMenu&lt;/code&gt; 的区别&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;onCreateOptionsMenu：&lt;br /&gt;
+只会调用一次，他只会在Menu显示之前去调用一次，之后就不会在去调用。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;onPrepareOptionsMenu：&lt;br /&gt;
+每次在display Menu之前，都会去调用，只要按一次Menu按鍵，就会调用一次。所以可以在这里动态的改变menu。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;searchview&quot;&gt;SearchView&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;
+    &amp;lt;item android:id=&quot;@+id/action_search&quot;
+        android:title=&quot;Search&quot;
+        android:icon=&quot;@mipmap/ic_action_search&quot;
+        app:showAsAction=&quot;collapseActionView|always&quot;
+        android:animateLayoutChanges=&quot;true&quot;
+        app:actionViewClass=&quot;android.support.v7.widget.SearchView&quot;/&amp;gt;
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;```
+    public void initSearchView(final Menu menu) {
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        if (searchItem != null) {
+            MenuItemCompat.setOnActionExpandListener(
+                    searchItem, new MenuItemCompat.OnActionExpandListener() {
+                        &lt;a href=&quot;https://github.com/Override&quot; class=&quot;user-mention&quot;&gt;@Override&lt;/a&gt;
+                        public boolean onMenuItemActionExpand(MenuItem item) {
+                            return true;
+                        }&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;                    &amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
+                    public boolean onMenuItemActionCollapse(MenuItem item) {
+                        return true;
+                    }
+                });
+        mSearchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        mSearchView.setInputType(InputType.TYPE_TEXT_VARIATION_FILTER);
+        mSearchView.setImeOptions(EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_FULLSCREEN);
+        mSearchView.setQueryHint(getString(R.string.action_search));
+        mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            &amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
+            public boolean onQueryTextSubmit(String query) {
+                return onQueryTextChange(query);
+            }
+
+            &amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
+            public boolean onQueryTextChange(String newText) {
+                Toast.makeText(getActivity(), newText, Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+    }
+} ```
+&lt;/code&gt;&lt;/pre&gt;
+
+</content>
+<summary>打开一个包含Fragment的Activity:### – 普通方式 –</summary>
+</entry>
+<entry>
+<title>使用MySQL遇到的坑</title>
+<link href="/%E4%BD%BF%E7%94%A8MySQL%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" rel="alternate" type="text/html" title="使用MySQL遇到的坑" />
+<published>2016-07-13T00:00:00+08:00</published>
+<updated>2016-07-13T00:00:00+08:00</updated>
+<id>/使用MySQL遇到的坑</id>
+<content type="html" xml:base="/%E4%BD%BF%E7%94%A8MySQL%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">&lt;p&gt;遇到一些错误：&lt;/p&gt;
+
+&lt;p&gt;```
+ ERROR 1045 (28000): Access denied for user ‘root’@’localhost’ (using password:YES)&lt;/p&gt;
+
+&lt;p&gt;ERROR 1045 (28000): Access denied for user ‘root’@’localhost’ (using password:NO)
+```&lt;/p&gt;
+
+&lt;p&gt;查看当前用户&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+ mysql&amp;gt; select current_user();
+ +----------------+
+ | current_user() |
+ +----------------+
+ | root@localhost |
+ +----------------+
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;上面是用户没有创建或没有权限，所以创建一个新用户：&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;mysql -uroot -p 登录mysql&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;创建一个新用户&lt;/p&gt;
+
+&lt;p&gt;```
+ mysql&amp;gt; CREATE USER ‘wei’@’localhost’ IDENTIFIED BY ‘123’;&lt;/p&gt;
+
+&lt;p&gt;mysql&amp;gt; grant all privileges on &lt;em&gt;.&lt;/em&gt; to wei@localhost identified by ‘123’;
+ Query OK, 0 rows affected (0.00 sec)
+ mysql&amp;gt; flush privileges;
+ Query OK, 0 rows affected (0.00 sec)
+```&lt;/p&gt;
+
+&lt;p&gt;查看用户&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+ mysql&amp;gt; select user, host from mysql.user;
+ +------+---------------------------+
+ | user | host                      |
+ +------+---------------------------+
+ | root | 127.0.0.1                 |
+ | root | ::1                       |
+ | wei  | host                      |
+ |      | localhost                 |
+ | root | localhost                 |
+ | wei  | localhost                 |
+ |      | tindledemacbook-pro.local |
+ | root | tindledemacbook-pro.local |
+ +------+---------------------------+
+ 8 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;再登录&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ mysql -uwei -p123&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/lioncode/article/details/7917310&quot;&gt;参考博客1&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;python-&quot;&gt;另外Python错误 端口占用问题&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;socket.error: [Errno 48] Address already in use &lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;原因&lt;/h3&gt;
+
+&lt;p&gt;其实就是因为你曾启动过相同或者类似的服务占用了这个端口，一般来讲，在Mac上直接用Python启动的话，会导致退出不完整，你不能通过点击GUI的“退出”按钮来一步到位，后台的Python进程还是存在的，而它就是一直占用端口不释放的元凶。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;解决办法&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;sudo lsof -i:8087&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;用以显示符合条件的进程情况&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;sudo kill *pid* &lt;/code&gt; //对应进程的PID&lt;/p&gt;
+
+&lt;h2 id=&quot;pycharm&quot;&gt;Pycharm&lt;/h2&gt;
+
+&lt;p&gt;这软件简直和Android Studio一模一样啊！&lt;/p&gt;
+
+&lt;p&gt;纪录一些快捷键:&lt;/p&gt;
+
+&lt;p&gt;Command + Alt + L 代码格式化&lt;/p&gt;
+
+&lt;p&gt;Command + Alt + I 自动缩进&lt;/p&gt;
+
+&lt;p&gt;Command + Alt + O 优化导入&lt;/p&gt;
+
+&lt;p&gt;Command + Tab 窗口间切换&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.2cto.com/os/201410/341542.html&quot;&gt;参考网址&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;macmysqlerror-2002-hy000-cant-connect-to-local-mysql-server-through-socket-tmpmysqlsock&quot;&gt;Mac上MySQL报错：ERROR 2002 (HY000): Can’t connect to local MySQL server through socket ‘/tmp/mysql.sock’&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;启动 &lt;code&gt;mysql.server start&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;登录 &lt;code&gt;mysql -uwei -pxxx&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://segmentfault.com/q/1010000000094608&quot;&gt;参考网址&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;mysqlserver-starterror-the-server-quit-without-updating-pid-file-usrlocalvarmysqltindledemacbook-prolocalpid&quot;&gt;mysql.server start报错：ERROR! The server quit without updating PID file (/usr/local/var/mysql/tindledeMacBook-Pro.local.pid).&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;sudo lsof -i:3306&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;sudo kill *pid* &lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</content>
+<summary>遇到一些错误：``` ERROR 1045 (28000): Access denied for user ‘root’@’localhost’ (using password:YES)ERROR 1045 (28000): Access denied for user ‘root’@’localhost’ (using password:NO)```</summary>
+</entry>
+<entry>
+<title>写个RxBus</title>
+<link href="/%E5%86%99%E4%B8%AARxBus/" rel="alternate" type="text/html" title="写个RxBus" />
+<published>2016-07-12T00:00:00+08:00</published>
+<updated>2016-07-12T00:00:00+08:00</updated>
+<id>/写个RxBus</id>
+<content type="html" xml:base="/%E5%86%99%E4%B8%AARxBus/">&lt;h3 id=&quot;rxbus&quot;&gt;RxBus单例&lt;/h3&gt;
+
+&lt;p&gt;```java
+public class RxBus {
+    private static volatile RxBus instance = null;
+    /**
+     * PublishSubject只会把在订阅发生的时间点之后来自原始Observable的数据发射给观察者
+     */
+    private Subject&amp;lt;Object, Object&amp;gt; bus = new SerializedSubject&amp;lt;&amp;gt;(PublishSubject.create());&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public static RxBus getDefault() {
+    if(instance == null){
+        synchronized (RxBus.class) {
+            if (instance == null) {
+                instance = new RxBus();
+            }
+        }
+    }
+    return instance;
+}
+
+public void post(Object o) {
+    bus.onNext(o);
+}
+
+public Observable&amp;lt;Object&amp;gt; toObserverable() {
+    return bus;
+}
+
+/**
+ * 判断是否有订阅者
+ */
+public boolean hasObservers() {
+    return bus.hasObservers();
+} }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;发事件&lt;/h3&gt;
+
+&lt;p&gt;```java
+	RxBus.getDefault().send(new TapEvent());&lt;/p&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;收事件&lt;/h3&gt;
+
+&lt;p&gt;```java
+	_subscriptions = new CompositeSubscription();&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ConnectableObservable&amp;lt;Object&amp;gt; tapEventEmitter = _rxBus.toObserverable().publish();
+
+_subscriptions
+   .add(tapEventEmitter.subscribe(new Action1&amp;lt;Object&amp;gt;() {
+              &amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
+              public void call(Object event) {
+                  if (event instanceof TapEvent) {
+                     // here we come
+                  }
+              }
+          })); ```
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;简写成：&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;java
+	_subscriptions
+       .add(_rxBus.toObserverable().subscribe(new Action1&amp;lt;Object&amp;gt;() {
+                  &amp;lt;a href=&#39;https://github.com/Override&#39; class=&#39;user-mention&#39;&amp;gt;@Override&amp;lt;/a&amp;gt;
+                  public void call(Object event) {
+                      if (event instanceof TapEvent) {
+                         // here we come
+                      }
+                  }
+              }));
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/kaushikgopal/RxJava-Android-Samples&quot;&gt;参考RxJava-Android-Samples&lt;/a&gt;&lt;/p&gt;
+</content>
+<summary>RxBus单例</summary>
+</entry>
+<entry>
+<title>写个Java单例</title>
+<link href="/%E5%86%99%E4%B8%AAJava%E5%8D%95%E4%BE%8B/" rel="alternate" type="text/html" title="写个Java单例" />
+<published>2016-07-12T00:00:00+08:00</published>
+<updated>2016-07-12T00:00:00+08:00</updated>
+<id>/写个Java单例</id>
+<content type="html" xml:base="/%E5%86%99%E4%B8%AAJava%E5%8D%95%E4%BE%8B/">&lt;h3 id=&quot;section&quot;&gt;一个比较好的的单例：&lt;/h3&gt;
+
+&lt;p&gt;```
+private static volatile SettingsDbHelper sInst = null;  // «&amp;lt; 这里添加了 volatile&lt;br /&gt;
+public static SettingsDbHelper getInstance(Context context) {&lt;br /&gt;
+    SettingsDbHelper inst = sInst;  // «&amp;lt; 在这里创建临时变量
+    if (inst == null) {
+        synchronized (SettingsDbHelper.class) {
+            inst = sInst;
+            if (inst == null) {
+                inst = new SettingsDbHelper(context);
+                sInst = inst;
+            }
+        }
+    }
+    return inst;  // «&amp;lt; 注意这里返回的是临时变量
+}&lt;/p&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;为什么用 volatile？&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;对 volatile 变量的写操作，不允许和它之前的读写操作打乱顺序；对 volatile 变量的读操作，不允许和它之后的读写乱序。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;dl&gt;
+  &lt;dt&gt;为什么需要再定义一个临时变量 inst？&lt;/dt&gt;
+  &lt;dd&gt;
+    &lt;p&gt;访问 volatile 变量，需要保证一些执行顺序，所以的开销比较大。&lt;br /&gt;
+通过这样修改以后，在运行过程中，除了第一次以外，其他的调用只要访问 volatile 变量 sInst 一次，这样能提高 25% 的性能（Wikipedia）。&lt;/p&gt;
+  &lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;补充，另一个比较好的懒加载单例：&lt;/h3&gt;
+
+&lt;p&gt;它能够延迟初始化（lazy initialization），并且多线程安全，还能保证高性能.&lt;/p&gt;
+
+&lt;p&gt;```
+class Foo {&lt;br /&gt;
+    private static class HelperHolder {
+       public static final Helper helper = new Helper();
+    }&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public static Helper getHelper() {
+    return HelperHolder.helper;
+} } ```
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Double-checked_locking#Usage_in_Java&quot;&gt;Double-checked locking机制&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.race604.com/java-double-checked-singleton/&quot;&gt;这篇文章更详细参考&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.infoq.com/cn/articles/java-memory-model-1&quot;&gt;深入理解Java内存模型&lt;/a&gt;&lt;/p&gt;
+</content>
+<summary>一个比较好的的单例：</summary>
+</entry>
+<entry>
+<title>Android Color</title>
+<link href="/How%20to%20make%20wonderful%20CardView/" rel="alternate" type="text/html" title="Android Color" />
+<published>2016-07-06T00:00:00+08:00</published>
+<updated>2016-07-06T00:00:00+08:00</updated>
+<id>/How to make wonderful CardView</id>
+<content type="html" xml:base="/How%20to%20make%20wonderful%20CardView/">&lt;h1 id=&quot;how-to-make-wonderful-cardview&quot;&gt;How To Make Wonderful CardView&lt;/h1&gt;
+
+&lt;div align=&quot;center&quot;&gt;    
+How to make view like this ?
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;../img/blog_16_6_17_1.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;div align=&quot;center&quot;&gt;    
+Wonderful, isn&#39;t it?
+&lt;/div&gt;
+
+&lt;p&gt;我们这就来说说 CardView：&lt;/p&gt;
+
+</content>
+</entry>
 <entry>
 <title>Android color</title>
 <link href="/Android%20Color/" rel="alternate" type="text/html" title="Android color" />
@@ -1159,750 +1705,5 @@ Observable.from(students)
 &lt;p&gt;至此，结束。&lt;/p&gt;
 </content>
 <summary>RxJava 的观察者模式</summary>
-</entry>
-<entry>
-<title>关于StaticLayout和DynamicLayout</title>
-<link href="/%E5%85%B3%E4%BA%8EStaticLayout%E5%92%8CDynamicLayout/" rel="alternate" type="text/html" title="关于StaticLayout和DynamicLayout" />
-<published>2016-02-17T00:00:00+08:00</published>
-<updated>2016-02-17T00:00:00+08:00</updated>
-<id>/关于StaticLayout和DynamicLayout</id>
-<content type="html" xml:base="/%E5%85%B3%E4%BA%8EStaticLayout%E5%92%8CDynamicLayout/">&lt;p&gt;StaticLayout 来自 http://developer.android.com/reference/android/text/StaticLayout.html&lt;/p&gt;
-
-&lt;p&gt;DynamicLayout 来自 http://developer.android.com/reference/android/text/DynamicLayout.html&lt;/p&gt;
-
-&lt;h2 id=&quot;cerditsroll&quot;&gt;CerditsRoll&lt;/h2&gt;
-
-&lt;p&gt;在该项目中，使用了一些&lt;/p&gt;
-</content>
-<summary>myself</summary>
-</entry>
-<entry>
-<title>Screen Density</title>
-<link href="/Screen-Density/" rel="alternate" type="text/html" title="Screen Density" />
-<published>2016-02-08T19:59:05+08:00</published>
-<updated>2016-02-08T19:59:05+08:00</updated>
-<id>/Screen-Density</id>
-<content type="html" xml:base="/Screen-Density/">&lt;h1 id=&quot;section&quot;&gt;宽高计算&lt;/h1&gt;
-
-&lt;p&gt;在Activity中，可以这样获得宽高密：&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-	float mDensity = getBaseContext().getResources().getDisplayMetrics().density;
-	float mScreenHeight = getBaseContext().getResources().getDisplayMetrics().heightPixels;
-    float mScreenWidth = getBaseContext().getResources().getDisplayMetrics().widthPixels;
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;例如，我的手机Nexus6手机的分辨率是 1440*2560，
-打印出的数据是：
-desity:3.5
-height:2392.0
-width:1440.0&lt;/p&gt;
-
-&lt;p&gt;接下来，查看statusBar和navigationBar的高度：&lt;/p&gt;
-
-&lt;p&gt;```
-    //获取statusBar高度
-    public int getStatusBarHeight(Context context){
-        int result = 0;
-        int resourceId = context.getResources().getIdentifier(“status_bar_height”, “dimen”, “android”);
-        if(resourceId&amp;gt;0){
-            result = context.getResources().getDimensionPixelSize(resourceId);
-        }
-        return result;
-    }&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;//获取底部navigationBar高度
-public int getNavigationBarHeight(Context context) {
-    int result = 0;
-    int resourceId = context.getResources().getIdentifier(&quot;navigation_bar_height&quot;, &quot;dimen&quot;, &quot;android&quot;);
-    if(resourceId&amp;gt;0){
-        result = context.getResources().getDimensionPixelSize(resourceId);
-    }
-    return result;
-} ```
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;打印出的数据：
-statusbar height:84
-navigationbar height:168&lt;/p&gt;
-
-&lt;p&gt;接下来计算：
-168/3.5=48
-2560-2392=168, 所以NavigationBar包括了StatusBar.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;dp2px&quot;&gt;dp2px&lt;/h2&gt;
-
-&lt;p&gt;实际，返回的值是 (int)(dp * density + 0.5f);&lt;/p&gt;
-
-&lt;h3 id=&quot;rootview&quot;&gt;RootView&lt;/h3&gt;
-
-&lt;p&gt;```
-    public void init(){
-        ViewGroup decor = (ViewGroup) mActivity.getWindow().getDecorView();
-        ViewGroup contentParent = (ViewGroup)mActivity.findViewById(android.R.id.content);
-        View rootView = contentParent.getChildAt(0);&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;    if(loadview==null){
-        loadview = LayoutInflater.from(mActivity).inflate(R.layout.layout_loadindview,null);
-        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        lp.gravity = Gravity.CENTER;
-        loadview.setLayoutParams(lp);
-        contentParent.addView(loadview);
-        loadview.setVisibility(View.GONE);
-    }
-} ```
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;屏幕截图&lt;/h3&gt;
-
-&lt;p&gt;```
-    private void getBitmapScreenshot() {
-        //create save path to for file
-        String mPath = Environment.getExternalStorageDirectory().toString() + “/” + IMAGE_FILENAME;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;    //create bitmap screenshot
-    Bitmap bitmap;
-    //remove .getRootView() if you want everything but the actionbar.
-    View view = getWindow().getDecorView().findViewById(android.R.id.content).getRootView();
-    view.setDrawingCacheEnabled(true);
-    bitmap = Bitmap.createBitmap(view.getDrawingCache());
-    view.setDrawingCacheEnabled(false);
-
-    OutputStream fileOut = null;
-    File imageFile = new File(mPath);
-
-    try {
-        fileOut = new FileOutputStream(imageFile);
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fileOut);
-        fileOut.flush();
-        fileOut.close();
-    } catch (FileNotFoundException e) {
-        e.printStackTrace();
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-
-    Uri uri = Uri.fromFile(new File(mPath));
-    //done. next steps are optional. just displaying screenshot for you in app.
-    Picasso.with(this)
-           .load(uri)
-           .into(mScreenshotImageView);
-    mPathTextView.setText(&quot;Screenshot saved at: &quot; + mPath);
-} ```
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;viewscreendwindowdecorview&quot;&gt;获取View在Screend中的坐标(或者说在Window或者DecorView中)&lt;/h3&gt;
-
-&lt;p&gt;```
-int[] location = new int[2];
-View.getLocationOnScreen(location);
-//或者
-int[] location = new int[2];
-View.getLocationInWindow(location);&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;h3 id=&quot;navigationbar&quot;&gt;判断是否存在NavigationBar&lt;/h3&gt;
-
-&lt;p&gt;单纯计算高度是不行的，因为高度值都不为0.&lt;/p&gt;
-
-&lt;p&gt;```
-public static boolean checkDeviceHasNavigationBar(Context context) {
-    boolean hasNavigationBar = false;
-    Resources rs = context.getResources();
-    int id = rs.getIdentifier(“config_showNavigationBar”, “bool”, “android”);
-    if (id &amp;gt; 0) {
-        hasNavigationBar = rs.getBoolean(id);
-    }
-    try {
-        Class systemPropertiesClass = Class.forName(“android.os.SystemProperties”);
-        Method m = systemPropertiesClass.getMethod(“get”, String.class);
-        String navBarOverride = (String) m.invoke(systemPropertiesClass, “qemu.hw.mainkeys”);
-        if (“1”.equals(navBarOverride)) {
-            hasNavigationBar = false;
-        } else if (“0”.equals(navBarOverride)) {
-            hasNavigationBar = true;
-        }
-    } catch (Exception e) {&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;}
-return hasNavigationBar;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;}
-```&lt;/p&gt;
-
-&lt;p&gt;隐藏NavigationBar,在3.0以后可以这么做：&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-&lt;/code&gt;&lt;/p&gt;
-
-</content>
-<summary>Screen Density</summary>
-</entry>
-<entry>
-<title>Volley 源码分析</title>
-<link href="/Volley%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" rel="alternate" type="text/html" title="Volley 源码分析" />
-<published>2016-01-01T00:00:00+08:00</published>
-<updated>2016-01-01T00:00:00+08:00</updated>
-<id>/Volley 源码分析</id>
-<content type="html" xml:base="/Volley%20%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">&lt;h1 id=&quot;volley-&quot;&gt;Volley 源码分析&lt;/h1&gt;
-
-&lt;h2 id=&quot;http&quot;&gt;Http缓存机制&lt;/h2&gt;
-
-&lt;p&gt;如果服务器端的资源没有变化，则自动返回 HTTP 304 （Not Changed.）状态码，内容为空，这样就节省了传输数据量。&lt;/p&gt;
-
-&lt;p&gt;在 BasicNetwork.java 中，有下面方法:&lt;/p&gt;
-
-&lt;p&gt;```
-    public NetworkResponse performRequest(Request&amp;lt;?&amp;gt; request) throws VolleyError {
-        long requestStart = SystemClock.elapsedRealtime();
-        while (true) {
-            HttpResponse httpResponse = null;
-            byte[] responseContents = null;
-            Map&amp;lt;String, String&amp;gt; responseHeaders = new HashMap&amp;lt;String, String&amp;gt;();
-            try {
-                // Gather headers.
-                Map&amp;lt;String, String&amp;gt; headers = new HashMap&amp;lt;String, String&amp;gt;();
-                addCacheHeaders(headers, request.getCacheEntry());
-                httpResponse = mHttpStack.performRequest(request, headers);
-                StatusLine statusLine = httpResponse.getStatusLine();
-                int statusCode = statusLine.getStatusCode();&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;            responseHeaders = convertHeaders(httpResponse.getAllHeaders());
-            // Handle cache validation.
-            if (statusCode == HttpStatus.SC_NOT_MODIFIED) {
-            // 响应码：304 （未修改） 自从上次请求后，请求的网页未修改过。 服务器返回此响应时，不会返回网页内容。
-                return new NetworkResponse(HttpStatus.SC_NOT_MODIFIED,
-                        request.getCacheEntry() == null ? null : request.getCacheEntry().data,
-                        responseHeaders, true);
-            }
-
-            // Some responses such as 204s do not have content.  We must check.
-            if (httpResponse.getEntity() != null) {
-              responseContents = entityToBytes(httpResponse.getEntity());
-            } else {
-              // Add 0 byte response as a way of honestly representing a
-              // no-content request.
-              responseContents = new byte[0];
-            }
-
-            // if the request is slow, log it.
-            long requestLifetime = SystemClock.elapsedRealtime() - requestStart;
-            logSlowRequests(requestLifetime, request, responseContents, statusLine);
-
-            // 响应码：小于200或者大于299,且除去之前安已经判断过的301,302,和204类的响应之外，其余的响应都表示该请求失败
-            if (statusCode &amp;lt; 200 || statusCode &amp;gt; 299) {
-                throw new IOException();
-            }
-            return new NetworkResponse(statusCode, responseContents, responseHeaders, false);
-        } ```
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Volley使用的Http缓存机制 与 Http协议的”Etag&amp;amp;Last-Modified”缓存机制有关。Etag有两种用法 If-Match/If-None-Match，是用来判断服务器的对象和客户端的URL对象是否匹配。
-关于Etag在后面#补充中做简单介绍。下面是  BasicNetwork.java 的源码：&lt;/p&gt;
-
-&lt;p&gt;```
-private void addCacheHeaders(Map&amp;lt;String, String&amp;gt; headers, Cache.Entry entry) {
-        // If there’s no cache entry, we’re done.
-        if (entry == null) {
-            return;
-        }&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;    if (entry.etag != null) {
-        headers.put(&quot;If-None-Match&quot;, entry.etag);
-    }
-
-    if (entry.serverDate &amp;gt; 0) {
-        Date refTime = new Date(entry.serverDate);
-        headers.put(&quot;If-Modified-Since&quot;, DateUtils.formatDate(refTime));
-    }
-}     ```
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;首先我们应该明白在Http协议中[“Etag”,”If-None-Match”,”Last-Modified”,”If-Modified-Since”]都是头信息，这四个头构成了Http协议的一种缓存机制，称作”Etag&amp;amp;Last-Modified”缓存机制，”Etag”对应的头就是”If-None-Match”，同样”Last-Modified”对应的头为”If-Modified-Since.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;再进一步，我们分析一下Etag机制，Etag存储的是访问资源的属性，标识着该资源和上一次对比，是否被修改过，我们可以暂且认为Etag的值为资源的MD5。”If-None-Match”是请求头，而”Etag”是响应头，客户端第一次请求某个资源的时候，该资源的Etag还没有在本地存储，所以我们对资源的第一次Request中If-None-Match应该是null，接着，服务器返回的时候把Etag的值是放到了响应头中返回过来，我们收到该Etag之后存储起来，第二次对相同的资源进行请求的时候，我们就有了该资源的Etag的值(以If-None-Match头形式发送)，服务器收到If-None-Match头信息之后，判断我们发过去的If-None-Match和服务器上的Etag是否一致，如果一致就返回304，表示该资源没有被修改，不返回请求内容，我们直接使用上一次缓存的资源即可，如果有修改，就返回新的Etag值和请求内容，如果我们不使用Etag机制的话，每次请求同一个资源都会返回200和请求内容。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;再说说Last-Modified，If-Modified-Since是请求头，Last-Modified是响应头，两个头存储的都是资源最后一次被修改的时间，和Etag的流程一样，客户端第一次请求资源是没有If-Modified-Since头信息的，服务器则老老实实返回资源内容加上Last-Modified头，客户端收到之后进行缓存，再次请求同一个资源时，则会在请求头上加上If-Modified-Since时间戳，服务器收到If-Modified-Since时间戳之后和对应的资源的Last-Modified时间戳作对比，如果一致就返回304，不一致返回新的Last-Modified时间戳和资源内容。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;首先是对我们上面讲过的”Etag&amp;amp;Last-Modified”机制结果的判断，如果服务器返回了304，则认为请求资源已经被缓存，我们直接使用本地的缓存资源即可，需要注意的是在这里做了一个判断，如果本次Request的CacheEntry为空，则表示本地没有对应的缓存子资源，但是服务器又返回了304，则说明这个资源是没有实体数据的，所以NetworkResponse的data字段为null。还有就是304头字段不完整的问题，我们可以去看看它给出的文档，在这里不做多讲。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;if-modified-sinceif-none-match&quot;&gt;“If-Modified-Since”以及“If-None-Match”两种头部&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;If-Modified-Since&lt;br /&gt;
-  若server回复的报头中存在“Last-Modified”，那么客户端一定要在下一次请求报头中包含“If-Modified-Since”，所以说，这两个头部是相互对应的。那么当服务器收到客户端回复的“If-Modified-Since”头部之后会如何处理呢？首先服务器通过比较这两个时间，若“Last-Modified”更大，表明客户端缓存中的内容已经过时，此时server会将最新的文档（附上新的Header）返回给客户端，并且状态码为200；否则认为客户端缓存中的内容仍然是最新的，只需向客户端返回304状态码，同时包含最新的HTTP头部。下图比较形象地显示了这两种处理情况。&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;./img/20120929085945571.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;If-None-Match&lt;br /&gt;
-   可以明显看出，“If-Modified-Since”实现重验证主要是通过比较时间来完成的，但是在某些情况下，它并不能十分凑效：&lt;/p&gt;
-    &lt;ul&gt;
-      &lt;li&gt;服务器上的文档被后台进程周期性地重写，此时虽然日期发生了变化，但是内容却没有发生任何改变；&lt;/li&gt;
-      &lt;li&gt;虽然服务器上的内容发生了改变，但是却只是一些不太重要的信息，比如说拼写错误等等，这样就导致文     档在客户端重载，显然开销过大；&lt;/li&gt;
-      &lt;li&gt;一些web服务器上很难精确计算出文档的修改日期；&lt;/li&gt;
-      &lt;li&gt;对于实时系统而言（文档修改在很短的时间内完成），显然也显得无能为力。&lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;p&gt;基于以上几点，HTTP规范定义了另外一种方式，即比较文档标签(Entity tags, Etags).它的基本思想是为每一个文档生成一个Etag，它可以是某个序列号、版本号或者检验。同样“If-None-Match”头部是与server端的“Etag”头部是相对应的，这样server端只需要比较标签号就可以判断出客户端缓存中的文档是否是最新的，其处理方式与“If-Modified-Since”类似，下图是服务器与客户端的一种交互情况：&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;./img/20120929085945172.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;如何进行重连？&lt;/h2&gt;
-
-&lt;p&gt;还是在&lt;/p&gt;
-
-&lt;p&gt;我们看到如下代码：&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-            } catch (SocketTimeoutException e) {
-                attemptRetryOnException(&quot;socket&quot;, request, new TimeoutError());
-            } catch (ConnectTimeoutException e) {
-                attemptRetryOnException(&quot;connection&quot;, request, new TimeoutError());
-            } catch (MalformedURLException e) {
-                throw new RuntimeException(&quot;Bad URL &quot; + request.getUrl(), e);
-            } catch (IOException e) {
-                int statusCode = 0;
-                NetworkResponse networkResponse = null;
-                if (httpResponse != null) {
-                    statusCode = httpResponse.getStatusLine().getStatusCode();
-                } else {
-                    throw new NoConnectionError(e);
-                }
-                VolleyLog.e(&quot;Unexpected response code %d for %s&quot;, statusCode, request.getUrl());
-                if (responseContents != null) {
-                    networkResponse = new NetworkResponse(statusCode, responseContents,
-                            responseHeaders, false);
-                    if (statusCode == HttpStatus.SC_UNAUTHORIZED ||
-                            statusCode == HttpStatus.SC_FORBIDDEN) {
-                        attemptRetryOnException(&quot;auth&quot;,
-                                request, new AuthFailureError(networkResponse));
-                    } else {
-                        // TODO: Only throw ServerError for 5xx status codes.
-                        throw new ServerError(networkResponse);
-                    }
-                } else {
-                    throw new NetworkError(networkResponse);
-                }
-            }
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;上面的代码中出下了三次 attemptRetryOnException&lt;/p&gt;
-
-&lt;p&gt;```
-    private static void attemptRetryOnException(String logPrefix, Request&amp;lt;?&amp;gt; request,
-            VolleyError exception) throws VolleyError {
-        RetryPolicy retryPolicy = request.getRetryPolicy();
-        int oldTimeout = request.getTimeoutMs();&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;    try {
-        retryPolicy.retry(exception);
-    } catch (VolleyError e) {
-        request.addMarker(
-                String.format(&quot;%s-timeout-giveup [timeout=%s]&quot;, logPrefix, oldTimeout));
-        throw e;
-    }
-    request.addMarker(String.format(&quot;%s-retry [timeout=%s]&quot;, logPrefix, oldTimeout));
-} ```
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;补充&lt;/h2&gt;
-
-&lt;h3 id=&quot;httplast-modifiedetag&quot;&gt;http响应Last-Modified和ETag&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;基础知识
-　　1) 什么是”Last-Modified”?
-　　在浏览器第一次请求某一个URL时，服务器端的返回状态会是200，内容是你请求的资源，同时有一个Last-Modified的属性标记此文件在服务期端最后被修改的时间，格式类似这样：
-　　Last-Modified: Fri, 12 May 2006 18:53:33 GMT
-　　客户端第二次请求此URL时，根据 HTTP 协议的规定，浏览器会向服务器传送 If-Modified-Since 报头，询问该时间之后文件是否有被修改过：
-　　If-Modified-Since: Fri, 12 May 2006 18:53:33 GMT
-　　如果服务器端的资源没有变化，则自动返回 HTTP 304 （Not Changed.）状态码，内容为空，这样就节省了传输数据量。当服务器端代码发生改变或者重启服务器时，则重新发出资源，返回和第一次请求时类似。从而保证不向客户端重复发出资源，也保证当服务器有变化时，客户端能够得到最新的资源。
-　　2) 什么是”Etag”?
-　　HTTP 协议规格说明定义ETag为“被请求变量的实体值” （参见 —— 章节 14.19）。 另一种说法是，ETag是一个可以与Web资源关联的记号（token）。典型的Web资源可以一个Web页，但也可能是JSON或XML文档。服务器单独负责判断记号是什么及其含义，并在HTTP响应头中将其传送到客户端，以下是服务器端返回的格式：
-　　ETag: “50b1c1d4f775c61:df3”
-　　客户端的查询更新格式是这样的：
-　　If-None-Match: W/”50b1c1d4f775c61:df3”
-　　如果ETag没改变，则返回状态304然后不返回，这也和Last-Modified一样。本人测试Etag主要在断点下载时比较有用。
-　　Last-Modified和Etags如何帮助提高性能?
-　　聪明的开发者会把Last-Modified 和ETags请求的http报头一起使用，这样可利用客户端（例如浏览器）的缓存。因为服务器首先产生 Last-Modified/Etag标记，服务器可在稍后使用它来判断页面是否已经被修改。本质上，客户端通过将该记号传回服务器要求服务器验证其（客户端）缓存。
-　　过程如下:&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;客户端请求一个页面（A）。&lt;/li&gt;
-  &lt;li&gt;服务器返回页面A，并在给A加上一个Last-Modified/ETag。&lt;/li&gt;
-  &lt;li&gt;客户端展现该页面，并将页面连同Last-Modified/ETag一起缓存。&lt;/li&gt;
-  &lt;li&gt;客户再次请求页面A，并将上次请求时服务器返回的Last-Modified/ETag一起传递给服务器。&lt;/li&gt;
-  &lt;li&gt;服务器检查该Last-Modified或ETag，并判断出该页面自上次客户端请求之后还未被修改，直接返回响应304和一个空的响应体。&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-<summary>Volley 源码分析</summary>
-</entry>
-<entry>
-<title>NSString Some Useful Methods</title>
-<link href="/NSString%20Some%20Useful%20Methods/" rel="alternate" type="text/html" title="NSString Some Useful Methods" />
-<published>2015-11-26T00:00:00+08:00</published>
-<updated>2015-11-26T00:00:00+08:00</updated>
-<id>/NSString Some Useful Methods</id>
-<content type="html" xml:base="/NSString%20Some%20Useful%20Methods/">&lt;p&gt;2015-11-26-NSString Some Useful Methods&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;[string substringToIndex:N]
- get substring from 0 to N-1;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;[string substringFromIndex:N]
- get substring form N to length-1;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;[string substringWithRange:NSMakeRange(N,M)]
- get substring from N to N+M-1;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;([string rangeOfString:@“A”].location == NSNotFound)
- check substring contains ‘A’;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Get Range Of String
- ```
-`NSString*string =@“abcdefgh”;
-NSRange range = &lt;a href=&quot;&quot;&gt;string rangeOfString:@”fg”&lt;/a&gt;;
-NSLog(@”rang:%@”,NSStringFromRange(range));//{5,2}
-string = &lt;a href=&quot;&quot;&gt;string substringWithRange:range&lt;/a&gt;;
-```
-`&lt;/li&gt;
-  &lt;li&gt;Separate String
-```
-`NSString*string =@“123A456”;
-NSArray *array = &lt;a href=&quot;&quot;&gt;string componentsSeparatedByString:@”A”&lt;/a&gt;;
-NSLog(@”array:%@”,array); 
-```
-`&lt;/li&gt;
-&lt;/ol&gt;
-
-</content>
-<summary>Web App 相关技术，移动端的 web 应用</summary>
-</entry>
-<entry>
-<title>SoftKeyBoard</title>
-<link href="/About%20iOS%20SoftKeyBoard/" rel="alternate" type="text/html" title="SoftKeyBoard" />
-<published>2015-09-25T22:06:05+08:00</published>
-<updated>2015-09-25T22:06:05+08:00</updated>
-<id>/About iOS SoftKeyBoard</id>
-<content type="html" xml:base="/About%20iOS%20SoftKeyBoard/">&lt;p&gt;iOS UITextView UITextField About SoftKeyBoard&lt;/p&gt;
-
-&lt;p&gt;一、键盘风格   
-UIKit框架支持8种风格键盘。
-.	typedef enum   
-.	    UIKeyboardTypeDefault,                // 默认键盘：支持所有字符   
-.	    UIKeyboardTypeASCIICapable,           // 支持ASCII的默认键盘   
-.	    UIKeyboardTypeNumbersAndPunctuation,  // 标准电话键盘，支持+*#等符号   
-.	    UIKeyboardTypeURL,                    // URL键盘，有.com按钮；只支持URL字符   
-.	    UIKeyboardTypeNumberPad,              //数字键盘   
-.	    UIKeyboardTypePhonePad,               // 电话键盘   
-.	    UIKeyboardTypeNamePhonePad,           // 电话键盘，也支持输入人名字   
-.	    UIKeyboardTypeEmailAddress,           // 用于输入电子邮件地址的键盘   
-.	} UIKeyboardType;  
-用法用例：
-textView.keyboardtype = UIKeyboardTypeNumberPad;&lt;/p&gt;
-
-&lt;p&gt;二、键盘外观
-.	typedef enum   
-.	    UIKeyboardAppearanceDefault,    // 默认外观：浅灰色   
-.	    UIKeyboardAppearanceAlert,      //深灰/石墨色   
-.	} UIKeyboardAppearance;  
-用法用例：
-textView.keyboardAppearance=UIKeyboardAppearanceDefault;&lt;/p&gt;
-
-&lt;p&gt;三、回车键
-.	typedef enum   
-.	    UIReturnKeyDefault,  //默认：灰色按钮，标有Return
-.	    UIReturnKeyGo,  //标有Go的蓝色按钮
-.	    UIReturnKeyGoogle,  //标有Google的蓝色按钮，用于搜索
-.	    UIReturnKeyJoin,  //标有Join的蓝色按钮
-.	    UIReturnKeyNext,  //标有Next的蓝色按钮
-.	    UIReturnKeyRoute,  //标有Route的蓝色按钮
-.	    UIReturnKeySearch,  //标有Search的蓝色按钮
-.	    UIReturnKeySend,  //标有Send的蓝色按钮
-.	    UIReturnKeyYahoo,  //标有Yahoo!的蓝色按钮，用于搜索
-.	    UIReturnKeyDone,  //标有Done的蓝色按钮
-.	    UIReturnKeyEmergencyCall,  //紧急呼叫按钮
-.	} UIReturnKeyType;  
-用法用例：
-textView.returnKeyType=UIReturnKeyGo;&lt;/p&gt;
-
-&lt;p&gt;四、自动大写
-.	typedef enum   
-.	    UITextAutocapitalizationTypeNone, //不自动大写   
-.	    UITextAutocapitalizationTypeWords, //单词首字母大写   
-.	    UITextAutocapitalizationTypeSentences, //句子首字母大写   
-.	    UITextAutocapitalizationTypeAllCharacters, //所有字母大写   
-.	} UITextAutocapitalizationType;  
-用法用例：
-textField.autocapitalizationType = UITextAutocapitalizationTypeWords;&lt;/p&gt;
-
-&lt;p&gt;五、自动更正
-.	typedef enum   
-.	    UITextAutocorrectionTypeDefault,//默认   
-.	    UITextAutocorrectionTypeNo,//不自动更正   
-.	    UITextAutocorrectionTypeYes,//自动更正   
-.	} UITextAutocorrectionType;  
-用法用例：
-textField.autocorrectionType = UITextAutocorrectionTypeYes;&lt;/p&gt;
-
-&lt;p&gt;六、安全文本输入
-textView.secureTextEntry=YES;
-开启安全输入主要是用于密码或一些私人数据的输入，此时会禁用自动更正和自此缓存。&lt;/p&gt;
-
-&lt;p&gt;统计字符：
-1、UITextView
-- (void)textViewDidChange:(UITextView *)textView&lt;/p&gt;
-
-&lt;p&gt;int count = &lt;a href=&quot;#&quot;&gt;textView.text length&lt;/a&gt;;
-//这里的count就是字符个数了
-}&lt;/p&gt;
-
-&lt;p&gt;2、UITextField
-方法一：
-自己先为UITextField的Editing Changed事件添加一个响应方法
--(IBAction)valuechange//m_TextField是UITextField的一个IBOutlet&lt;/p&gt;
-
-&lt;p&gt;int count = &lt;a href=&quot;#&quot;&gt;m_TextField.text length&lt;/a&gt;;
- //count就是当前的字符个数
-//下边是将字符限制在140以内
-if (&lt;a href=&quot;#&quot;&gt;m_TextField.text length&lt;/a&gt;&amp;gt;140) 
-[m_TextField setText:&lt;a href=&quot;#&quot;&gt;m_TextField.text substringToIndex:140&lt;/a&gt;];//多出140时，只取前140个字符
-}
-}&lt;/p&gt;
-
-&lt;p&gt;方法二：
-在代理方法：- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string，判断range.length的值来判断输入的是回格还是其它字符&lt;/p&gt;
-
-&lt;p&gt;响应Return键：
-1、UITextView
-//代理方法
-- (BOOL)textView:(UITextView &lt;em&gt;)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString &lt;/em&gt;)text&lt;/p&gt;
-
-&lt;p&gt;if (1 == range.length) //按下回格键
-return YES;
-}
-if (&lt;a href=&quot;#&quot;&gt;text isEqualToString:@”n”&lt;/a&gt;) //按下return键
-//这里隐藏键盘，不做任何处理
-&lt;a href=&quot;#&quot;&gt;textView resignFirstResponder&lt;/a&gt;;
-return NO;
-}else 
-if (&lt;a href=&quot;#&quot;&gt;textView.text length&lt;/a&gt; &amp;lt; 140) //判断字符个数
-return YES;
-}&lt;br /&gt;
-}
-return NO;
-}&lt;/p&gt;
-
-&lt;p&gt;2、UITextField
-这个直接有代理方法哈
-- (BOOL)textFieldShouldReturn:(UITextField *)textField&lt;/p&gt;
-
-&lt;p&gt;UITextField进入编辑状态 获得焦点 becomeFirstResponder
- 关闭键盘 resignFirstResponder&lt;/p&gt;
-</content>
-<summary>iOS SoftKeyBoard</summary>
-</entry>
-<entry>
-<title>Markdown Cheatsheet Demo</title>
-<link href="/markdown-cheatsheet-demo/" rel="alternate" type="text/html" title="Markdown Cheatsheet Demo" />
-<published>2015-09-06T22:06:05+08:00</published>
-<updated>2015-09-06T22:06:05+08:00</updated>
-<id>/markdown-cheatsheet-demo</id>
-<content type="html" xml:base="/markdown-cheatsheet-demo/">&lt;blockquote&gt;
-  &lt;p&gt;This is Markdown Cheatsheet Demo for &lt;strong&gt;The Plain&lt;/strong&gt;, this Jekyll theme. Please check the raw content of this file for the markdown usage.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;typography-elements-in-one&quot;&gt;Typography Elements in One&lt;/h2&gt;
-
-&lt;p&gt;Let’s start with a informative paragraph. &lt;strong&gt;This text is bolded.&lt;/strong&gt; But not this one! &lt;em&gt;How about italic text?&lt;/em&gt; Cool right? Ok, let’s &lt;strong&gt;&lt;em&gt;combine&lt;/em&gt;&lt;/strong&gt; them together. Yeah, that’s right! I have code to highlight, so &lt;code&gt;ThisIsMyCode()&lt;/code&gt;. What a nice! Good people will hyperlink away, so &lt;a href=&quot;#&quot;&gt;here we go&lt;/a&gt; or &lt;a href=&quot;http://www.example.com&quot;&gt;http://www.example.com&lt;/a&gt;.&lt;/p&gt;
-
-&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;headings-h1-to-h6&quot;&gt;Headings H1 to H6&lt;/h2&gt;
-
-&lt;h1 id=&quot;h1-heading&quot;&gt;H1 Heading&lt;/h1&gt;
-
-&lt;h2 id=&quot;h2-heading&quot;&gt;H2 Heading&lt;/h2&gt;
-
-&lt;h3 id=&quot;h3-heading&quot;&gt;H3 Heading&lt;/h3&gt;
-
-&lt;h4 id=&quot;h4-heading&quot;&gt;H4 Heading&lt;/h4&gt;
-
-&lt;h5 id=&quot;h5-heading&quot;&gt;H5 Heading&lt;/h5&gt;
-
-&lt;h6 id=&quot;h6-heading&quot;&gt;H6 Heading&lt;/h6&gt;
-
-&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;footnote&quot;&gt;Footnote&lt;/h2&gt;
-
-&lt;p&gt;Let’s say you have text that you want to refer with a footnote, you can do that too! This is an example for the footnote number one &lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. You can even add more footnotes, with link! &lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-
-&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;blockquote&quot;&gt;Blockquote&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Start by doing what’s necessary; then do what’s possible; and suddenly you are doing the impossible. –Francis of Assisi&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; This theme does NOT support nested blockquotes.&lt;/p&gt;
-
-&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;list-items&quot;&gt;List Items&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;First order list item&lt;/li&gt;
-  &lt;li&gt;Second item&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Unordered list can use asterisks&lt;/li&gt;
-  &lt;li&gt;Or minuses&lt;/li&gt;
-  &lt;li&gt;Or pluses&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;code-blocks&quot;&gt;Code Blocks&lt;/h2&gt;
-
-&lt;p&gt;&lt;code&gt;javascript
-var s = &quot;JavaScript syntax highlighting&quot;;
-alert(s);
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;python
-s = &quot;Python syntax highlighting&quot;
-print s
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-No language indicated, so no syntax highlighting.
-But let&#39;s throw in a &amp;lt;b&amp;gt;tag&amp;lt;/b&amp;gt;.
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;table&quot;&gt;Table&lt;/h2&gt;
-
-&lt;h3 id=&quot;table-1-with-alignment&quot;&gt;Table 1: With Alignment&lt;/h3&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Tables&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Are&lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt;Cool&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;col 3 is&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;right-aligned&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;$1600&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;col 2 is&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;centered&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;$12&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;zebra stripes&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;are neat&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;$1&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h3 id=&quot;table-2-with-typography-elements&quot;&gt;Table 2: With Typography Elements&lt;/h3&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Markdown&lt;/th&gt;
-      &lt;th&gt;Less&lt;/th&gt;
-      &lt;th&gt;Pretty&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;em&gt;Still&lt;/em&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code&gt;renders&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;strong&gt;nicely&lt;/strong&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;1&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;horizontal-line&quot;&gt;Horizontal Line&lt;/h2&gt;
-
-&lt;p&gt;The HTML &lt;code&gt;&amp;lt;hr&amp;gt;&lt;/code&gt; element is for creating a “thematic break” between paragraph-level elements. In markdown, you can create a &lt;code&gt;&amp;lt;hr&amp;gt;&lt;/code&gt; with any of the following:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;___&lt;/code&gt;: three consecutive underscores&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;---&lt;/code&gt;: three consecutive dashes&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;***&lt;/code&gt;: three consecutive asterisks&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;renders to:&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;hr /&gt;
-
-&lt;hr /&gt;
-
-&lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;media&quot;&gt;Media&lt;/h2&gt;
-
-&lt;h3 id=&quot;youtube-embedded-iframe&quot;&gt;YouTube Embedded Iframe&lt;/h3&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/n1a7o44WxNo&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;h3 id=&quot;image&quot;&gt;Image&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://octodex.github.com/images/minion.png&quot; alt=&quot;Minion&quot; /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;footnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot;&gt;
-      &lt;p&gt;Footnote number one yeah baby! &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:2&quot;&gt;
-      &lt;p&gt;A footnote you can link to - &lt;a href=&quot;#&quot;&gt;click here!&lt;/a&gt; &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;
-</content>
-<summary>Web App 相关技术，移动端的 web 应用</summary>
 </entry>
 </feed>

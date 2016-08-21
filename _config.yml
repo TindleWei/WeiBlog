@@ -37,19 +37,19 @@ disqus_shortname:   taylantatli
   #ad-client:
   #ad-slot:
 #bing-verify:
-#email:
-twitter:            username
-facebook:           username
 github:             TindleWei
-#stackoverflow:     123456/username   from a "http://stackoverflow.com/users/123456/username" link
+stackoverflow:      4404683/adamwei
+email:              tindle.wei@gmail.com
+# twitter:            username
+# facebook:           username
 #linkedin:          username
 #xing:              username
-instagram:          username
+#instagram:         username
 #lastfm:            username
 #tumblr:            username
 #pinterest:         username
 #foursquare:        username
-steam:              SkyShuter
+#steam:             SkyShuter
 #dribbble:          username
 #youtube:           username
 #soundcloud:        username
@@ -66,6 +66,7 @@ gems:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-gist
+  - jekyll-paginate
 
 jekyll-mentions:
     base_url: https://github.com

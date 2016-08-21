@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>/Flask%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</loc>
+    <lastmod>2016-08-09T00:00:00+08:00</lastmod>
+  </url>
+  <url>
+    <loc>/Android%E5%8A%A8%E6%80%81%E4%BF%AE%E6%94%B9Menu/</loc>
+    <lastmod>2016-07-21T00:00:00+08:00</lastmod>
+  </url>
+  <url>
+    <loc>/%E4%BD%BF%E7%94%A8MySQL%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/</loc>
+    <lastmod>2016-07-13T00:00:00+08:00</lastmod>
+  </url>
+  <url>
+    <loc>/%E5%86%99%E4%B8%AARxBus/</loc>
+    <lastmod>2016-07-12T00:00:00+08:00</lastmod>
+  </url>
+  <url>
+    <loc>/%E5%86%99%E4%B8%AAJava%E5%8D%95%E4%BE%8B/</loc>
+    <lastmod>2016-07-12T00:00:00+08:00</lastmod>
+  </url>
+  <url>
+    <loc>/How%20to%20make%20wonderful%20CardView/</loc>
+    <lastmod>2016-07-06T00:00:00+08:00</lastmod>
+  </url>
+  <url>
     <loc>/Android%20Color/</loc>
     <lastmod>2016-07-04T00:00:00+08:00</lastmod>
   </url>
